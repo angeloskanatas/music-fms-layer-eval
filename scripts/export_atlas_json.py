@@ -140,7 +140,23 @@ TASK_LABEL = {
     "dimsim_acc_l2": "DimSim L2",
 }
 
-PARAMS = {'mert-v1-95M': ('95M', 95), 'mert-v1-330M': ('330M', 330), 'musicfm': ('330M', 330), 'muq': ('310M', 310), 'omar-rq-multifeature-25hz': ('580M', 580), 'musicgen-small': ('300M', 300), 'musicgen-medium': ('1.5B', 1500), 'musicgen-large': ('3.3B', 3300), 'yue-0.5b': ('0.5B', 500), 'yue-7b': ('7B', 7000), 'clap': ('73M', 73), 'myna': ('22M', 22)}
+PARAMS = {"mert-v1-95M": ("95M", 95), "mert-v1-330M": ("330M", 330),
+     "musicfm": ("330M", 330), "muq": ("310M", 310),
+     "omar-rq-multifeature-25hz": ("580M", 580),
+     "musicgen-small": ("300M", 300), "musicgen-medium": ("1.5B", 1500),
+     "musicgen-large": ("3.3B", 3300), "yue-0.5b": ("0.5B", 500),
+     "yue-7b": ("7B", 7000), "clap": ("73M", 73), "myna": ("22M", 22),
+     # extras, verified from primary sources 2026-07-28 (HF cards / papers /
+     # exact config arithmetic; see worklog 4ab):
+     "maest": ("87M", 87, "official checkpoint 86.9M incl. classification head"),
+     "mt2": ("5.3M", 5.3, "paper-stated (arXiv 2507.12996)"),
+     "omar-rq-base": ("90M", 90, "paper-stated (arXiv 2507.03482)"),
+     "qwen2audio-instruct": ("637M", 637,
+        "the probed audio tower (Whisper-derived, 32 layers — matches our 33 "
+        "extracted states); full system 8.2B"),
+     "musicflamingo": ("637M", 637,
+        "the probed AF-Whisper tower (32 layers — matches our extracted states); "
+        "full system 8.3B")}
 
 # Family identity colors — validated categorical palette (dataviz skill,
 # ALL CHECKS PASS on white; identity is never color-alone: names are printed).
@@ -383,7 +399,10 @@ def render_atlas_table(task_registry):
         cells = [f"<tr style='--fam:{c}'>",
                  f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
-                 (lambda p: f"<td class='num' data-val='{p[1]}'>{p[0]}</td>" if p else
+                 (lambda p: (f"<td class='num' data-val='{p[1]}'"
+                             + (f" title='{p[2]}'" if len(p) > 2 else "")
+                             + f">{p[0]}{'<sup class=cav>*</sup>' if len(p) > 2 else ''}</td>")
+                  if p else
                   "<td class='num na' data-val='-1' title='not verified'>&mdash;</td>")(PARAMS.get(m['id'])),
                  f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:
