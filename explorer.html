@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layer Explorer | What Makes a Good Layer?</title>
+  <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task.">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <style>
+    :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
+            --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Inter',-apple-system,sans-serif; color:var(--ink);
+           background:var(--bg); font-size:15px; line-height:1.55; }
+    header { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem .75rem; }
+    header h1 { font-size:1.7rem; font-weight:800; margin:0 0 .25rem; }
+    header p { color:var(--ink-2); margin:.25rem 0; max-width:720px; }
+    header a { color:var(--accent); text-decoration:none; }
+    .meta { font-size:.85rem; color:var(--ink-3); }
+    .controls { max-width:1000px; margin:0 auto; padding:0 1.5rem 1rem;
+                display:flex; gap:1rem; flex-wrap:wrap; align-items:end; }
+    .ctrl label { display:block; font-size:.72rem; text-transform:uppercase;
+                  letter-spacing:.04em; color:var(--ink-2); margin-bottom:.25rem; }
+    select { font:inherit; font-size:.9rem; padding:.4rem .6rem; border:1px solid var(--line);
+             border-radius:6px; background:var(--bg); color:var(--ink); min-width:180px; }
+    .toggle { font-size:.85rem; color:var(--ink-2); display:flex; align-items:center;
+              gap:.4rem; padding-bottom:.45rem; }
+    #chart { max-width:1000px; margin:0 auto; padding:0 1.5rem; height:480px; }
+    footer { max-width:1000px; margin:0 auto; padding:1rem 1.5rem 3rem;
+             font-size:.8rem; color:var(--ink-3); }
+    footer a { color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Layer Explorer</h1>
+    <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
+       marked; its paradigm-mates give context. Frozen encoders, MARBLE constrained-track probes.</p>
+    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
+       <a href="index.html">paper</a> &middot; results as of 2026-07-28 &middot;
+       camera icon in the chart toolbar exports PNG</p>
+  </header>
+  <div class="controls">
+    <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
+    <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
+    <label class="toggle"><input type="checkbox" id="mates" checked> show paradigm-mates</label>
+  </div>
+  <div id="chart"></div>
+  <footer>
+    x-axis: transformer block (0 = first hidden state). Data:
+    <a href="data/results/">raw per-layer JSON</a> &middot; single-seed probes (seed 1234).
+  </footer>
+  <script>
+  const MODELS = [{"id": "muq", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "musicfm", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "yue-0.5b", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicgen-small", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "omar-rq-multifeature-25hz", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "mert-v1-95M", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "mert-v1-330M", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "omar-rq-base", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "clap", "family": "contrastive", "in_paper": true, "color": "#1baf7a"}, {"id": "yue-7b", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicgen-large", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicgen-medium", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicflamingo", "family": "audio-llm", "in_paper": false, "color": "#eda100"}, {"id": "muq-paper", "family": "masked", "in_paper": false, "color": "#2a78d6"}, {"id": "qwen2audio-instruct", "family": "audio-llm", "in_paper": false, "color": "#eda100"}, {"id": "maest", "family": "supervised", "in_paper": false, "color": "#e87ba4"}, {"id": "mt2", "family": "contrastive", "in_paper": false, "color": "#1baf7a"}, {"id": "musicfm-paper", "family": "masked", "in_paper": false, "color": "#2a78d6"}, {"id": "mt2-cls-contrastive", "family": "contrastive", "in_paper": false, "color": "#1baf7a"}, {"id": "mt2-cls-avg", "family": "contrastive", "in_paper": false, "color": "#1baf7a"}, {"id": "mt2-cls-equiv", "family": "contrastive", "in_paper": false, "color": "#1baf7a"}, {"id": "myna", "family": "contrastive", "in_paper": true, "color": "#1baf7a"}];
+  const TASKS  = [{"id": "chords_ace_mirex", "label": "Chords", "desc": "Chord MIREX score (ChordsACE)"}, {"id": "key", "label": "Key", "desc": "Key estimation weighted score (GiantSteps)"}, {"id": "nsynth_pitch", "label": "Pitch", "desc": "Pitch classification accuracy (NSynth)"}, {"id": "chords_ace_root", "label": "Chords root", "desc": "Chord root score (ChordsACE)"}, {"id": "chords_ace_thirds", "label": "Chords thirds", "desc": "Chord thirds score (ChordsACE)"}, {"id": "beat_f1", "label": "Beat", "desc": "Beat tracking F1 (GTZAN)"}, {"id": "downbeat_f1", "label": "Downbeat", "desc": "Downbeat tracking F1 (GTZAN)"}, {"id": "nsynth_instrument", "label": "Instrument", "desc": "Instrument classification accuracy (NSynth)"}, {"id": "emo_r2", "label": "Emotion", "desc": "Emotion recognition R2 (EMO)"}, {"id": "genre", "label": "Genre", "desc": "Genre classification accuracy (GTZAN)"}, {"id": "hxmsa", "label": "Structure", "desc": "Clip-level music structure analysis accuracy (Harmonix)"}, {"id": "mtg_genre_ap", "label": "MTG-Genre", "desc": "Genre tagging AP (MTG-Jamendo)"}, {"id": "mtg_instrument_ap", "label": "MTG-Instr", "desc": "Instrument tagging AP (MTG-Jamendo)"}, {"id": "mtg_mood_ap", "label": "MTG-Mood", "desc": "Mood/theme tagging AP (MTG-Jamendo)"}, {"id": "mtg_top50_ap", "label": "MTG-Top50", "desc": "Top-50 tagging AP (MTG-Jamendo)"}, {"id": "mtt_ap", "label": "MTT", "desc": "Auto-tagging AP (MagnaTagATune)"}, {"id": "emo_r2a", "label": "Arousal", "desc": "Emotion recognition arousal R2 (EMO)"}, {"id": "emo_r2v", "label": "Valence", "desc": "Emotion recognition valence R2 (EMO)"}, {"id": "mtg_genre_auroc", "label": "MTG-Genre AUROC", "desc": "Genre tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_instrument_auroc", "label": "MTG-Instr AUROC", "desc": "Instrument tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_mood_auroc", "label": "MTG-Mood AUROC", "desc": "Mood/theme tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_top50_auroc", "label": "MTG-Top50 AUROC", "desc": "Top-50 tagging AUROC (MTG-Jamendo)"}, {"id": "mtt_auroc", "label": "MTT AUROC", "desc": "Auto-tagging AUROC (MagnaTagATune)"}, {"id": "dimsim_acc_centered", "label": "DimSim", "desc": "Perceptual similarity accuracy, centered cosine (DimSim)"}, {"id": "dimsim_acc_cosine", "label": "DimSim cos", "desc": "Perceptual similarity accuracy, cosine (DimSim)"}, {"id": "dimsim_acc_l2", "label": "DimSim L2", "desc": "Perceptual similarity accuracy, raw L2 (DimSim)"}, {"id": "instrument", "label": "instrument", "desc": "Instrument classification (NSynth)"}, {"id": "mpc", "label": "mpc", "desc": "Music piece classification"}, {"id": "pitch", "label": "pitch", "desc": "Pitch classification (NSynth)"}, {"id": "rd", "label": "rd", "desc": "Rhythm detection"}, {"id": "singer", "label": "singer", "desc": "Singer identification (VocalSet)"}, {"id": "sqc", "label": "sqc", "desc": "Sound quality classification"}, {"id": "structure", "label": "structure", "desc": "Music structure segmentation (Harmonix)"}, {"id": "tagging_ap", "label": "tagging_ap", "desc": "Music tagging Average Precision (MagnaTagATune)"}, {"id": "tagging_roc", "label": "tagging_roc", "desc": "Music tagging ROC-AUC (MagnaTagATune)"}, {"id": "technique", "label": "technique", "desc": "Vocal technique classification (VocalSet)"}];
+  const cache = {};
+  const $m = document.getElementById('model'), $t = document.getElementById('task'),
+        $g = document.getElementById('mates');
+  const q = new URLSearchParams(location.search);
+
+  MODELS.forEach(m => $m.add(new Option(m.id + (m.in_paper ? '' : ' +'), m.id)));
+  TASKS.forEach(t => $t.add(new Option(t.label, t.id)));
+  if (q.get('model') && MODELS.some(m => m.id === q.get('model'))) $m.value = q.get('model');
+  if (q.get('task') && TASKS.some(t => t.id === q.get('task'))) $t.value = q.get('task');
+
+  async function rec(model) {
+    if (!cache[model])
+      cache[model] = fetch('data/results/' + model + '/downstream.json').then(r => r.json());
+    return cache[model];
+  }
+  async function draw() {
+    const mid = $m.value, tid = $t.value;
+    const meta = MODELS.find(m => m.id === mid);
+    const tmeta = TASKS.find(t => t.id === tid);
+    history.replaceState(null, '', '?model=' + mid + '&task=' + tid);
+    const traces = [];
+    if ($g.checked) {
+      for (const m of MODELS.filter(x => x.family === meta.family && x.id !== mid)) {
+        const d = await rec(m.id);
+        const r = d.records.find(x => x.task === tid);
+        if (r) traces.push({ x: [...r.layers.keys()], y: r.layers, mode: 'lines',
+          name: m.id, line: { color: '#cbd5e1', width: 1.4 }, hovertemplate:
+          m.id + ' L%{x}: %{y:.1f}<extra></extra>' });
+      }
+    }
+    const d = await rec(mid);
+    const r = d.records.find(x => x.task === tid);
+    if (!r) { Plotly.newPlot('chart', [], note(mid + ' — not evaluated on ' + tmeta.label)); return; }
+    const best = r.layers.indexOf(Math.max(...r.layers));
+    traces.push({ x: [...r.layers.keys()], y: r.layers, mode: 'lines+markers', name: mid,
+      line: { color: meta.color, width: 2.5 }, marker: { size: 5 },
+      hovertemplate: 'L%{x}: %{y:.1f}<extra></extra>' });
+    traces.push({ x: [best], y: [r.layers[best]], mode: 'markers', name: 'best (L' + best + ')',
+      marker: { color: '#2563eb', size: 11, symbol: 'circle-open', line: { width: 2.5 } },
+      hovertemplate: 'best: L%{x} = %{y:.1f}<extra></extra>' });
+    Plotly.newPlot('chart', traces, layout(tmeta, r), { responsive: true,
+      displaylogo: false, toImageButtonOptions: { filename: mid + '_' + tid + '_layers' } });
+  }
+  function layout(tmeta, r) {
+    return { font: { family: 'Inter, sans-serif', color: '#1e293b', size: 13 },
+      title: { text: tmeta.desc, font: { size: 15 }, x: 0, xanchor: 'left' },
+      xaxis: { title: 'layer', dtick: r.n_layers > 30 ? 4 : (r.n_layers > 16 ? 2 : 1),
+               gridcolor: '#f1f5f9', zeroline: false },
+      yaxis: { title: 'score', gridcolor: '#f1f5f9', zeroline: false },
+      plot_bgcolor: '#fff', paper_bgcolor: '#fff', hovermode: 'x unified',
+      legend: { orientation: 'h', y: -0.22 }, margin: { t: 48, r: 16 } };
+  }
+  function note(text) {
+    return { annotations: [{ text, showarrow: false, font: { color: '#64748b' } }],
+             xaxis: { visible: false }, yaxis: { visible: false } };
+  }
+  $m.onchange = $t.onchange = $g.onchange = draw;
+  draw();
+  </script>
+</body>
+</html>

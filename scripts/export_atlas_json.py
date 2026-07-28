@@ -107,6 +107,24 @@ PRIMARY_METRICS = {
     "dimsim_acc_centered",
 }
 
+# Short display labels for table headers / selectors (full description from
+# the registry rides on the title attribute). Machine keys never face users.
+TASK_LABEL = {
+    "key": "Key", "nsynth_pitch": "Pitch", "chords_ace_mirex": "Chords",
+    "chords_ace_root": "Chords root", "chords_ace_thirds": "Chords thirds",
+    "beat_f1": "Beat", "downbeat_f1": "Downbeat",
+    "nsynth_instrument": "Instrument",
+    "genre": "Genre", "hxmsa": "Structure",
+    "emo_r2": "Emotion", "emo_r2a": "Arousal", "emo_r2v": "Valence",
+    "mtt_ap": "MTT", "mtt_auroc": "MTT AUROC",
+    "mtg_genre_ap": "MTG-Genre", "mtg_genre_auroc": "MTG-Genre AUROC",
+    "mtg_instrument_ap": "MTG-Instr", "mtg_instrument_auroc": "MTG-Instr AUROC",
+    "mtg_mood_ap": "MTG-Mood", "mtg_mood_auroc": "MTG-Mood AUROC",
+    "mtg_top50_ap": "MTG-Top50", "mtg_top50_auroc": "MTG-Top50 AUROC",
+    "dimsim_acc_centered": "DimSim", "dimsim_acc_cosine": "DimSim cos",
+    "dimsim_acc_l2": "DimSim L2",
+}
+
 # Family identity colors — validated categorical palette (dataviz skill,
 # ALL CHECKS PASS on white; identity is never color-alone: names are printed).
 FAMILY_COLOR = {
@@ -229,8 +247,8 @@ def render_atlas_table(task_registry):
         for r in d["records"]:
             t, scores = r["task"], r["layers"]
             best = max(range(len(scores)), key=lambda i: scores[i])
-            per_task[t] = {"score": scores[best], "layer": best,
-                           "scores": scores, "caveat": r.get("caveat")}
+            per_task[t] = {"score": scores[best], "layer": best, "scores": scores,
+                           "caveat": r.get("caveat"), "model": model_id, "t": t}
         models.append({
             "id": model_id, "family": d["family"], "in_paper": d["in_paper"],
             "n_layers": max((r["n_layers"] for r in d["records"]), default=0),
@@ -264,7 +282,9 @@ def render_atlas_table(task_registry):
     def th_task(t, tf, hidden):
         h = " hidden" if hidden else ""
         cls = "detail d-" + tf if hidden else "ptask"
-        return f"<th class='{cls}' data-sort='num'{h}>{t}</th>"
+        label = TASK_LABEL.get(t, t)
+        desc = task_registry.get(t, t)
+        return f"<th class='{cls}' data-sort='num'{h} title='{desc}'>{label}</th>"
 
     head_top = ["<tr><th rowspan='2' data-sort='str'>Model</th>"
                 "<th rowspan='2' data-sort='str'>Paradigm</th>"
@@ -292,9 +312,12 @@ def render_atlas_table(task_registry):
             return f"<td class='num {cls} na'{h} title='not evaluated'>&mdash;</td>"
         cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
               if pt.get("caveat") else "")
-        return (f"<td class='num {cls}'{h}><span class='sc'>{pt['score']:.1f}{cv}"
+        return (f"<td class='num {cls}'{h}>"
+                f"<a class='cellink' href='explorer.html?model={pt['model']}&amp;task={pt['t']}' "
+                f"title='open the full layer curve'>"
+                f"<span class='sc'>{pt['score']:.1f}{cv}"
                 f"<span class='lyr'>L{pt['layer']}</span></span>"
-                f"{sparkline(pt['scores'], pt['layer'])}</td>")
+                f"{sparkline(pt['scores'], pt['layer'])}</a></td>")
 
     rows = []
     for m in models:
@@ -322,6 +345,23 @@ def render_atlas_table(task_registry):
                .replace("{{DATE}}", str(date.today()))
                .replace("{{NMODELS}}", str(len(models))))
     (OUT.parent / "atlas.html").write_text(page)
+
+    # Layer Explorer: inject the model/task manifests into the template
+    models_json = json.dumps([
+        {"id": m["id"], "family": m["family"], "in_paper": m["in_paper"],
+         "color": FAMILY_COLOR.get(m["family"], "#94a3b8")} for m in models])
+    tasks_seen = sorted({t for m in models for t in m["per_task"]},
+                        key=lambda t: (TASK_FAMILY_ORDER.index(TASK_FAMILY[t])
+                                       if TASK_FAMILY.get(t) in TASK_FAMILY_ORDER
+                                       else 9, t not in PRIMARY_METRICS, t))
+    tasks_json = json.dumps([
+        {"id": t, "label": TASK_LABEL.get(t, t), "desc": task_registry.get(t, t)}
+        for t in tasks_seen])
+    etpl = (Path(__file__).resolve().parent / "explorer_template.html").read_text()
+    (OUT.parent / "explorer.html").write_text(
+        etpl.replace("/*MODELS_JSON*/", models_json)
+            .replace("/*TASKS_JSON*/", tasks_json)
+            .replace("{{DATE}}", str(date.today())))
     return len(models)
 
 
