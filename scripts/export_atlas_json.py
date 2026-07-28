@@ -750,13 +750,15 @@ def render_fusion_panel():
                     val = data[task].get(m, {}).get(v)
                     orc = data[task].get(m, {}).get("oracle")
                     if val is None:
-                        tds.append("<td class='num na'>&mdash;</td>")
-                    elif v in ("oracle", "last") or orc is None:
-                        tds.append(f"<td class='num'>{val:.1f}</td>")
+                        tds.append("<td class='num na'><span class='val'>&mdash;</span>"
+                                   "<span class='dlt'></span></td>")
+                    elif v in ("oracle", "middle", "last") or orc is None:
+                        tds.append(f"<td class='num'><span class='val'>{val:.1f}</span>"
+                                   f"<span class='dlt'></span></td>")
                     else:
                         d = val - orc
                         cls = " pos" if d >= 0 else ""
-                        tds.append(f"<td class='num'><span>{val:.1f}</span>"
+                        tds.append(f"<td class='num'><span class='val'>{val:.1f}</span>"
                                    f"<span class='dlt{cls}'>{d:+.1f}</span></td>")
                 rcls = " class='oracle'" if v == "oracle" else ""
                 body.append(f"<tr{rcls}><td>{VARIANT_LABEL[v]}</td>{''.join(tds)}</tr>")
@@ -781,13 +783,15 @@ def render_fusion_panel():
                     val = data[t].get(model_id, {}).get(v)
                     orc = data[t].get(model_id, {}).get("oracle")
                     if val is None:
-                        tds.append("<td class='num na'>&mdash;</td>")
+                        tds.append("<td class='num na'><span class='val'>&mdash;</span>"
+                                   "<span class='dlt'></span></td>")
                     elif v in ("oracle", "middle", "last") or orc is None:
-                        tds.append(f"<td class='num'>{val:.1f}</td>")
+                        tds.append(f"<td class='num'><span class='val'>{val:.1f}</span>"
+                                   f"<span class='dlt'></span></td>")
                     else:
                         d = val - orc
                         cls = " pos" if d >= 0 else ""
-                        tds.append(f"<td class='num'><span>{val:.1f}</span>"
+                        tds.append(f"<td class='num'><span class='val'>{val:.1f}</span>"
                                    f"<span class='dlt{cls}'>{d:+.1f}</span></td>")
                 rcls = " class='oracle'" if v == "oracle" else ""
                 body.append(f"<tr{rcls}><td>{VARIANT_LABEL[v]}</td>{''.join(tds)}</tr>")
