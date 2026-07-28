@@ -48,6 +48,7 @@
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
     <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
     <label class="toggle"><input type="checkbox" id="mates" checked> show paradigm-mates</label>
+    <label class="toggle"><input type="checkbox" id="norm" checked> depth % (compare across depths)</label>
   </div>
   <div id="chart"></div>
   <footer>
@@ -59,8 +60,11 @@
   const TASKS  = /*TASKS_JSON*/;
   const cache = {};
   const $m = document.getElementById('model'), $t = document.getElementById('task'),
-        $g = document.getElementById('mates');
+        $g = document.getElementById('mates'), $n = document.getElementById('norm');
   const q = new URLSearchParams(location.search);
+  const xs = r => $n.checked
+    ? r.layers.map((_, i) => 100 * i / Math.max(r.layers.length - 1, 1))
+    : [...r.layers.keys()];
 
   MODELS.forEach(m => $m.add(new Option(m.label + (m.in_paper ? '' : ' +'), m.id)));
   TASKS.forEach(t => $t.add(new Option(t.label, t.id)));
@@ -82,38 +86,49 @@
       for (const m of MODELS.filter(x => x.family === meta.family && x.id !== mid)) {
         const d = await rec(m.id);
         const r = d.records.find(x => x.task === tid);
-        if (r) traces.push({ x: [...r.layers.keys()], y: r.layers, mode: 'lines',
-          name: m.id, line: { color: '#cbd5e1', width: 1.4 }, hovertemplate:
-          m.id + ' L%{x}: %{y:.1f}<extra></extra>' });
+        if (r) traces.push({ x: xs(r), y: r.layers, mode: 'lines',
+          name: m.label, line: { color: '#cbd5e1', width: 1.4 },
+          customdata: [...r.layers.keys()], hovertemplate:
+          m.label + ' L%{customdata}: %{y:.1f}<extra></extra>' });
       }
     }
     const d = await rec(mid);
     const r = d.records.find(x => x.task === tid);
-    if (!r) { Plotly.newPlot('chart', [], note(mid + ' — not evaluated on ' + tmeta.label)); return; }
+    if (!r) { Plotly.newPlot('chart', [], note(meta.label + ' — not evaluated on ' + tmeta.label)); return; }
     const best = r.layers.indexOf(Math.max(...r.layers));
-    traces.push({ x: [...r.layers.keys()], y: r.layers, mode: 'lines+markers', name: mid,
-      line: { color: meta.color, width: 2.5 }, marker: { size: 5 },
-      hovertemplate: 'L%{x}: %{y:.1f}<extra></extra>' });
-    traces.push({ x: [best], y: [r.layers[best]], mode: 'markers', name: 'best (L' + best + ')',
-      marker: { color: '#2563eb', size: 11, symbol: 'circle-open', line: { width: 2.5 } },
-      hovertemplate: 'best: L%{x} = %{y:.1f}<extra></extra>' });
-    Plotly.newPlot('chart', traces, layout(tmeta, r), { responsive: true,
+    const x = xs(r);
+    traces.push({ x, y: r.layers, mode: 'lines+markers', name: meta.label,
+      line: { color: meta.color, width: 2.6 }, marker: { size: 5 },
+      customdata: [...r.layers.keys()],
+      hovertemplate: 'L%{customdata}: %{y:.1f}<extra></extra>' });
+    traces.push({ x: [x[best]], y: [r.layers[best]], mode: 'markers',
+      name: 'best (L' + best + ')',
+      marker: { color: '#2563eb', size: 12, symbol: 'circle-open', line: { width: 2.5 } },
+      hovertemplate: 'best: L' + best + ' = %{y:.1f}<extra></extra>' });
+    Plotly.newPlot('chart', traces, layout(tmeta, meta, r), { responsive: true,
       displaylogo: false, toImageButtonOptions: { filename: mid + '_' + tid + '_layers' } });
   }
-  function layout(tmeta, r) {
+  function layout(tmeta, meta, r) {
+    const normed = $n.checked;
     return { font: { family: 'Inter, sans-serif', color: '#1e293b', size: 13 },
-      title: { text: tmeta.desc, font: { size: 15 }, x: 0, xanchor: 'left' },
-      xaxis: { title: 'layer', dtick: r.n_layers > 30 ? 4 : (r.n_layers > 16 ? 2 : 1),
-               gridcolor: '#f1f5f9', zeroline: false },
+      title: { text: '<b>' + meta.label + '</b> — ' + tmeta.desc,
+               font: { size: 15 }, x: 0, xanchor: 'left' },
+      xaxis: normed
+        ? { title: 'depth (%)', range: [-2, 102], dtick: 25,
+            gridcolor: '#f1f5f9', zeroline: false }
+        : { title: 'layer', dtick: r.n_layers > 30 ? 4 : (r.n_layers > 16 ? 2 : 1),
+            gridcolor: '#f1f5f9', zeroline: false },
       yaxis: { title: 'score', gridcolor: '#f1f5f9', zeroline: false },
-      plot_bgcolor: '#fff', paper_bgcolor: '#fff', hovermode: 'x unified',
-      legend: { orientation: 'h', y: -0.22 }, margin: { t: 48, r: 16 } };
+      plot_bgcolor: '#fff', paper_bgcolor: '#fff', hovermode: 'closest',
+      showlegend: true,
+      legend: { orientation: 'h', y: -0.22, font: { size: 12 } },
+      margin: { t: 52, r: 16, l: 56 } };
   }
   function note(text) {
     return { annotations: [{ text, showarrow: false, font: { color: '#64748b' } }],
              xaxis: { visible: false }, yaxis: { visible: false } };
   }
-  $m.onchange = $t.onchange = $g.onchange = draw;
+  $m.onchange = $t.onchange = $g.onchange = $n.onchange = draw;
   draw();
   </script>
 </body>
