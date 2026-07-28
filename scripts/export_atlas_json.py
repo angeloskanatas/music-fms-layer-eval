@@ -122,6 +122,15 @@ PRIMARY_METRICS = {
     "dimsim_acc_centered",
 }
 
+VARIANT_LABEL = {
+    "oracle": "Oracle (best single layer)", "middle": "Middle layer",
+    "last": "Last layer",
+    "topk_avg": "Top-3 avg", "topk_stack": "Top-3 concat",
+    "top5_avg": "Top-5 avg", "top5_stack": "Top-5 concat",
+    "uniform_avg": "All-layer avg", "stack": "All-layer concat",
+    "learned_avg": "Weighted sum", "hconv": "HConv",
+    "attentive_ciernik": "Attentive",
+}
 # Short display labels for table headers / selectors (full description from
 # the registry rides on the title attribute). Machine keys never face users.
 TASK_LABEL = {
@@ -696,15 +705,6 @@ FUSION_GROUPS = [
     ("All-layer fusion (non-trainable)", ["uniform_avg", "stack"]),
     ("Trainable fusion", ["learned_avg", "hconv", "attentive_ciernik"]),
 ]
-VARIANT_LABEL = {
-    "oracle": "Oracle (best single layer)", "middle": "Middle layer",
-    "last": "Last layer",
-    "topk_avg": "Top-3 avg", "topk_stack": "Top-3 concat",
-    "top5_avg": "Top-5 avg", "top5_stack": "Top-5 concat",
-    "uniform_avg": "All-layer avg", "stack": "All-layer concat",
-    "learned_avg": "Weighted sum", "hconv": "HConv",
-    "attentive_ciernik": "Attentive",
-}
 # fusion-task id -> how to derive the SAME-METRIC single-layer curve (4aa rule)
 FUSION_BASE = {  # task -> list of downstream record tasks to average per layer
     "mtt": ["mtt_ap", "mtt_auroc"], "mtg_genre": ["mtg_genre_ap", "mtg_genre_auroc"],
