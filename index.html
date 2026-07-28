@@ -43,7 +43,9 @@
   <meta name="citation_author" content="Bogdanov, Dmitry">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="International Society for Music Information Retrieval Conference (ISMIR)">
-  <meta name="citation_pdf_url" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/pdfs/paper.pdf">
+  <!-- citation_pdf_url deliberately absent until the arXiv upload: Scholar penalizes dead PDF links.
+       Then add: <meta name="citation_pdf_url" content="https://arxiv.org/pdf/ARXIV_ID">
+                 <meta name="citation_arxiv_id" content="ARXIV_ID"> -->
 
   <!-- Additional SEO -->
   <meta name="theme-color" content="#0f172a">
@@ -164,22 +166,22 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="static/pdfs/paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
-                  </a>
+                  <span class="button is-normal is-rounded is-dark" style="opacity:.55;cursor:default;" title="The paper will be available on arXiv shortly">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv&nbsp;&middot;&nbsp;soon</span>
+                  </span>
                 </span>
                 <span class="link-block">
                   <a href="https://github.com/angeloskanatas/music-fms-layer-eval" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
                   </a>
                 </span>
-                <!-- TODO: uncomment when an arXiv link exists
+                <!-- When the arXiv id exists, replace the disabled chip above with:
                 <span class="link-block">
                   <a href="https://arxiv.org/abs/ARXIV_ID" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
                   </a>
                 </span>
-                -->
+                and restore citation_pdf_url (-> arxiv.org/pdf/ARXIV_ID) + citation_arxiv_id in <head>. -->
               </div>
             </div>
           </div>

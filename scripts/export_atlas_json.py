@@ -145,6 +145,9 @@ TASK_LABEL = {
     "mtg_instrument_ap": "MTG-Instr", "mtg_instrument_auroc": "MTG-Instr AUROC",
     "mtg_mood_ap": "MTG-Mood", "mtg_mood_auroc": "MTG-Mood AUROC",
     "mtg_top50_ap": "MTG-Top50", "mtg_top50_auroc": "MTG-Top50 AUROC",
+    # fusion-only averaged ids (avg AP/AUROC; the title attribute says so)
+    "mtt": "MTT", "mtg_genre": "MTG-Genre", "mtg_instrument": "MTG-Instr",
+    "mtg_mood": "MTG-Mood", "mtg_top50": "MTG-Top50",
     "dimsim_acc_centered": "DimSim", "dimsim_acc_cosine": "DimSim cos",
     "dimsim_acc_l2": "DimSim L2",
 }
