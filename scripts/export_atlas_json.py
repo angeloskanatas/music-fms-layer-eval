@@ -648,21 +648,20 @@ if __name__ == "__main__" and "--fusion" in sys.argv:
 # ------------- stage 1c views: Selection & Fusion panel + table hover -------------
 
 FUSION_GROUPS = [
-    ("Reference", ["oracle", "last"]),
+    ("Reference", ["oracle", "middle", "last"]),
     ("Proxy-guided fusion (label-free layer choice)",
      ["topk_avg", "topk_stack", "top5_avg", "top5_stack"]),
-    ("Non-trainable fusion (all layers)", ["uniform_avg", "softmax_avg"]),
-    ("Trainable fusion", ["learned_avg", "stack", "mlpreduce", "hconv",
-                          "attentive", "attentive_ciernik"]),
+    ("All-layer fusion (non-trainable)", ["uniform_avg", "stack"]),
+    ("Trainable fusion", ["learned_avg", "hconv", "attentive_ciernik"]),
 ]
 VARIANT_LABEL = {
-    "oracle": "Oracle (best single layer)", "last": "Last layer",
+    "oracle": "Oracle (best single layer)", "middle": "Middle layer",
+    "last": "Last layer",
     "topk_avg": "Top-3 avg", "topk_stack": "Top-3 concat",
     "top5_avg": "Top-5 avg", "top5_stack": "Top-5 concat",
-    "uniform_avg": "Uniform avg", "softmax_avg": "Softmax avg",
-    "learned_avg": "Learned weights", "stack": "Concat + linear",
-    "mlpreduce": "MLP reduce", "hconv": "HConv", "attentive": "Attentive",
-    "attentive_ciernik": "Attentive (Ciernik)",
+    "uniform_avg": "All-layer avg", "stack": "All-layer concat",
+    "learned_avg": "Weighted sum", "hconv": "HConv",
+    "attentive_ciernik": "Attentive",
 }
 # fusion-task id -> how to derive the SAME-METRIC single-layer curve (4aa rule)
 FUSION_BASE = {  # task -> list of downstream record tasks to average per layer
@@ -711,6 +710,7 @@ def render_fusion_panel():
                 curve = _single_layer_curve(down, task)
                 if curve:
                     data[task][model_id]["oracle"] = round(max(curve), 2)
+                    data[task][model_id]["middle"] = round(curve[len(curve) // 2], 2)
                     data[task][model_id]["last"] = round(curve[-1], 2)
 
     order = [t for t in FUSION_TASK_LABEL if t in data]
@@ -744,12 +744,46 @@ def render_fusion_panel():
         sections.append(
             f"<section class='ftask' id='ft-{task}'{'' if ti == 0 else ' hidden'}>"
             f"<table>{head}{''.join(body)}</table></section>")
+    # per-MODEL pivot: methods x tasks for one model
+    msections = []
+    for model_id in models_here:
+        tcols = [t for t in order if model_id in data[t]]
+        head = ("<tr><th>Method</th>" +
+                "".join(f"<th class='num' title='{FUSION_TASK_LABEL[t]}'>"
+                        f"{TASK_LABEL.get(t, t)}</th>" for t in tcols) + "</tr>")
+        body = []
+        for gname, variants in FUSION_GROUPS:
+            body.append(f"<tr class='ghead'><td colspan='{len(tcols)+1}'>{gname}</td></tr>")
+            for v in variants:
+                if not any(v in data[t].get(model_id, {}) for t in tcols):
+                    continue
+                tds = []
+                for t in tcols:
+                    val = data[t].get(model_id, {}).get(v)
+                    orc = data[t].get(model_id, {}).get("oracle")
+                    if val is None:
+                        tds.append("<td class='num na'>&mdash;</td>")
+                    elif v in ("oracle", "middle", "last") or orc is None:
+                        tds.append(f"<td class='num'>{val:.1f}</td>")
+                    else:
+                        d = val - orc
+                        cls = " pos" if d >= 0 else ""
+                        tds.append(f"<td class='num'><span>{val:.1f}</span>"
+                                   f"<span class='dlt{cls}'>{d:+.1f}</span></td>")
+                rcls = " class='oracle'" if v == "oracle" else ""
+                body.append(f"<tr{rcls}><td>{VARIANT_LABEL[v]}</td>{''.join(tds)}</tr>")
+        msections.append(
+            f"<section class='ftask' id='fm-{model_id}' hidden>"
+            f"<table>{head}{''.join(body)}</table></section>")
+    mopts = "".join(f"<option value='fm-{m}'>{MODELS[m]['display']}</option>"
+                    for m in models_here)
     opts = "".join(f"<option value='ft-{t}'>{FUSION_TASK_LABEL[t]}</option>"
                    for t in order)
     tpl = (Path(__file__).resolve().parent / "fusion_template.html").read_text()
     (OUT.parent / "fusion.html").write_text(
         tpl.replace("<!--OPTIONS-->", opts)
-           .replace("<!--SECTIONS-->", "\n".join(sections))
+           .replace("<!--MOPTIONS-->", mopts)
+           .replace("<!--SECTIONS-->", "\n".join(sections + msections))
            .replace("{{DATE}}", str(date.today())))
     print(f"fusion.html: {len(order)} tasks x {len(models_here)} models")
 

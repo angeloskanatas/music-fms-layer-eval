@@ -85,8 +85,15 @@
     </div>
   </div>
   <div class="controls">
-    <div class="ctrl"><label for="task">Task</label>
+    <div class="ctrl"><label for="view">View by</label>
+      <select id="view" onchange="switchView()">
+        <option value="task">task (compare models)</option>
+        <option value="model">model (compare tasks)</option>
+      </select></div>
+    <div class="ctrl" id="c-task"><label for="task">Task</label>
       <select id="task" onchange="showTask(this.value)"><!--OPTIONS--></select></div>
+    <div class="ctrl" id="c-model" style="display:none"><label for="model">Model</label>
+      <select id="model" onchange="showTask(this.value)"><!--MOPTIONS--></select></div>
   </div>
   <div class="twrap">
     <!--SECTIONS-->
@@ -100,6 +107,13 @@
   <script>
   function showTask(id) {
     document.querySelectorAll('.ftask').forEach(s => s.hidden = (s.id !== id));
+  }
+  function switchView() {
+    const byTask = document.getElementById('view').value === 'task';
+    document.getElementById('c-task').style.display = byTask ? '' : 'none';
+    document.getElementById('c-model').style.display = byTask ? 'none' : '';
+    showTask(byTask ? document.getElementById('task').value
+                    : document.getElementById('model').value);
   }
   </script>
 </body>
