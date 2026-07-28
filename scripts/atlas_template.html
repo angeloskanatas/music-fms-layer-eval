@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Layer Atlas | What Makes a Good Layer?</title>
-  <meta name="description" content="Layer-wise downstream results for music foundation models: best-layer scores per model and task, MARBLE constrained-track probes, sortable with per-task breakdowns.">
+  <meta name="description" content="Which layer of a music foundation model works best for each task? Layer-wise results for 17 models across 15 music tasks — per-layer performance profiles, best layers, and sortable comparisons.">
   <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
@@ -70,8 +70,7 @@
     <h1>Layer Atlas</h1>
     <p>Layer-wise downstream results for {{NMODELS}} music foundation models.
        Each cell: the best single layer's score with its index (L#) and a <strong>sparkline of the
-       full layer profile</strong> (dot = best layer). Frozen encoders, MARBLE constrained-track
-       probes (MLP, one 512-unit hidden layer). <strong>Rank</strong> = mean rank across primary
+       full layer profile</strong> (dot = best layer). <strong>Rank</strong> = mean rank across primary
        tasks (scale-free; lower is better). Click a family header (&#9656;) for companion metrics;
        click any column header to sort. &dagger; = metric caveat (hover); &mdash; = not evaluated.</p>
     <p class="meta">Companion to <a href="index.html"><em>What Makes a Good Layer?</em> (ISMIR 2026)</a>

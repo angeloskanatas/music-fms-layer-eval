@@ -39,7 +39,7 @@
   <header>
     <h1>Layer Explorer</h1>
     <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
-       marked; its paradigm-mates give context. Frozen encoders, MARBLE constrained-track probes.</p>
+       marked; its paradigm-mates give context.</p>
     <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
        <a href="index.html">paper</a> &middot; results as of {{DATE}} &middot;
        camera icon in the chart toolbar exports PNG</p>
@@ -53,8 +53,9 @@
   <div id="chart"></div>
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
   <footer>
-    x-axis: transformer block (0 = first hidden state). Data:
-    <a href="data/results/">raw per-layer JSON</a> &middot; single-seed probes (seed 1234).
+    Protocol: frozen encoders, one fixed probe for every number (MARBLE constrained track: MLP with
+    one 512-unit hidden layer, identical splits, single seed 1234). x-axis: transformer block
+    (0 = first hidden state). Data: <a href="data/results/">raw per-layer JSON</a>.
   </footer>
   <script>
   const MODELS = /*MODELS_JSON*/;
