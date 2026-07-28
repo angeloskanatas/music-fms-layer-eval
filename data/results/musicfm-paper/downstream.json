@@ -1,0 +1,298 @@
+{
+ "schema_version": "1.0.0",
+ "model": "musicfm-paper",
+ "family": "masked",
+ "in_paper": false,
+ "variant_of": "musicfm",
+ "source": "layerbylayer/output/downstream/data/musicfm_paper.json",
+ "readout_spec": {
+  "id": "mlp512-marble",
+  "probe": "MLP, one 512-unit hidden layer",
+  "protocol": "MARBLE constrained track, frozen encoder, per-layer",
+  "seed": 1234,
+  "n_seeds": 1
+ },
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "genre",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    57.6,
+    72.8,
+    81.0,
+    82.1,
+    85.5,
+    82.1,
+    82.1,
+    73.8,
+    78.6,
+    78.6,
+    74.1,
+    68.3
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "emo_r2a",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    70.2,
+    72.4,
+    75.2,
+    75.4,
+    75.7,
+    75.5,
+    74.3,
+    72.6,
+    73.2,
+    72.1,
+    71.9,
+    72.0
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "emo_r2v",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    49.3,
+    56.5,
+    58.8,
+    57.3,
+    61.1,
+    60.7,
+    57.7,
+    57.6,
+    55.6,
+    58.4,
+    52.0,
+    52.2
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "singer",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    92.5,
+    91.2,
+    90.8,
+    89.7,
+    88.0,
+    86.5,
+    85.3,
+    81.3,
+    80.1,
+    79.9,
+    78.6,
+    77.1
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "technique",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    71.2,
+    73.7,
+    75.0,
+    76.7,
+    76.4,
+    78.3,
+    77.0,
+    74.0,
+    74.3,
+    73.6,
+    71.8,
+    70.4
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "key",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    60.8,
+    63.1,
+    63.3,
+    60.1,
+    62.3,
+    62.4,
+    15.8,
+    15.0,
+    15.8,
+    61.4,
+    59.3,
+    60.0
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "instrument",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    70.9,
+    73.0,
+    75.5,
+    75.2,
+    74.0,
+    72.3,
+    73.0,
+    71.6,
+    71.9,
+    70.2,
+    70.2,
+    71.0
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "pitch",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    89.5,
+    89.2,
+    87.8,
+    88.7,
+    87.8,
+    89.0,
+    88.0,
+    87.5,
+    86.1,
+    86.6,
+    85.5,
+    85.5
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "tagging_roc",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    89.8,
+    90.8,
+    91.2,
+    91.3,
+    91.3,
+    91.3,
+    91.1,
+    91.0,
+    91.0,
+    91.0,
+    90.7,
+    90.4
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "tagging_ap",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    37.3,
+    38.8,
+    39.5,
+    40.1,
+    40.0,
+    39.7,
+    39.3,
+    39.4,
+    39.0,
+    38.8,
+    38.1,
+    38.2
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "structure",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    75.6,
+    75.7,
+    76.0,
+    76.4,
+    76.2,
+    76.5,
+    76.2,
+    76.4,
+    76.3,
+    76.0,
+    75.8,
+    75.7
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "rd",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    92.1,
+    93.3,
+    93.9,
+    93.4,
+    93.1,
+    93.1,
+    92.6,
+    93.4,
+    93.8,
+    93.9,
+    93.1,
+    93.5
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "mpc",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    67.9,
+    74.5,
+    74.2,
+    74.4,
+    75.4,
+    74.7,
+    74.2,
+    72.7,
+    74.2,
+    72.5,
+    74.3,
+    72.9
+   ],
+   "n_layers": 12
+  },
+  {
+   "task": "sqc",
+   "task_family": null,
+   "readout": "mlp512-marble",
+   "layers": [
+    77.0,
+    77.8,
+    78.0,
+    79.5,
+    79.3,
+    79.3,
+    79.3,
+    78.5,
+    78.5,
+    79.4,
+    78.8,
+    78.0
+   ],
+   "n_layers": 12
+  }
+ ]
+}

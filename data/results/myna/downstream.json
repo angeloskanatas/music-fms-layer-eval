@@ -1,0 +1,354 @@
+{
+ "schema_version": "1.0.0",
+ "model": "myna",
+ "family": "contrastive",
+ "in_paper": true,
+ "variant_of": null,
+ "source": "layerbylayer/output/downstream/data/myna.json",
+ "readout_spec": {
+  "id": "mlp512-marble",
+  "probe": "MLP, one 512-unit hidden layer",
+  "protocol": "MARBLE constrained track, frozen encoder, per-layer",
+  "seed": 1234,
+  "n_seeds": 1
+ },
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "emo_r2",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    13.3,
+    24.1,
+    32.0,
+    39.9,
+    41.5,
+    41.5,
+    41.3,
+    41.5,
+    42.7,
+    43.2,
+    42.7,
+    43.1,
+    43.2
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "emo_r2a",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    19.8,
+    29.1,
+    36.1,
+    45.0,
+    47.9,
+    49.2,
+    49.0,
+    50.0,
+    50.1,
+    51.0,
+    50.0,
+    50.8,
+    51.6
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "emo_r2v",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    6.8,
+    19.2,
+    27.9,
+    34.8,
+    35.2,
+    33.7,
+    33.7,
+    33.0,
+    35.3,
+    35.5,
+    35.4,
+    35.3,
+    34.7
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "genre",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    30.0,
+    47.6,
+    44.1,
+    50.0,
+    52.1,
+    51.4,
+    49.0,
+    50.0,
+    50.0,
+    48.6,
+    50.0,
+    48.3,
+    49.3
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "hxmsa",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    46.4,
+    47.8,
+    48.1,
+    45.9,
+    48.0,
+    48.6,
+    48.8,
+    47.8,
+    48.6,
+    48.6,
+    48.7,
+    46.4,
+    49.6
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "key",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    39.6,
+    41.3,
+    45.5,
+    44.9,
+    44.2,
+    45.9,
+    47.8,
+    47.0,
+    46.0,
+    45.9,
+    45.6,
+    44.4,
+    46.7
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtg_genre_ap",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    6.1,
+    8.4,
+    8.9,
+    9.6,
+    9.9,
+    10.2,
+    10.1,
+    10.3,
+    10.2,
+    10.1,
+    10.4,
+    10.2,
+    10.6
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    67.7,
+    73.8,
+    75.3,
+    76.7,
+    77.2,
+    77.4,
+    77.5,
+    77.6,
+    77.3,
+    77.5,
+    77.7,
+    77.3,
+    77.9
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtg_mood_ap",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    5.8,
+    7.3,
+    7.9,
+    8.2,
+    8.5,
+    8.5,
+    8.7,
+    8.6,
+    8.6,
+    8.5,
+    8.7,
+    8.6,
+    8.9
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    61.8,
+    67.0,
+    68.1,
+    69.1,
+    69.6,
+    69.6,
+    69.4,
+    69.6,
+    69.6,
+    69.1,
+    69.5,
+    69.3,
+    69.7
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_ap",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    16.9,
+    24.5,
+    27.3,
+    28.5,
+    28.7,
+    29.2,
+    29.2,
+    29.2,
+    29.6,
+    29.5,
+    29.3,
+    29.4,
+    29.7
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_auroc",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    75.4,
+    82.6,
+    84.3,
+    85.1,
+    85.3,
+    85.6,
+    85.6,
+    85.6,
+    85.7,
+    85.5,
+    85.5,
+    85.5,
+    85.8
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "nsynth_instrument",
+   "task_family": "timbre",
+   "readout": "mlp512-marble",
+   "layers": [
+    52.7,
+    57.0,
+    60.9,
+    61.4,
+    61.6,
+    62.4,
+    63.0,
+    62.7,
+    63.8,
+    61.8,
+    62.0,
+    62.6,
+    64.5
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "dimsim_acc_centered",
+   "task_family": "similarity",
+   "readout": "mlp512-marble",
+   "layers": [
+    52.1,
+    54.27,
+    56.66,
+    60.75,
+    63.25,
+    63.59,
+    64.51,
+    64.16,
+    64.16,
+    63.71,
+    63.71,
+    63.71,
+    65.53
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "dimsim_acc_cosine",
+   "task_family": "similarity",
+   "readout": "mlp512-marble",
+   "layers": [
+    51.88,
+    54.49,
+    57.57,
+    62.57,
+    63.25,
+    63.14,
+    64.05,
+    63.94,
+    64.39,
+    65.76,
+    65.76,
+    65.76,
+    66.67
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "dimsim_acc_l2",
+   "task_family": "similarity",
+   "readout": "mlp512-marble",
+   "layers": [
+    51.99,
+    53.58,
+    58.02,
+    62.68,
+    63.94,
+    64.28,
+    65.07,
+    65.07,
+    64.73,
+    65.3,
+    65.3,
+    65.3,
+    67.35
+   ],
+   "n_layers": 13
+  }
+ ]
+}

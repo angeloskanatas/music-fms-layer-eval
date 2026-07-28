@@ -1,0 +1,106 @@
+# canonical task registry; aliases map source-file drift onto one vocabulary
+beat_f1:
+  description: "Beat tracking F1 (GTZAN)"
+  family: rhythm
+chords_ace_mirex:
+  description: "Chord MIREX score (ChordsACE)"
+  family: tonal
+chords_ace_root:
+  description: "Chord root score (ChordsACE)"
+  family: tonal
+chords_ace_thirds:
+  description: "Chord thirds score (ChordsACE)"
+  family: tonal
+dimsim_acc_centered:
+  description: "Perceptual similarity accuracy, centered cosine (DimSim)"
+  family: similarity
+dimsim_acc_cosine:
+  description: "Perceptual similarity accuracy, cosine (DimSim)"
+  family: similarity
+dimsim_acc_l2:
+  description: "Perceptual similarity accuracy, raw L2 (DimSim)"
+  family: similarity
+downbeat_f1:
+  description: "Downbeat tracking F1 (GTZAN)"
+  family: rhythm
+emo_r2:
+  description: "Emotion recognition R2 (EMO)"
+  family: semantic
+emo_r2a:
+  description: "Emotion recognition arousal R2 (EMO)"
+  family: semantic
+emo_r2v:
+  description: "Emotion recognition valence R2 (EMO)"
+  family: semantic
+genre:
+  description: "Genre classification accuracy (GTZAN)"
+  family: semantic
+hxmsa:
+  description: "Clip-level music structure analysis accuracy (Harmonix)"
+  family: semantic
+instrument:
+  description: "Instrument classification (NSynth)"
+key:
+  description: "Key estimation weighted score (GiantSteps)"
+  family: tonal
+mpc:
+  description: "Music piece classification"
+mtg_genre_ap:
+  description: "Genre tagging AP (MTG-Jamendo)"
+  family: semantic
+mtg_genre_auroc:
+  description: "Genre tagging AUROC (MTG-Jamendo)"
+  family: semantic
+mtg_instrument_ap:
+  description: "Instrument tagging AP (MTG-Jamendo)"
+  family: semantic
+mtg_instrument_auroc:
+  description: "Instrument tagging AUROC (MTG-Jamendo)"
+  family: semantic
+mtg_mood_ap:
+  description: "Mood/theme tagging AP (MTG-Jamendo)"
+  family: semantic
+mtg_mood_auroc:
+  description: "Mood/theme tagging AUROC (MTG-Jamendo)"
+  family: semantic
+mtg_top50_ap:
+  description: "Top-50 tagging AP (MTG-Jamendo)"
+  family: semantic
+mtg_top50_auroc:
+  description: "Top-50 tagging AUROC (MTG-Jamendo)"
+  family: semantic
+mtt_ap:
+  description: "Auto-tagging AP (MagnaTagATune)"
+  family: semantic
+mtt_auroc:
+  description: "Auto-tagging AUROC (MagnaTagATune)"
+  family: semantic
+nsynth_instrument:
+  description: "Instrument classification accuracy (NSynth)"
+  family: timbre
+nsynth_pitch:
+  description: "Pitch classification accuracy (NSynth)"
+  family: tonal
+pitch:
+  description: "Pitch classification (NSynth)"
+rd:
+  description: "Rhythm detection"
+singer:
+  description: "Singer identification (VocalSet)"
+sqc:
+  description: "Sound quality classification"
+structure:
+  description: "Music structure segmentation (Harmonix)"
+tagging_ap:
+  description: "Music tagging Average Precision (MagnaTagATune)"
+tagging_roc:
+  description: "Music tagging ROC-AUC (MagnaTagATune)"
+technique:
+  description: "Vocal technique classification (VocalSet)"
+aliases:
+  emotion_r2a: emo_r2a
+  emotion_r2v: emo_r2v
+excluded_metrics:   # never export/render; reasons are evidence-based
+  tempo_acc1: "untrained head (beat-probe tempo loss weight = 0.0)"
+  tempo_acc2: "untrained head (beat-probe tempo loss weight = 0.0)"
+  tempo_mae: "untrained head (beat-probe tempo loss weight = 0.0)"

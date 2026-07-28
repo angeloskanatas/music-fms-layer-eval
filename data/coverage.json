@@ -1,0 +1,151 @@
+{
+ "generated": "2026-07-28",
+ "policy": "fill-as-we-go, append-only; new cells run 3 seeds",
+ "missing_primary_cells": {
+  "musicgen-small": [
+   "chords_ace_mirex",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "musicgen-medium": [
+   "chords_ace_mirex"
+  ],
+  "musicgen-large": [
+   "chords_ace_mirex"
+  ],
+  "yue-0.5b": [
+   "chords_ace_mirex",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "yue-7b": [
+   "chords_ace_mirex",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "clap": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "downbeat_f1"
+  ],
+  "myna": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "downbeat_f1",
+   "mtg_instrument_ap",
+   "mtg_top50_ap",
+   "nsynth_pitch"
+  ],
+  "maest": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "downbeat_f1",
+   "hxmsa"
+  ],
+  "mt2": [
+   "beat_f1",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "mt2-cls-avg": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "mt2-cls-contrastive": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "mt2-cls-equiv": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "muq-paper": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "mtt_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "musicfm-paper": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "dimsim_acc_centered",
+   "downbeat_f1",
+   "emo_r2",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "mtt_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "qwen2audio-instruct": [
+   "beat_f1",
+   "chords_ace_mirex",
+   "downbeat_f1",
+   "hxmsa",
+   "mtg_genre_ap",
+   "mtg_instrument_ap",
+   "mtg_mood_ap",
+   "mtg_top50_ap",
+   "mtt_ap",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ],
+  "musicflamingo": [
+   "chords_ace_mirex",
+   "hxmsa",
+   "nsynth_instrument",
+   "nsynth_pitch"
+  ]
+ },
+ "n_missing": 112
+}

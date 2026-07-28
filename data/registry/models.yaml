@@ -1,0 +1,74 @@
+# canonical model registry (open vocabulary; edit by hand, append-only)
+mert-v1-95M:
+  family: masked
+  in_paper: true
+mert-v1-330M:
+  family: masked
+  in_paper: true
+musicfm:
+  family: masked
+  in_paper: true
+muq:
+  family: masked
+  in_paper: true
+omar-rq-base:
+  family: masked
+  in_paper: true
+omar-rq-multifeature-25hz:
+  family: masked
+  in_paper: true
+musicgen-small:
+  family: autoregressive
+  in_paper: true
+musicgen-medium:
+  family: autoregressive
+  in_paper: true
+musicgen-large:
+  family: autoregressive
+  in_paper: true
+yue-0.5b:
+  family: autoregressive
+  in_paper: true
+yue-7b:
+  family: autoregressive
+  in_paper: true
+clap:
+  family: contrastive
+  in_paper: true
+myna:
+  family: contrastive
+  in_paper: true
+maest:
+  family: supervised
+  in_paper: false
+mt2:
+  family: contrastive
+  in_paper: false
+mt2-cls-avg:
+  family: contrastive
+  in_paper: false
+  variant_of: mt2
+mt2-cls-contrastive:
+  family: contrastive
+  in_paper: false
+  variant_of: mt2
+mt2-cls-equiv:
+  family: contrastive
+  in_paper: false
+  variant_of: mt2
+muq-paper:
+  family: masked
+  in_paper: false
+  variant_of: muq
+  note: "replication of the MuQ paper's own eval suite (different task vocabulary)"
+musicfm-paper:
+  family: masked
+  in_paper: false
+  variant_of: musicfm
+  note: "replication of the MusicFM paper's own eval suite"
+qwen2audio-instruct:
+  family: audio-llm
+  in_paper: false
+musicflamingo:
+  family: audio-llm
+  in_paper: false

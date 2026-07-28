@@ -1,0 +1,102 @@
+{
+ "schema_version": "1.0.0",
+ "model": "mt2-cls-contrastive",
+ "family": "contrastive",
+ "in_paper": false,
+ "variant_of": "mt2",
+ "source": "layerbylayer/output/downstream/data/mt2-cls-contrastive.json",
+ "readout_spec": {
+  "id": "mlp512-marble",
+  "probe": "MLP, one 512-unit hidden layer",
+  "protocol": "MARBLE constrained track, frozen encoder, per-layer",
+  "seed": 1234,
+  "n_seeds": 1
+ },
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "genre",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    35.9,
+    49.0,
+    54.5,
+    56.9,
+    59.0,
+    62.4,
+    65.2,
+    64.5,
+    67.2,
+    67.6,
+    69.7,
+    67.9,
+    70.3
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "key",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    64.1,
+    66.7,
+    67.8,
+    68.2,
+    69.5,
+    69.2,
+    69.5,
+    69.5,
+    69.0,
+    69.5,
+    68.6,
+    66.1,
+    65.4
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_ap",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    26.9,
+    29.1,
+    30.0,
+    31.2,
+    31.7,
+    32.7,
+    33.2,
+    33.3,
+    33.2,
+    34.0,
+    32.8,
+    32.7,
+    32.6
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_auroc",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    84.2,
+    85.7,
+    86.5,
+    87.3,
+    87.2,
+    87.8,
+    87.8,
+    88.2,
+    88.3,
+    88.6,
+    88.0,
+    88.0,
+    87.9
+   ],
+   "n_layers": 13
+  }
+ ]
+}

@@ -56,9 +56,10 @@
 
   <title>What Makes a Good Layer? | Layer-Wise Intrinsic Properties of Music Foundation Models</title>
 
-  <!-- Favicon (template's favicon.ico is the template author's photo — replaced) -->
+  <!-- Favicon: note-on-a-staff-of-layers; SVG primary, root .ico fallback, PNG touch icon -->
   <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
-  <link rel="apple-touch-icon" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
 
   <!-- Critical CSS -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -196,8 +197,8 @@
             Music foundation models are used as frozen feature extractors, but <em>which layer</em> you read from
             is usually a guess. We map 12 models layer by layer: label-free geometry picks the right layer for
             most MIR tasks, tonal tasks need a new <strong>pitch-transposition equivariance</strong> measure, and
-            together they replace an exhaustive layer search with a <strong>three-layer shortlist</strong> that
-            beats trainable multi-layer fusion.
+            together they replace an exhaustive layer search with a <strong>shortlist of a few
+            proxy-ranked layers</strong> that beats trainable multi-layer fusion.
           </div>
         </div>
       </div>
@@ -215,7 +216,7 @@
             <p class="finding"><strong>Geometry works — off tonal.</strong> Intrinsic dimension is the strongest general proxy (mean&nbsp;<em>ρ</em>&nbsp;=&nbsp;0.76), and straighter temporal trajectories transfer better, most consistently for beat tracking.</p>
             <p class="finding"><strong>Tonal tasks break every standard metric.</strong> Key, chord and pitch show weak, sign-inconsistent correlations: static geometry and augmentation-induced <em>invariance</em> are the opposite of what these tasks need.</p>
             <p class="finding"><strong>PTE closes the gap.</strong> A self-supervised circle-of-fifths diagnostic — the only metric with a consistent tonal signal (mean&nbsp;<em>ρ</em>&nbsp;=&nbsp;0.80), and the only one that holds both within and across models.</p>
-            <p class="finding"><strong>Three layers are enough.</strong> The top-3 proxy-ranked layers land 0.4&nbsp;pp from the per-task oracle and match it on 58% of model–task pairs, using 4–16× fewer probe runs; the default final layer is 4.3&nbsp;pp worse.</p>
+            <p class="finding"><strong>A few proxy-ranked layers are enough.</strong> The top-3 land 0.4&nbsp;pp from the per-task oracle and match it on 58% of model–task pairs, using 4–16× fewer probe runs; the default final layer is 4.3&nbsp;pp worse.</p>
             <p class="finding"><strong>Metric-guided fusion beats trainable fusion.</strong> Averaging those three layers is the strongest fusion method (<em>p</em>&nbsp;&lt;&nbsp;0.001): 0.3&nbsp;pp from the oracle, exceeding it in 41% of model–task pairs, while every trainable baseline trails — and the margin grows when labels are scarce.</p>
             <p class="finding"><strong>But values don't rank models.</strong> Effective rank tracks hidden size (<em>ρ</em>&nbsp;=&nbsp;0.82), not quality (<em>ρ</em>&nbsp;=&nbsp;0.02) — these metrics choose layers within a model, not winners across architectures.</p>
           </div>
@@ -229,16 +230,19 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-4">Extended Results <span class="soon">Coming soon</span></h2>
+          <h2 class="title is-4">Extended Results</h2>
           <p class="is-size-6" style="margin-bottom:1rem;">
-            The paper reports aggregates. This page will host the full breakdowns behind them:
+            The paper reports aggregates. The <a href="atlas.html"><strong>Layer Atlas</strong></a> hosts
+            the breakdowns behind them &mdash; best-layer scores for every model &times; task, sortable,
+            with per-task columns, CSV/LaTeX export, and the raw per-layer records as
+            <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">JSON</a>.
           </p>
           <div class="content is-size-6">
             <ul>
-              <li><strong>Layer-wise downstream results</strong> — every model × task, across probing readouts</li>
-              <li><strong>Layer selection &amp; fusion</strong> — proxy-guided selection and fusion against trainable fusion and the per-task oracle, per model and per task</li>
-              <li><strong>Metric–task correlations</strong> — per task and per model, beyond the paper's paradigm-level averages</li>
-              <li><strong>Intrinsic-metric profiles across depth</strong> — overlaid on downstream performance</li>
+              <li><a href="atlas.html"><strong>Layer-wise downstream results</strong></a> — every model × task, best layer per cell <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
+              <li><strong>Layer selection &amp; fusion</strong> — proxy-guided vs. trainable fusion vs. the per-task oracle, per model and per task <span class="soon">next</span></li>
+              <li><strong>Metric–task correlations</strong> — per task and per model, beyond the paper's paradigm-level averages <span class="soon">next</span></li>
+              <li><strong>Intrinsic-metric profiles across depth</strong> — overlaid on downstream performance <span class="soon">next</span></li>
             </ul>
           </div>
         </div>

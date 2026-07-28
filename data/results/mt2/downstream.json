@@ -1,0 +1,165 @@
+{
+ "schema_version": "1.0.0",
+ "model": "mt2",
+ "family": "contrastive",
+ "in_paper": false,
+ "variant_of": null,
+ "source": "layerbylayer/output/downstream/data/mt2.json",
+ "readout_spec": {
+  "id": "mlp512-marble",
+  "probe": "MLP, one 512-unit hidden layer",
+  "protocol": "MARBLE constrained track, frozen encoder, per-layer",
+  "seed": 1234,
+  "n_seeds": 1
+ },
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "chords_ace_mirex",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    81.1,
+    80.8,
+    81.6,
+    83.8,
+    84.2,
+    84.4,
+    83.4,
+    83.6,
+    83.4,
+    84.4,
+    80.8,
+    82.2,
+    81.1
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "chords_ace_root",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    59.2,
+    63.6,
+    67.1,
+    70.9,
+    72.1,
+    72.3,
+    72.7,
+    72.3,
+    71.6,
+    70.6,
+    69.3,
+    67.7,
+    64.8
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "chords_ace_thirds",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    56.1,
+    60.5,
+    63.9,
+    67.8,
+    69.3,
+    69.2,
+    69.4,
+    69.1,
+    68.4,
+    67.4,
+    66.0,
+    64.4,
+    61.4
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "genre",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    36.9,
+    49.0,
+    51.0,
+    61.0,
+    60.0,
+    61.0,
+    63.1,
+    61.7,
+    62.1,
+    64.1,
+    63.1,
+    63.1,
+    60.0
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "key",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    65.2,
+    67.9,
+    70.0,
+    68.8,
+    70.0,
+    68.3,
+    69.3,
+    68.3,
+    69.0,
+    66.6,
+    64.9,
+    63.2,
+    59.6
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_ap",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    26.9,
+    28.5,
+    29.7,
+    30.8,
+    31.3,
+    31.3,
+    31.9,
+    32.1,
+    32.3,
+    32.7,
+    32.6,
+    32.2,
+    32.0
+   ],
+   "n_layers": 13
+  },
+  {
+   "task": "mtt_auroc",
+   "task_family": "semantic",
+   "readout": "mlp512-marble",
+   "layers": [
+    84.2,
+    85.1,
+    85.7,
+    86.5,
+    86.8,
+    87.0,
+    87.5,
+    87.7,
+    87.7,
+    88.0,
+    87.9,
+    87.7,
+    87.0
+   ],
+   "n_layers": 13
+  }
+ ]
+}

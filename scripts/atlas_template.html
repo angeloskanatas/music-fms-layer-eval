@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layer Atlas | What Makes a Good Layer?</title>
+  <meta name="description" content="Layer-wise downstream results for music foundation models: best-layer scores per model and task, MARBLE constrained-track probes, sortable with per-task breakdowns.">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1e293b; --ink-2: #64748b; --ink-3: #94a3b8;
+      --accent: #2563eb; --line: #e2e8f0; --bg: #ffffff; --bg-2: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Inter', -apple-system, sans-serif; color: var(--ink);
+           background: var(--bg); font-size: 15px; line-height: 1.55; }
+    header { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 1rem; }
+    header h1 { font-size: 1.7rem; font-weight: 800; margin: 0 0 .25rem; }
+    header p  { color: var(--ink-2); margin: .25rem 0; max-width: 720px; }
+    header a  { color: var(--accent); text-decoration: none; }
+    .meta { font-size: .85rem; color: var(--ink-3); }
+    .toolbar { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem .75rem;
+               display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .toolbar button { font: inherit; font-size: .85rem; font-weight: 600; color: var(--ink);
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+      padding: .4rem .8rem; cursor: pointer; }
+    .toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+    .twrap { max-width: 1100px; margin: 0 auto 3rem; padding: 0 1.5rem; overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+    th, td { padding: .45rem .6rem; border-bottom: 1px solid var(--line); text-align: left;
+             white-space: nowrap; }
+    thead th { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em;
+               color: var(--ink-2); border-bottom: 2px solid var(--line);
+               position: sticky; top: 0; background: var(--bg); cursor: pointer; }
+    thead th.detail { text-transform: none; letter-spacing: 0; }
+    th.fam-agg.expandable:hover { color: var(--accent); }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.num { font-weight: 500; }
+    tbody tr { border-left: 3px solid var(--fam, transparent); }
+    tbody td:first-child { border-left: 3px solid var(--fam, transparent);
+                           padding-left: .75rem; }
+    tbody tr:hover td { background: var(--bg-2); }
+    .mname { font-weight: 600; }
+    .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+           background: var(--fam); margin-right: .45rem; vertical-align: baseline; }
+    .lyr { color: var(--ink-3); font-size: .72rem; font-weight: 400; margin-left: .35rem; }
+    .na  { color: var(--ink-3); font-weight: 400; }
+    .cav { color: var(--ink-2); cursor: help; }
+    .xtra { color: var(--ink-3); cursor: help; font-weight: 600; }
+    .chev { font-size: .7rem; color: var(--ink-3); }
+    th.sorted-asc .chev, th.sorted-desc .chev { color: var(--accent); }
+    footer { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem;
+             font-size: .8rem; color: var(--ink-3); }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Layer Atlas</h1>
+    <p>Best-layer downstream scores for {{NMODELS}} music foundation models.
+       Every number: frozen encoder, MARBLE constrained-track probe (MLP, one 512-unit hidden
+       layer), best single layer per task shown with its index (L#). Click a task-family header
+       to expand its per-task columns; click any column header to sort.
+       &dagger; marks a metric caveat (hover). &mdash; means not evaluated.</p>
+    <p class="meta">Companion to <a href="index.html"><em>What Makes a Good Layer?</em> (ISMIR 2026)</a>
+       &middot; results as of {{DATE}} &middot;
+       raw per-layer JSON: <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a></p>
+  </header>
+  <div class="toolbar">
+    <button onclick="exportCSV()">Download CSV (current view)</button>
+    <button onclick="exportLatex()">Copy LaTeX table</button>
+  </div>
+  <div class="twrap">
+    <table id="atlas">
+      <thead><!--THEAD--></thead>
+      <tbody><!--TBODY--></tbody>
+    </table>
+  </div>
+  <footer>
+    Aggregate columns are means over each family's primary task metrics only (AP for tagging,
+    MIREX for chords) &mdash; companion metrics appear in the expanded view. A <sup>p</sup> marks a
+    partial mean (model missing some of the family's tasks): not comparable to complete rows &mdash;
+    expand the family and compare per task instead. Derived values are computed at build time from
+    the raw per-layer records in <code>data/results/</code>.
+    Current numbers are single-seed probes (seed 1234); missing cells are filled append-only as
+    they are evaluated (<a href="data/coverage.json">coverage</a>), and newly added cells run three
+    seeds &mdash; multi-seed cells will show mean&nbsp;&plusmn;&nbsp;sd.
+  </footer>
+  <script>
+  // expand/collapse a task family's per-task columns
+  document.querySelectorAll('th.fam-agg.expandable').forEach(th => {
+    th.addEventListener('click', e => {
+      const fam = th.dataset.fam;
+      const cells = document.querySelectorAll('.detail.d-' + fam);
+      const show = cells[0] && cells[0].hidden;
+      cells.forEach(c => c.hidden = !show);
+      th.querySelector('.chev').innerHTML = show ? '&#9662;' : '&#9656;';
+      e.stopPropagation();
+    });
+  });
+  // click-to-sort on any header with data-sort
+  document.querySelectorAll('thead th[data-sort]').forEach((th) => {
+    th.addEventListener('click', () => {
+      const table = th.closest('table'), tbody = table.tBodies[0];
+      const idx = cellIndex(th), num = th.dataset.sort === 'num';
+      const dir = th.classList.contains('sorted-desc') ? 1 : -1;
+      table.querySelectorAll('thead th').forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+      th.classList.add(dir === -1 ? 'sorted-desc' : 'sorted-asc');
+      Array.from(tbody.rows)
+        .sort((a, b) => cmp(val(a, idx, num), val(b, idx, num)) * dir)
+        .forEach(r => tbody.appendChild(r));
+    });
+  });
+  function cellIndex(th) {   // visual column index accounting for hidden cells
+    const cells = th.closest('table').querySelectorAll('thead th');
+    let i = 0; for (const c of cells) { if (c === th) break; i++; }
+    return i;
+  }
+  function val(row, i, num) {
+    const t = (row.cells[i] ? row.cells[i].textContent : '').replace(/L\d+$/, '').trim();
+    return num ? (t === '—' ? -Infinity : parseFloat(t)) : t;
+  }
+  function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+  function visibleGrid() {
+    const rows = [];
+    document.querySelectorAll('#atlas tr').forEach(tr => {
+      const cells = Array.from(tr.children).filter(c => !c.hidden)
+        .map(c => c.textContent.replace(/†/g, '').trim());
+      if (cells.length) rows.push(cells);
+    });
+    return rows;
+  }
+  function exportCSV() {
+    const csv = visibleGrid().map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
+    a.download = 'layer_atlas_{{DATE}}.csv'; a.click();
+  }
+  function exportLatex() {
+    const g = visibleGrid();
+    const tex = ['\\begin{tabular}{l' + 'r'.repeat(g[0].length - 1) + '}', '\\toprule',
+      g[0].join(' & ') + ' \\\\', '\\midrule',
+      ...g.slice(2).map(r => r.join(' & ') + ' \\\\'),
+      '\\bottomrule', '\\end{tabular}',
+      '% Layer Atlas, results as of {{DATE}} — angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
+    navigator.clipboard.writeText(tex).then(() => alert('LaTeX table copied.'));
+  }
+  </script>
+</body>
+</html>

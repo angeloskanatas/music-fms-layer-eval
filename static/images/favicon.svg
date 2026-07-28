@@ -1,8 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Stacked layers with one selected">
-  <rect width="64" height="64" rx="12" fill="#0f172a"/>
-  <!-- stacked layers; the third one is "selected" -->
-  <rect x="12" y="13" width="40" height="7" rx="3.5" fill="#94a3b8" opacity="0.55"/>
-  <rect x="12" y="24" width="40" height="7" rx="3.5" fill="#94a3b8" opacity="0.55"/>
-  <rect x="8"  y="35" width="48" height="9" rx="4.5" fill="#38bdf8"/>
-  <rect x="12" y="48" width="40" height="7" rx="3.5" fill="#94a3b8" opacity="0.55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="A note on a staff whose lines are model layers">
+  <rect width="64" height="64" rx="13" fill="#0f172a"/>
+  <!-- staff lines = layers -->
+  <rect x="10" y="14" width="44" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+  <rect x="10" y="24" width="44" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+  <rect x="10" y="34" width="44" height="3.5" rx="1.75" fill="#38bdf8"/>
+  <rect x="10" y="45" width="44" height="3" rx="1.5" fill="#94a3b8" opacity="0.5"/>
+  <!-- the note on the good layer -->
+  <circle cx="36" cy="35.75" r="8" fill="#ffffff"/>
+  <rect x="42.5" y="17" width="3" height="19" rx="1.5" fill="#ffffff"/>
 </svg>
