@@ -97,19 +97,12 @@
     </table>
   </div>
   <footer>
-    <strong>All numbers are our own evaluations under one fixed protocol</strong> (frozen encoder,
-    MARBLE constrained-track MLP probe, identical splits) &mdash; they can differ from the numbers in
-    each model&rsquo;s own paper, which may use different probes, variants, or protocols (e.g. the Myna
-    paper&rsquo;s key result is for Myna-Vertical, a variant not evaluated here).
-    Columns show each family's primary metric per dataset (AP for tagging, MIREX for chords);
-    companion metrics (AUROC, chord root/thirds, arousal/valence &hellip;) sit behind the family
-    expanders. Rank is the mean of per-task ranks over the primary tasks a model was evaluated on;
-    <sup>p</sup> marks models ranked on a subset (see per-task cells). Value-means across tasks are
-    deliberately not shown: the metrics live on different scales. Derived values are computed at
-    build time from the raw per-layer records in <code>data/results/</code>.
-    Current numbers are single-seed probes (seed 1234); missing cells are filled append-only as
-    they are evaluated (<a href="data/coverage.json">coverage</a>), and newly added cells run three
-    seeds &mdash; multi-seed cells will show mean&nbsp;&plusmn;&nbsp;sd.
+    All results are our own evaluations under a single fixed protocol, so they can differ from the
+    numbers in each model&rsquo;s paper (different probes, model variants, or splits). Cells show one
+    primary metric per dataset; companion metrics sit behind the family expanders. Rank averages each
+    model&rsquo;s per-task position &mdash; score means across different metrics would not be meaningful.
+    Full protocol, coverage, and raw per-layer records:
+    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
   <script>
   // expand/collapse a task family's companion-metric columns
