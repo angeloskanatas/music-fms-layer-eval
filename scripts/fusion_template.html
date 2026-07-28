@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selection &amp; Fusion | What Makes a Good Layer?</title>
+  <meta name="description" content="Does combining layers beat picking the right one? Single-layer selection versus multi-layer fusion for music foundation models, per model and task, against the best-single-layer reference.">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
+            --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Inter',-apple-system,sans-serif; color:var(--ink);
+           background:var(--bg); font-size:15px; line-height:1.55; }
+    header, .controls, .cards, footer { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
+    header { padding-top:2.5rem; padding-bottom:.75rem; }
+    header h1 { font-size:1.7rem; font-weight:800; margin:0 0 .25rem; }
+    header p { color:var(--ink-2); margin:.25rem 0; max-width:760px; }
+    header a { color:var(--accent); text-decoration:none; }
+    .meta { font-size:.85rem; color:var(--ink-3); }
+    .controls { padding-bottom:1rem; display:flex; gap:1rem; align-items:end; flex-wrap:wrap; }
+    .ctrl label { display:block; font-size:.72rem; text-transform:uppercase;
+                  letter-spacing:.04em; color:var(--ink-2); margin-bottom:.25rem; }
+    select { font:inherit; font-size:.9rem; padding:.4rem .6rem; border:1px solid var(--line);
+             border-radius:6px; background:var(--bg); color:var(--ink); min-width:240px; }
+    .twrap { max-width:1100px; margin:0 auto 1.5rem; padding:0 1.5rem; overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:.85rem; }
+    th, td { padding:.4rem .6rem; border-bottom:1px solid var(--line); text-align:left;
+             white-space:nowrap; }
+    thead th { font-size:.74rem; text-transform:uppercase; letter-spacing:.04em;
+               color:var(--ink-2); border-bottom:2px solid var(--line);
+               position:sticky; top:0; background:var(--bg); }
+    .num { text-align:right; font-variant-numeric:tabular-nums; }
+    tr.ghead td { font-size:.74rem; text-transform:uppercase; letter-spacing:.04em;
+                  color:var(--ink-2); background:var(--bg-2); font-weight:600;
+                  padding-top:.55rem; }
+    tr.oracle td { font-weight:700; border-top:2px solid var(--line); }
+    .dlt { display:inline-block; min-width:3.2em; margin-left:.5rem; font-size:.74rem;
+           color:var(--ink-3); }
+    .dlt.pos { color:#047857; font-weight:600; }
+    .na { color:var(--ink-3); }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+             gap:1rem; padding-bottom:1.5rem; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:1rem 1.25rem;
+            font-size:.86rem; }
+    .card h3 { margin:0 0 .5rem; font-size:.95rem; }
+    .lane { display:inline-block; font-size:.68rem; letter-spacing:.04em;
+            text-transform:uppercase; border-radius:999px; padding:.12rem .55rem;
+            margin-left:.4rem; vertical-align:middle; }
+    .lane.pub { background:#eef2ff; color:#4338ca; }
+    .lane.held { background:#ecfdf5; color:#047857; }
+    footer { padding-bottom:3rem; font-size:.8rem; color:var(--ink-3); }
+    footer a { color:var(--accent); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selection &amp; Fusion</h1>
+    <p>Does combining layers beat picking the right one? Per model and task: the best single
+       layer (the reference row, in bold), label-free proxy-guided fusion over a few chosen
+       layers, and trainable multi-layer fusion. Small green/grey numbers are the difference
+       to the best single layer.</p>
+    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
+       <a href="explorer.html">layer explorer</a> &middot;
+       <a href="index.html">paper</a> &middot; results as of {{DATE}}</p>
+  </header>
+  <div class="cards">
+    <div class="card">
+      <h3>As published <span class="lane pub">retrospective protocol</span></h3>
+      Across the paper&rsquo;s models and tasks: probing only the top-3 proxy-ranked layers comes
+      within <strong>0.4&nbsp;pp</strong> of the best single layer (matching it on 58% of
+      model&ndash;task pairs); averaging those three layers lands at <strong>0.3&nbsp;pp</strong>
+      and beats every trainable fusion method (<em>p</em>&nbsp;&lt;&nbsp;0.001). The per-task
+      proxy metric was chosen retrospectively on the same models (see the paper).
+    </div>
+    <div class="card">
+      <h3>Held out <span class="lane held">non-circular</span></h3>
+      Fixing each task family&rsquo;s proxy on all other models and applying it to a held-out
+      model still places the true best layer in the proxy&rsquo;s top-3 <strong>39.6%</strong>
+      of the time (chance 15.1%; top-1: 16.7% vs 5.0%), and <strong>41.7%</strong> for tonal
+      tasks via the pitch-transposition equivariance measure.
+    </div>
+  </div>
+  <div class="controls">
+    <div class="ctrl"><label for="task">Task</label>
+      <select id="task" onchange="showTask(this.value)"><!--OPTIONS--></select></div>
+  </div>
+  <div class="twrap">
+    <!--SECTIONS-->
+  </div>
+  <footer>
+    Protocol: frozen encoders; every number from the same probe family (MARBLE constrained
+    track), single seed. Tagging tasks are scored as the mean of AP and AUROC here — matching
+    the published fusion protocol — so their single-layer reference is the best layer of the
+    averaged AP/AUROC curve, not of AP alone. Proxy-guided fusion uses the published top-k
+    layer sets. Raw records: <a href="data/results/">data/results/&lt;model&gt;/fusion.json</a>.
+  </footer>
+  <script>
+  function showTask(id) {
+    document.querySelectorAll('.ftask').forEach(s => s.hidden = (s.id !== id));
+  }
+  </script>
+</body>
+</html>

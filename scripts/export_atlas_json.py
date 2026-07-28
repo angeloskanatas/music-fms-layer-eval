@@ -610,3 +610,116 @@ if __name__ == "__main__" and "--fusion" in sys.argv:
               if r["task"] == "key" and r["variant"] == "topk_avg"]
     print("ANCHOR GS/mert-330M/topk_avg:", anchor[0]["value"] if anchor else "MISSING",
           "(expect 63.64)")
+
+
+# ------------- stage 1c views: Selection & Fusion panel + table hover -------------
+
+FUSION_GROUPS = [
+    ("Reference", ["oracle", "last"]),
+    ("Proxy-guided fusion (label-free layer choice)",
+     ["topk_avg", "topk_stack", "top5_avg", "top5_stack"]),
+    ("Non-trainable fusion (all layers)", ["uniform_avg", "softmax_avg"]),
+    ("Trainable fusion", ["learned_avg", "stack", "mlpreduce", "hconv",
+                          "attentive", "attentive_ciernik"]),
+]
+VARIANT_LABEL = {
+    "oracle": "Oracle (best single layer)", "last": "Last layer",
+    "topk_avg": "Top-3 avg", "topk_stack": "Top-3 concat",
+    "top5_avg": "Top-5 avg", "top5_stack": "Top-5 concat",
+    "uniform_avg": "Uniform avg", "softmax_avg": "Softmax avg",
+    "learned_avg": "Learned weights", "stack": "Concat + linear",
+    "mlpreduce": "MLP reduce", "hconv": "HConv", "attentive": "Attentive",
+    "attentive_ciernik": "Attentive (Ciernik)",
+}
+# fusion-task id -> how to derive the SAME-METRIC single-layer curve (4aa rule)
+FUSION_BASE = {  # task -> list of downstream record tasks to average per layer
+    "mtt": ["mtt_ap", "mtt_auroc"], "mtg_genre": ["mtg_genre_ap", "mtg_genre_auroc"],
+    "mtg_instrument": ["mtg_instrument_ap", "mtg_instrument_auroc"],
+    "mtg_mood": ["mtg_mood_ap", "mtg_mood_auroc"],
+    "mtg_top50": ["mtg_top50_ap", "mtg_top50_auroc"],
+}
+FUSION_TASK_LABEL = {
+    "key": "Key (GiantSteps)", "nsynth_pitch": "Pitch (NSynth)",
+    "nsynth_instrument": "Instrument (NSynth)", "genre": "Genre (GTZAN)",
+    "beat_f1": "Beat (GTZAN)", "downbeat_f1": "Downbeat (GTZAN)",
+    "emo_r2": "Emotion (EMO)", "hxmsa": "Structure (Harmonix)",
+    "mtt": "Tagging (MTT, avg AP/AUROC)", "mtg_genre": "MTG-Genre (avg AP/AUROC)",
+    "mtg_instrument": "MTG-Instr (avg AP/AUROC)", "mtg_mood": "MTG-Mood (avg AP/AUROC)",
+    "mtg_top50": "MTG-Top50 (avg AP/AUROC)",
+}
+
+
+def _single_layer_curve(down_recs, task):
+    """Same-metric per-layer curve for a fusion task (avg of components for tagging)."""
+    comp = FUSION_BASE.get(task, [task])
+    curves = [r["layers"] for r in down_recs if r["task"] in comp]
+    if len(curves) != len(comp):
+        return None
+    return [sum(v) / len(curves) for v in zip(*curves)]
+
+
+def render_fusion_panel():
+    data = {}                                   # task -> model -> variant -> value
+    models_here = []
+    for model_id in MODELS:
+        f = OUT / "results" / model_id / "fusion.json"
+        if not f.exists():
+            continue
+        models_here.append(model_id)
+        fus = json.loads(f.read_text())["records"]
+        down = json.loads((OUT / "results" / model_id / "downstream.json")
+                          .read_text())["records"]
+        for r in fus:
+            if r["task"].endswith("_ap") or r["task"].endswith("_auroc"):
+                continue                        # components; panel shows the avg
+            data.setdefault(r["task"], {}).setdefault(model_id, {})[r["variant"]] = r["value"]
+        for task in list(data.keys()):
+            if model_id in data[task] and "oracle" not in data[task][model_id]:
+                curve = _single_layer_curve(down, task)
+                if curve:
+                    data[task][model_id]["oracle"] = round(max(curve), 2)
+                    data[task][model_id]["last"] = round(curve[-1], 2)
+
+    order = [t for t in FUSION_TASK_LABEL if t in data]
+    sections = []
+    for ti, task in enumerate(order):
+        cols = [m for m in models_here if m in data[task]]
+        head = ("<tr><th>Method</th>" +
+                "".join(f"<th class='num'>{MODELS[m]['display']}</th>" for m in cols) +
+                "</tr>")
+        body = []
+        for gname, variants in FUSION_GROUPS:
+            body.append(f"<tr class='ghead'><td colspan='{len(cols)+1}'>{gname}</td></tr>")
+            for v in variants:
+                if not any(v in data[task].get(m, {}) for m in cols):
+                    continue
+                tds = []
+                for m in cols:
+                    val = data[task].get(m, {}).get(v)
+                    orc = data[task].get(m, {}).get("oracle")
+                    if val is None:
+                        tds.append("<td class='num na'>&mdash;</td>")
+                    elif v in ("oracle", "last") or orc is None:
+                        tds.append(f"<td class='num'>{val:.1f}</td>")
+                    else:
+                        d = val - orc
+                        cls = " pos" if d >= 0 else ""
+                        tds.append(f"<td class='num'><span>{val:.1f}</span>"
+                                   f"<span class='dlt{cls}'>{d:+.1f}</span></td>")
+                rcls = " class='oracle'" if v == "oracle" else ""
+                body.append(f"<tr{rcls}><td>{VARIANT_LABEL[v]}</td>{''.join(tds)}</tr>")
+        sections.append(
+            f"<section class='ftask' id='ft-{task}'{'' if ti == 0 else ' hidden'}>"
+            f"<table>{head}{''.join(body)}</table></section>")
+    opts = "".join(f"<option value='ft-{t}'>{FUSION_TASK_LABEL[t]}</option>"
+                   for t in order)
+    tpl = (Path(__file__).resolve().parent / "fusion_template.html").read_text()
+    (OUT.parent / "fusion.html").write_text(
+        tpl.replace("<!--OPTIONS-->", opts)
+           .replace("<!--SECTIONS-->", "\n".join(sections))
+           .replace("{{DATE}}", str(date.today())))
+    print(f"fusion.html: {len(order)} tasks x {len(models_here)} models")
+
+
+if __name__ == "__main__" and "--fusion" in sys.argv:
+    render_fusion_panel()
