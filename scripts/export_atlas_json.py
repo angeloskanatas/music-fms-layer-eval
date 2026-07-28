@@ -387,16 +387,29 @@ def render_atlas_table(task_registry):
     # Layer Explorer: inject the model/task manifests into the template.
     # Readout-group members appear as their own selectable entries, properly
     # labeled ("MT2 — equivariant CLS"), since each has its own curve file.
-    explorer_models = []
+    # One dropdown entry per MODEL; readout-group members become curves inside
+    # the chart (readout names are expert jargon — the chart legend + a note
+    # explain them in place instead of polluting the model list).
+    explorer_models, seen_groups = [], {}
     for mid, spec in MODELS.items():
         if spec.get("hidden") or not (OUT / "results" / mid / "downstream.json").exists():
             continue
-        label = spec["display"] + (f" — {spec['readout_label']}"
-                                   if spec.get("readout_label") else "")
-        explorer_models.append(
-            {"id": mid, "label": label, "family": spec["family"],
-             "in_paper": spec.get("in_paper", True),
-             "color": FAMILY_COLOR.get(spec["family"], "#94a3b8")})
+        g = spec.get("readout_of")
+        if g:
+            if g not in seen_groups:
+                seen_groups[g] = {"id": g, "label": spec["display"],
+                                  "family": spec["family"],
+                                  "in_paper": spec.get("in_paper", True),
+                                  "color": FAMILY_COLOR.get(spec["family"], "#94a3b8"),
+                                  "members": []}
+                explorer_models.append(seen_groups[g])
+            seen_groups[g]["members"].append(
+                {"id": mid, "readout": spec["readout_label"]})
+        else:
+            explorer_models.append(
+                {"id": mid, "label": spec["display"], "family": spec["family"],
+                 "in_paper": spec.get("in_paper", True),
+                 "color": FAMILY_COLOR.get(spec["family"], "#94a3b8")})
     models_json = json.dumps(explorer_models)
     tasks_seen = sorted({t for m in models for t in m["per_task"]},
                         key=lambda t: (TASK_FAMILY_ORDER.index(TASK_FAMILY[t])
