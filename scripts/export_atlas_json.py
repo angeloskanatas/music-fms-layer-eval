@@ -163,6 +163,13 @@ def export_downstream():
         raw = json.loads(src.read_text())
         meta, tasks = raw.get("metadata", {}), raw.get("downstream", {})
         n_layers = meta.get("n_layers")
+        # registry collection must not depend on the append-only skip below,
+        # else a re-run rebuilds tasks.yaml empty
+        for key in tasks:
+            task_id = TASK_ALIASES.get(key, key)
+            desc = meta.get("tasks", {}).get(key)
+            if desc and task_id not in task_registry:
+                task_registry[task_id] = desc
         out_dir = OUT / "results" / model_id
         out_dir.mkdir(parents=True, exist_ok=True)
         out_file = out_dir / "downstream.json"
@@ -478,3 +485,128 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ---------------- stage 1c: fusion / multi-layer probe results ----------------
+import csv
+
+PROBE_DIR = Path("/home/akanatas/projects/layerbylayer/MARBLE/output")
+
+# canonical task -> test column map, verbatim from
+# MARBLE/scripts/analyze_multilayer_vs_proxy.py:534 (the published protocol;
+# tagging = avg(AP, AUROC) there). Tempo columns are never in this map.
+FUSION_TASKS = {
+    "GS":               ("key", "test/weighted_score"),
+    "NSynthP":          ("nsynth_pitch", "test/file_acc"),
+    "NSynthI":          ("nsynth_instrument", "test/file_acc"),
+    "GTZANGenre":       ("genre", "test/file_acc"),
+    "GTZANBeatTracking": ("beat_f1", "test/beat_f1"),
+    "EMO":              ("emo_r2", "test/r2"),
+    "HXMSA":            ("hxmsa", "test/acc"),
+    "MTT":              ("mtt", ("test/ap", "test/auroc")),
+    "MTGGenre":         ("mtg_genre", ("test/ap", "test/auroc")),
+    "MTGInstrument":    ("mtg_instrument", ("test/ap", "test/auroc")),
+    "MTGMood":          ("mtg_mood", ("test/ap", "test/auroc")),
+    "MTGTop50":         ("mtg_top50", ("test/ap", "test/auroc")),
+}
+FUSION_EXTRA_COLS = {"GTZANBeatTracking": ("downbeat_f1", "test/downbeat_f1")}
+FUSION_VARIANTS = {"uniform_avg", "softmax_avg", "learned_avg", "stack", "mlpreduce",
+                   "hconv", "attentive", "attentive_ciernik",
+                   "topk_avg", "topk_stack", "top5_avg", "top5_stack"}
+PROBE_MODEL_MAP = {"mert-95M": "mert-v1-95M", "mert-330M": "mert-v1-330M",
+                   "maest-30s-discogs-pw": "maest", "music-flamingo": "musicflamingo"}
+# extraction-protocol variants: never merged into the canonical rows (4aa)
+SKIP_MODEL_TOKENS = ("-centered", "-lastn", "maest-10s")
+
+
+def _last_test_row(probe_dir):
+    """Latest lightning version dir whose metrics.csv carries test/ columns."""
+    versions = sorted(probe_dir.glob("lightning_logs/version_*"),
+                      key=lambda p: int(p.name.split("_")[1]), reverse=True)
+    for v in versions:
+        f = v / "metrics.csv"
+        if not f.exists():
+            continue
+        with f.open() as fh:
+            r = list(csv.DictReader(fh))
+        if r and any(k.startswith("test/") for k in r[0]):
+            vals = {}
+            for row in r:                       # last non-empty value per test col
+                for k, x in row.items():
+                    if k.startswith("test/") and x not in ("", None):
+                        vals[k] = float(x)
+            if vals:
+                return vals, v.name
+    return None, None
+
+
+def export_fusion():
+    parsed, skipped_models, missing_col, written = 0, set(), [], set()
+    per_model = {}
+    for d in sorted(PROBE_DIR.glob("probe.*")):
+        parts = d.name.split(".")
+        task_probe = parts[1]
+        rest = ".".join(parts[2:])              # model token may contain dots (yue-0.5b)
+        variant = rest.rsplit(".", 1)[-1]
+        token = rest[: -(len(variant) + 1)]
+        if task_probe not in FUSION_TASKS or variant not in FUSION_VARIANTS:
+            continue
+        if any(s in token for s in SKIP_MODEL_TOKENS):
+            skipped_models.add(token)
+            continue
+        model = PROBE_MODEL_MAP.get(token, token)
+        if model not in MODELS:
+            skipped_models.add(token)
+            continue
+        vals, vdir = _last_test_row(d)
+        if not vals:
+            continue
+        base_task, col = FUSION_TASKS[task_probe]
+        recs = []
+        if isinstance(col, tuple):              # published tagging protocol
+            if all(c in vals for c in col):
+                recs.append({"task": base_task, "metric_spec": "avg(ap,auroc)x100",
+                             "value": round(100 * (vals[col[0]] + vals[col[1]]) / 2, 2)})
+                recs.append({"task": base_task + "_ap", "metric_spec": "ap x100",
+                             "value": round(100 * vals[col[0]], 2)})
+                recs.append({"task": base_task + "_auroc", "metric_spec": "auroc x100",
+                             "value": round(100 * vals[col[1]], 2)})
+            else:
+                missing_col.append(d.name)
+        elif col in vals:
+            recs.append({"task": base_task, "metric_spec": col + " x100",
+                         "value": round(100 * vals[col], 2)})
+        else:
+            missing_col.append(d.name)
+        xt = FUSION_EXTRA_COLS.get(task_probe)
+        if xt and xt[1] in vals:
+            recs.append({"task": xt[0], "metric_spec": xt[1] + " x100",
+                         "value": round(100 * vals[xt[1]], 2)})
+        for rec in recs:
+            rec.update({"variant": variant, "source": d.name, "version": vdir,
+                        "protocol": "published-map"})
+            per_model.setdefault(model, []).append(rec)
+            parsed += 1
+    for model, recs in per_model.items():
+        out = OUT / "results" / model / "fusion.json"
+        if out.exists():
+            continue                            # append-only
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({
+            "schema_version": SCHEMA_VERSION, "model": model,
+            "readout_family": "multi-layer fusion probes",
+            "note": "one score per (task, variant); fusion collapses the layer axis",
+            "exported": str(date.today()), "records": recs}, indent=1))
+        written.add(model)
+    print(f"fusion: {parsed} records -> {len(written)} models "
+          f"| skipped tokens: {sorted(skipped_models)} | missing cols: {len(missing_col)}")
+    return per_model
+
+
+if __name__ == "__main__" and "--fusion" in sys.argv:
+    fm = export_fusion()
+    # RECONCILIATION GATE (4aa anchor): GS x mert-v1-330M x topk_avg == 63.64
+    anchor = [r for r in fm.get("mert-v1-330M", [])
+              if r["task"] == "key" and r["variant"] == "topk_avg"]
+    print("ANCHOR GS/mert-330M/topk_avg:", anchor[0]["value"] if anchor else "MISSING",
+          "(expect 63.64)")

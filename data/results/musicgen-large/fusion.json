@@ -1,0 +1,2376 @@
+{
+ "schema_version": "1.0.0",
+ "model": "musicgen-large",
+ "readout_family": "multi-layer fusion probes",
+ "note": "one score per (task, variant); fusion collapses the layer axis",
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 41.32,
+   "variant": "attentive",
+   "source": "probe.EMO.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 35.11,
+   "variant": "attentive_ciernik",
+   "source": "probe.EMO.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 50.06,
+   "variant": "hconv",
+   "source": "probe.EMO.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 50.15,
+   "variant": "learned_avg",
+   "source": "probe.EMO.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 52.5,
+   "variant": "mlpreduce",
+   "source": "probe.EMO.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 50.78,
+   "variant": "softmax_avg",
+   "source": "probe.EMO.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 51.71,
+   "variant": "stack",
+   "source": "probe.EMO.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 54.2,
+   "variant": "top5_avg",
+   "source": "probe.EMO.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 55.9,
+   "variant": "top5_stack",
+   "source": "probe.EMO.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 53.95,
+   "variant": "topk_avg",
+   "source": "probe.EMO.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 52.15,
+   "variant": "topk_stack",
+   "source": "probe.EMO.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 50.41,
+   "variant": "uniform_avg",
+   "source": "probe.EMO.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 58.25,
+   "variant": "attentive",
+   "source": "probe.GS.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 60.2,
+   "variant": "attentive_ciernik",
+   "source": "probe.GS.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 60.63,
+   "variant": "hconv",
+   "source": "probe.GS.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 65.56,
+   "variant": "learned_avg",
+   "source": "probe.GS.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 61.37,
+   "variant": "mlpreduce",
+   "source": "probe.GS.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 66.64,
+   "variant": "softmax_avg",
+   "source": "probe.GS.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 62.37,
+   "variant": "stack",
+   "source": "probe.GS.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 68.2,
+   "variant": "top5_avg",
+   "source": "probe.GS.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 66.52,
+   "variant": "top5_stack",
+   "source": "probe.GS.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 65.75,
+   "variant": "uniform_avg",
+   "source": "probe.GS.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 83.12,
+   "variant": "attentive",
+   "source": "probe.GTZANBeatTracking.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 44.74,
+   "variant": "attentive",
+   "source": "probe.GTZANBeatTracking.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 85.07,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANBeatTracking.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.4,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANBeatTracking.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.4,
+   "variant": "hconv",
+   "source": "probe.GTZANBeatTracking.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.14,
+   "variant": "hconv",
+   "source": "probe.GTZANBeatTracking.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.71,
+   "variant": "learned_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.07,
+   "variant": "learned_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.87,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANBeatTracking.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.19,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANBeatTracking.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.83,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.48,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.6,
+   "variant": "stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.12,
+   "variant": "stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.43,
+   "variant": "top5_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.9,
+   "variant": "top5_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 85.01,
+   "variant": "top5_stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 45.72,
+   "variant": "top5_stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.7,
+   "variant": "topk_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.1,
+   "variant": "topk_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.98,
+   "variant": "topk_stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.01,
+   "variant": "topk_stack",
+   "source": "probe.GTZANBeatTracking.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 84.52,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 44.86,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANBeatTracking.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 44.83,
+   "variant": "attentive",
+   "source": "probe.GTZANGenre.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 42.76,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANGenre.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 43.79,
+   "variant": "hconv",
+   "source": "probe.GTZANGenre.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 38.28,
+   "variant": "learned_avg",
+   "source": "probe.GTZANGenre.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 47.93,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANGenre.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 39.66,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANGenre.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 45.17,
+   "variant": "stack",
+   "source": "probe.GTZANGenre.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 60.69,
+   "variant": "top5_avg",
+   "source": "probe.GTZANGenre.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 56.9,
+   "variant": "top5_stack",
+   "source": "probe.GTZANGenre.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 60.69,
+   "variant": "topk_avg",
+   "source": "probe.GTZANGenre.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 60.0,
+   "variant": "topk_stack",
+   "source": "probe.GTZANGenre.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 40.34,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANGenre.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 51.21,
+   "variant": "attentive",
+   "source": "probe.HXMSA.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 50.85,
+   "variant": "attentive_ciernik",
+   "source": "probe.HXMSA.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 54.53,
+   "variant": "hconv",
+   "source": "probe.HXMSA.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 53.63,
+   "variant": "learned_avg",
+   "source": "probe.HXMSA.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 51.7,
+   "variant": "mlpreduce",
+   "source": "probe.HXMSA.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 53.63,
+   "variant": "softmax_avg",
+   "source": "probe.HXMSA.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 53.36,
+   "variant": "stack",
+   "source": "probe.HXMSA.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.81,
+   "variant": "topk_avg",
+   "source": "probe.HXMSA.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 55.06,
+   "variant": "topk_stack",
+   "source": "probe.HXMSA.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 53.54,
+   "variant": "uniform_avg",
+   "source": "probe.HXMSA.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.84,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 12.66,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.02,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 47.51,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 13.3,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.71,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.67,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 12.59,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.76,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 48.28,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 14.03,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 82.53,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 45.46,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 11.41,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.51,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 48.06,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 13.64,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 82.47,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.84,
+   "variant": "stack",
+   "source": "probe.MTGGenre.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 11.24,
+   "variant": "stack",
+   "source": "probe.MTGGenre.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 76.44,
+   "variant": "stack",
+   "source": "probe.MTGGenre.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 48.89,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 14.4,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 83.37,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 47.64,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 13.42,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.87,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 48.81,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 14.38,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 83.24,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 47.81,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 13.91,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.7,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.6,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 12.4,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.8,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.99,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 14.35,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 67.64,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.29,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.54,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.03,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.47,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 16.02,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 70.92,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.86,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.51,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 70.21,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.49,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 13.81,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 67.17,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.31,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.92,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 70.69,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.84,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 13.87,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 67.8,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 44.65,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 16.79,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.51,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.23,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.87,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 70.59,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 44.79,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 16.76,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.81,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.21,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.77,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 70.66,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.43,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.18,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 69.68,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 38.11,
+   "variant": "attentive",
+   "source": "probe.MTGMood.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 8.94,
+   "variant": "attentive",
+   "source": "probe.MTGMood.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 67.29,
+   "variant": "attentive",
+   "source": "probe.MTGMood.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 39.98,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.08,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 69.87,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.7,
+   "variant": "hconv",
+   "source": "probe.MTGMood.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.39,
+   "variant": "hconv",
+   "source": "probe.MTGMood.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.0,
+   "variant": "hconv",
+   "source": "probe.MTGMood.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 41.31,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.91,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.71,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 38.55,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 9.46,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 67.64,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 41.0,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.17,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.82,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 37.57,
+   "variant": "stack",
+   "source": "probe.MTGMood.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 8.46,
+   "variant": "stack",
+   "source": "probe.MTGMood.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 66.68,
+   "variant": "stack",
+   "source": "probe.MTGMood.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.2,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.2,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.19,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.33,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 11.71,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.94,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.99,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.03,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 73.96,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.37,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 11.81,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.94,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.61,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 9.86,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.37,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.36,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 22.85,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 77.87,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 51.24,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 23.47,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.02,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.28,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 22.97,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 77.6,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 52.17,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 24.5,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.83,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.29,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 21.68,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 76.9,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 52.04,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 24.43,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.66,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 47.91,
+   "variant": "stack",
+   "source": "probe.MTGTop50.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 20.61,
+   "variant": "stack",
+   "source": "probe.MTGTop50.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 75.21,
+   "variant": "stack",
+   "source": "probe.MTGTop50.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 52.49,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.musicgen-large.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 25.09,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.musicgen-large.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.88,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.musicgen-large.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 51.5,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 24.16,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 78.83,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 52.31,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 24.84,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.77,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 51.85,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 24.47,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.23,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.37,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 22.37,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 78.36,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 61.43,
+   "variant": "attentive",
+   "source": "probe.MTT.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 34.19,
+   "variant": "attentive",
+   "source": "probe.MTT.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.67,
+   "variant": "attentive",
+   "source": "probe.MTT.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 62.78,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 36.13,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.42,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 61.15,
+   "variant": "hconv",
+   "source": "probe.MTT.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 34.01,
+   "variant": "hconv",
+   "source": "probe.MTT.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.28,
+   "variant": "hconv",
+   "source": "probe.MTT.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 62.51,
+   "variant": "learned_avg",
+   "source": "probe.MTT.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 35.63,
+   "variant": "learned_avg",
+   "source": "probe.MTT.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.39,
+   "variant": "learned_avg",
+   "source": "probe.MTT.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 60.99,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 33.91,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.07,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 62.32,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 35.48,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.15,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 60.54,
+   "variant": "stack",
+   "source": "probe.MTT.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 33.56,
+   "variant": "stack",
+   "source": "probe.MTT.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 87.53,
+   "variant": "stack",
+   "source": "probe.MTT.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 62.6,
+   "variant": "top5_avg",
+   "source": "probe.MTT.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 35.95,
+   "variant": "top5_avg",
+   "source": "probe.MTT.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.24,
+   "variant": "top5_avg",
+   "source": "probe.MTT.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 61.47,
+   "variant": "top5_stack",
+   "source": "probe.MTT.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 34.33,
+   "variant": "top5_stack",
+   "source": "probe.MTT.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.62,
+   "variant": "top5_stack",
+   "source": "probe.MTT.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.08,
+   "variant": "topk_avg",
+   "source": "probe.MTT.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 36.65,
+   "variant": "topk_avg",
+   "source": "probe.MTT.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.52,
+   "variant": "topk_avg",
+   "source": "probe.MTT.musicgen-large.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 61.97,
+   "variant": "topk_stack",
+   "source": "probe.MTT.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 34.88,
+   "variant": "topk_stack",
+   "source": "probe.MTT.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 89.06,
+   "variant": "topk_stack",
+   "source": "probe.MTT.musicgen-large.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 61.66,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 34.76,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.56,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 67.02,
+   "variant": "attentive",
+   "source": "probe.NSynthI.musicgen-large.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.48,
+   "variant": "attentive_ciernik",
+   "source": "probe.NSynthI.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 67.92,
+   "variant": "hconv",
+   "source": "probe.NSynthI.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.82,
+   "variant": "learned_avg",
+   "source": "probe.NSynthI.musicgen-large.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 51.29,
+   "variant": "mlpreduce",
+   "source": "probe.NSynthI.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.68,
+   "variant": "softmax_avg",
+   "source": "probe.NSynthI.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.43,
+   "variant": "stack",
+   "source": "probe.NSynthI.musicgen-large.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 68.73,
+   "variant": "top5_avg",
+   "source": "probe.NSynthI.musicgen-large.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 68.95,
+   "variant": "top5_stack",
+   "source": "probe.NSynthI.musicgen-large.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.87,
+   "variant": "uniform_avg",
+   "source": "probe.NSynthI.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 91.6,
+   "variant": "attentive_ciernik",
+   "source": "probe.NSynthP.musicgen-large.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 87.57,
+   "variant": "hconv",
+   "source": "probe.NSynthP.musicgen-large.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 5.52,
+   "variant": "mlpreduce",
+   "source": "probe.NSynthP.musicgen-large.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 90.45,
+   "variant": "softmax_avg",
+   "source": "probe.NSynthP.musicgen-large.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 89.33,
+   "variant": "uniform_avg",
+   "source": "probe.NSynthP.musicgen-large.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  }
+ ]
+}

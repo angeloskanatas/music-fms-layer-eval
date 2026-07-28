@@ -1,0 +1,2439 @@
+{
+ "schema_version": "1.0.0",
+ "model": "mert-v1-330M",
+ "readout_family": "multi-layer fusion probes",
+ "note": "one score per (task, variant); fusion collapses the layer axis",
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 55.81,
+   "variant": "attentive",
+   "source": "probe.EMO.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 58.12,
+   "variant": "attentive_ciernik",
+   "source": "probe.EMO.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 60.95,
+   "variant": "hconv",
+   "source": "probe.EMO.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 62.31,
+   "variant": "learned_avg",
+   "source": "probe.EMO.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 58.98,
+   "variant": "mlpreduce",
+   "source": "probe.EMO.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 61.14,
+   "variant": "softmax_avg",
+   "source": "probe.EMO.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 61.21,
+   "variant": "stack",
+   "source": "probe.EMO.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 64.54,
+   "variant": "top5_avg",
+   "source": "probe.EMO.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 61.07,
+   "variant": "top5_stack",
+   "source": "probe.EMO.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 63.71,
+   "variant": "topk_avg",
+   "source": "probe.EMO.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 62.29,
+   "variant": "topk_stack",
+   "source": "probe.EMO.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "emo_r2",
+   "metric_spec": "test/r2 x100",
+   "value": 61.16,
+   "variant": "uniform_avg",
+   "source": "probe.EMO.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 59.01,
+   "variant": "attentive",
+   "source": "probe.GS.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 61.52,
+   "variant": "attentive_ciernik",
+   "source": "probe.GS.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 60.07,
+   "variant": "hconv",
+   "source": "probe.GS.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 62.88,
+   "variant": "learned_avg",
+   "source": "probe.GS.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 15.76,
+   "variant": "mlpreduce",
+   "source": "probe.GS.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 65.23,
+   "variant": "softmax_avg",
+   "source": "probe.GS.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 26.71,
+   "variant": "stack",
+   "source": "probe.GS.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 65.22,
+   "variant": "top5_avg",
+   "source": "probe.GS.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 61.75,
+   "variant": "top5_stack",
+   "source": "probe.GS.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 63.64,
+   "variant": "topk_avg",
+   "source": "probe.GS.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 63.74,
+   "variant": "topk_stack",
+   "source": "probe.GS.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "key",
+   "metric_spec": "test/weighted_score x100",
+   "value": 65.4,
+   "variant": "uniform_avg",
+   "source": "probe.GS.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 88.46,
+   "variant": "attentive",
+   "source": "probe.GTZANBeatTracking.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 48.02,
+   "variant": "attentive",
+   "source": "probe.GTZANBeatTracking.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 88.57,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANBeatTracking.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 47.61,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANBeatTracking.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.35,
+   "variant": "hconv",
+   "source": "probe.GTZANBeatTracking.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.82,
+   "variant": "hconv",
+   "source": "probe.GTZANBeatTracking.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.29,
+   "variant": "learned_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.7,
+   "variant": "learned_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 86.95,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANBeatTracking.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.91,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANBeatTracking.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.36,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 47.18,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.23,
+   "variant": "stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 47.26,
+   "variant": "stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.13,
+   "variant": "top5_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.05,
+   "variant": "top5_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.4,
+   "variant": "top5_stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.45,
+   "variant": "top5_stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.3,
+   "variant": "topk_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.89,
+   "variant": "topk_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.56,
+   "variant": "topk_stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 47.69,
+   "variant": "topk_stack",
+   "source": "probe.GTZANBeatTracking.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "metric_spec": "test/beat_f1 x100",
+   "value": 87.06,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "downbeat_f1",
+   "metric_spec": "test/downbeat_f1 x100",
+   "value": 46.98,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANBeatTracking.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.0,
+   "variant": "attentive",
+   "source": "probe.GTZANGenre.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 64.14,
+   "variant": "attentive_ciernik",
+   "source": "probe.GTZANGenre.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 48.97,
+   "variant": "hconv",
+   "source": "probe.GTZANGenre.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 68.28,
+   "variant": "learned_avg",
+   "source": "probe.GTZANGenre.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 25.86,
+   "variant": "mlpreduce",
+   "source": "probe.GTZANGenre.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 63.45,
+   "variant": "softmax_avg",
+   "source": "probe.GTZANGenre.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 67.24,
+   "variant": "stack",
+   "source": "probe.GTZANGenre.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 72.76,
+   "variant": "top5_avg",
+   "source": "probe.GTZANGenre.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 73.79,
+   "variant": "top5_stack",
+   "source": "probe.GTZANGenre.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 75.17,
+   "variant": "topk_avg",
+   "source": "probe.GTZANGenre.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 74.48,
+   "variant": "topk_stack",
+   "source": "probe.GTZANGenre.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "genre",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.69,
+   "variant": "uniform_avg",
+   "source": "probe.GTZANGenre.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.23,
+   "variant": "attentive",
+   "source": "probe.HXMSA.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 55.65,
+   "variant": "attentive_ciernik",
+   "source": "probe.HXMSA.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 55.82,
+   "variant": "hconv",
+   "source": "probe.HXMSA.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.72,
+   "variant": "learned_avg",
+   "source": "probe.HXMSA.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 50.4,
+   "variant": "mlpreduce",
+   "source": "probe.HXMSA.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.68,
+   "variant": "softmax_avg",
+   "source": "probe.HXMSA.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.14,
+   "variant": "stack",
+   "source": "probe.HXMSA.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.68,
+   "variant": "top5_avg",
+   "source": "probe.HXMSA.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 55.73,
+   "variant": "top5_stack",
+   "source": "probe.HXMSA.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.68,
+   "variant": "topk_avg",
+   "source": "probe.HXMSA.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.77,
+   "variant": "topk_stack",
+   "source": "probe.HXMSA.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "hxmsa",
+   "metric_spec": "test/acc x100",
+   "value": 56.72,
+   "variant": "uniform_avg",
+   "source": "probe.HXMSA.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.6,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.mert-330M.attentive",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.58,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.mert-330M.attentive",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 83.63,
+   "variant": "attentive",
+   "source": "probe.MTGGenre.mert-330M.attentive",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.6,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.mert-330M.attentive_ciernik",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.35,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.mert-330M.attentive_ciernik",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 83.85,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGGenre.mert-330M.attentive_ciernik",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.13,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.mert-330M.hconv",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.02,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.mert-330M.hconv",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 83.23,
+   "variant": "hconv",
+   "source": "probe.MTGGenre.mert-330M.hconv",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.01,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.mert-330M.learned_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.84,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.mert-330M.learned_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.18,
+   "variant": "learned_avg",
+   "source": "probe.MTGGenre.mert-330M.learned_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 33.69,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.mert-330M.mlpreduce",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 4.36,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.mert-330M.mlpreduce",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 63.01,
+   "variant": "mlpreduce",
+   "source": "probe.MTGGenre.mert-330M.mlpreduce",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.6,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.mert-330M.softmax_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 16.29,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.mert-330M.softmax_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.91,
+   "variant": "softmax_avg",
+   "source": "probe.MTGGenre.mert-330M.softmax_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 47.09,
+   "variant": "stack",
+   "source": "probe.MTGGenre.mert-330M.stack",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 12.61,
+   "variant": "stack",
+   "source": "probe.MTGGenre.mert-330M.stack",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.57,
+   "variant": "stack",
+   "source": "probe.MTGGenre.mert-330M.stack",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.03,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.87,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.19,
+   "variant": "top5_avg",
+   "source": "probe.MTGGenre.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.6,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.19,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.01,
+   "variant": "top5_stack",
+   "source": "probe.MTGGenre.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.4,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 16.25,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.54,
+   "variant": "topk_avg",
+   "source": "probe.MTGGenre.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 49.87,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.61,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.13,
+   "variant": "topk_stack",
+   "source": "probe.MTGGenre.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 50.01,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.mert-330M.uniform_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "metric_spec": "ap x100",
+   "value": 15.71,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.mert-330M.uniform_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "metric_spec": "auroc x100",
+   "value": 84.32,
+   "variant": "uniform_avg",
+   "source": "probe.MTGGenre.mert-330M.uniform_avg",
+   "version": "version_3",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 44.27,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 16.68,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.85,
+   "variant": "attentive",
+   "source": "probe.MTGInstrument.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 45.71,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 17.28,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.15,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGInstrument.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 44.15,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 15.6,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.69,
+   "variant": "hconv",
+   "source": "probe.MTGInstrument.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.2,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 17.88,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.52,
+   "variant": "learned_avg",
+   "source": "probe.MTGInstrument.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 34.34,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 8.17,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 60.51,
+   "variant": "mlpreduce",
+   "source": "probe.MTGInstrument.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.71,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 18.59,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.82,
+   "variant": "softmax_avg",
+   "source": "probe.MTGInstrument.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.18,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 14.58,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.78,
+   "variant": "stack",
+   "source": "probe.MTGInstrument.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 45.88,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 17.57,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.18,
+   "variant": "top5_avg",
+   "source": "probe.MTGInstrument.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 44.57,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 16.41,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 72.74,
+   "variant": "top5_stack",
+   "source": "probe.MTGInstrument.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.27,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 17.73,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.82,
+   "variant": "topk_avg",
+   "source": "probe.MTGInstrument.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.46,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 17.8,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 75.12,
+   "variant": "topk_stack",
+   "source": "probe.MTGInstrument.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 46.44,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "metric_spec": "ap x100",
+   "value": 18.42,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.45,
+   "variant": "uniform_avg",
+   "source": "probe.MTGInstrument.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 40.84,
+   "variant": "attentive",
+   "source": "probe.MTGMood.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.56,
+   "variant": "attentive",
+   "source": "probe.MTGMood.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.12,
+   "variant": "attentive",
+   "source": "probe.MTGMood.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.38,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 11.77,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 73.0,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGMood.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.6,
+   "variant": "hconv",
+   "source": "probe.MTGMood.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 11.8,
+   "variant": "hconv",
+   "source": "probe.MTGMood.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 73.4,
+   "variant": "hconv",
+   "source": "probe.MTGMood.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.53,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.59,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.46,
+   "variant": "learned_avg",
+   "source": "probe.MTGMood.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 28.96,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 4.06,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 53.85,
+   "variant": "mlpreduce",
+   "source": "probe.MTGMood.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.82,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.8,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.85,
+   "variant": "softmax_avg",
+   "source": "probe.MTGMood.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 41.01,
+   "variant": "stack",
+   "source": "probe.MTGMood.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 10.32,
+   "variant": "stack",
+   "source": "probe.MTGMood.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 71.71,
+   "variant": "stack",
+   "source": "probe.MTGMood.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.5,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.48,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.52,
+   "variant": "top5_avg",
+   "source": "probe.MTGMood.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.71,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.71,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.71,
+   "variant": "top5_stack",
+   "source": "probe.MTGMood.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 42.91,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 11.9,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 73.92,
+   "variant": "topk_avg",
+   "source": "probe.MTGMood.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.38,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.51,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.26,
+   "variant": "topk_stack",
+   "source": "probe.MTGMood.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 43.57,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "metric_spec": "ap x100",
+   "value": 12.63,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "metric_spec": "auroc x100",
+   "value": 74.51,
+   "variant": "uniform_avg",
+   "source": "probe.MTGMood.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.04,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 25.95,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.12,
+   "variant": "attentive",
+   "source": "probe.MTGTop50.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.83,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.59,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.07,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTGTop50.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.66,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.48,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.84,
+   "variant": "hconv",
+   "source": "probe.MTGTop50.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 54.08,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.93,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.22,
+   "variant": "learned_avg",
+   "source": "probe.MTGTop50.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 31.41,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 7.47,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 55.35,
+   "variant": "mlpreduce",
+   "source": "probe.MTGTop50.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.82,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.4,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.24,
+   "variant": "softmax_avg",
+   "source": "probe.MTGTop50.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 51.59,
+   "variant": "stack",
+   "source": "probe.MTGTop50.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 23.79,
+   "variant": "stack",
+   "source": "probe.MTGTop50.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 79.39,
+   "variant": "stack",
+   "source": "probe.MTGTop50.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.51,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.33,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.69,
+   "variant": "top5_avg",
+   "source": "probe.MTGTop50.mert-330M.top5_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.13,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 25.63,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.62,
+   "variant": "top5_stack",
+   "source": "probe.MTGTop50.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 54.25,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 27.2,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.29,
+   "variant": "topk_avg",
+   "source": "probe.MTGTop50.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 53.82,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 26.75,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 80.9,
+   "variant": "topk_stack",
+   "source": "probe.MTGTop50.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 54.23,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "metric_spec": "ap x100",
+   "value": 27.21,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "metric_spec": "auroc x100",
+   "value": 81.25,
+   "variant": "uniform_avg",
+   "source": "probe.MTGTop50.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.97,
+   "variant": "attentive",
+   "source": "probe.MTT.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.81,
+   "variant": "attentive",
+   "source": "probe.MTT.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.12,
+   "variant": "attentive",
+   "source": "probe.MTT.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 64.04,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.65,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.44,
+   "variant": "attentive_ciernik",
+   "source": "probe.MTT.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.35,
+   "variant": "hconv",
+   "source": "probe.MTT.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 36.62,
+   "variant": "hconv",
+   "source": "probe.MTT.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.09,
+   "variant": "hconv",
+   "source": "probe.MTT.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 64.66,
+   "variant": "learned_avg",
+   "source": "probe.MTT.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 38.67,
+   "variant": "learned_avg",
+   "source": "probe.MTT.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.65,
+   "variant": "learned_avg",
+   "source": "probe.MTT.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 32.62,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 8.42,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 56.81,
+   "variant": "mlpreduce",
+   "source": "probe.MTT.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 64.21,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.8,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.62,
+   "variant": "softmax_avg",
+   "source": "probe.MTT.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 59.98,
+   "variant": "stack",
+   "source": "probe.MTT.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 31.95,
+   "variant": "stack",
+   "source": "probe.MTT.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 88.01,
+   "variant": "stack",
+   "source": "probe.MTT.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 64.22,
+   "variant": "top5_avg",
+   "source": "probe.MTT.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.81,
+   "variant": "top5_avg",
+   "source": "probe.MTT.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.63,
+   "variant": "top5_avg",
+   "source": "probe.MTT.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.39,
+   "variant": "top5_stack",
+   "source": "probe.MTT.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 36.62,
+   "variant": "top5_stack",
+   "source": "probe.MTT.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.16,
+   "variant": "top5_stack",
+   "source": "probe.MTT.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 64.2,
+   "variant": "topk_avg",
+   "source": "probe.MTT.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.86,
+   "variant": "topk_avg",
+   "source": "probe.MTT.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.53,
+   "variant": "topk_avg",
+   "source": "probe.MTT.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.64,
+   "variant": "topk_stack",
+   "source": "probe.MTT.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.0,
+   "variant": "topk_stack",
+   "source": "probe.MTT.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.28,
+   "variant": "topk_stack",
+   "source": "probe.MTT.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt",
+   "metric_spec": "avg(ap,auroc)x100",
+   "value": 63.79,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_ap",
+   "metric_spec": "ap x100",
+   "value": 37.3,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "mtt_auroc",
+   "metric_spec": "auroc x100",
+   "value": 90.28,
+   "variant": "uniform_avg",
+   "source": "probe.MTT.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.53,
+   "variant": "attentive",
+   "source": "probe.NSynthI.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 64.58,
+   "variant": "attentive_ciernik",
+   "source": "probe.NSynthI.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.24,
+   "variant": "hconv",
+   "source": "probe.NSynthI.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.02,
+   "variant": "learned_avg",
+   "source": "probe.NSynthI.mert-330M.learned_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 20.58,
+   "variant": "mlpreduce",
+   "source": "probe.NSynthI.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.46,
+   "variant": "softmax_avg",
+   "source": "probe.NSynthI.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 66.53,
+   "variant": "stack",
+   "source": "probe.NSynthI.mert-330M.stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 68.87,
+   "variant": "top5_avg",
+   "source": "probe.NSynthI.mert-330M.top5_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 70.09,
+   "variant": "top5_stack",
+   "source": "probe.NSynthI.mert-330M.top5_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 68.87,
+   "variant": "topk_avg",
+   "source": "probe.NSynthI.mert-330M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.43,
+   "variant": "topk_stack",
+   "source": "probe.NSynthI.mert-330M.topk_stack",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_instrument",
+   "metric_spec": "test/file_acc x100",
+   "value": 69.24,
+   "variant": "uniform_avg",
+   "source": "probe.NSynthI.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 92.72,
+   "variant": "attentive",
+   "source": "probe.NSynthP.mert-330M.attentive",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 91.53,
+   "variant": "attentive_ciernik",
+   "source": "probe.NSynthP.mert-330M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 90.16,
+   "variant": "hconv",
+   "source": "probe.NSynthP.mert-330M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 1.37,
+   "variant": "mlpreduce",
+   "source": "probe.NSynthP.mert-330M.mlpreduce",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 91.58,
+   "variant": "softmax_avg",
+   "source": "probe.NSynthP.mert-330M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "nsynth_pitch",
+   "metric_spec": "test/file_acc x100",
+   "value": 90.92,
+   "variant": "uniform_avg",
+   "source": "probe.NSynthP.mert-330M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  }
+ ]
+}
