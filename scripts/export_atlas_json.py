@@ -348,13 +348,13 @@ def render_atlas_table(task_registry):
             return f"<td class='num {cls} na'{h} title='not evaluated'>&mdash;</td>"
         cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
               if pt.get("caveat") else "")
-        ro = (f"<span class='lyr' title='best of this model&#39;s readouts'>"
-              f"&middot;{pt['readout_label']}</span>" if pt.get("readout_label") else "")
+        tip = ("open the full layer curve" if not pt.get("readout_label") else
+               f"best readout: {pt['readout_label']} — open the curves for all readouts")
         return (f"<td class='num {cls}'{h}>"
                 f"<a class='cellink' href='explorer.html?model={pt['model']}&amp;task={pt['t']}' "
-                f"title='open the full layer curve'>"
+                f"title='{tip}'>"
                 f"<span class='sc'>{pt['score']:.1f}{cv}"
-                f"<span class='lyr'>L{pt['layer']}</span>{ro}</span>"
+                f"<span class='lyr'>L{pt['layer']}</span></span>"
                 f"{sparkline(pt['scores'], pt['layer'])}</a></td>")
 
     rows = []
@@ -365,8 +365,11 @@ def render_atlas_table(task_registry):
         part = ("" if m["rank_n"] == n_prim else
                 f"<sup class='cav' title='ranked on {m['rank_n']} of {n_prim} "
                 f"primary tasks'>p</sup>")
+        multi = ("<sup class='cav' title='multi-readout model: each cell shows its "
+                 "best readout; click a cell to compare all readouts'>&#9702;</sup>"
+                 if m.get("is_group") else "")
         cells = [f"<tr style='--fam:{c}'>",
-                 f"<td class='mname' title='{m['id']}'>{m['display']}{extra}</td>",
+                 f"<td class='mname' title='{m['id']}'>{m['display']}{multi}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
                  f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:
