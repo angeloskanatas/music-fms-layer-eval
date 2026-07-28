@@ -59,6 +59,12 @@
     .xtra { color: var(--ink-3); cursor: help; font-weight: 600; }
     .chev { font-size: .7rem; color: var(--ink-3); }
     th.sorted-asc .chev, th.sorted-desc .chev { color: var(--accent); }
+    tr.divider td { text-align:center; padding:.35rem; border-bottom:1px solid var(--line); }
+    tr.divider button { font:inherit; font-size:.8rem; font-weight:600; color:var(--ink-2);
+      background:var(--bg-2); border:1px solid var(--line); border-radius:999px;
+      padding:.3rem .9rem; cursor:pointer; }
+    tr.divider button:hover { color:var(--accent); border-color:var(--accent); }
+    tr.extra td { background: #fcfcfd; }
     footer { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 3rem;
              font-size: .8rem; color: var(--ink-3); }
     footer a { color: var(--accent); text-decoration: none; }
@@ -81,6 +87,12 @@
     <a href="explorer.html" style="font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Explorer &rarr;</a>
     <button onclick="exportCSV()">Download CSV (current view)</button>
     <button onclick="exportLatex()">Copy LaTeX table</button>
+  </div>
+  <div class="legend" style="max-width:1100px;margin:0 auto;padding:0 1.5rem .5rem;font-size:.8rem;color:#64748b;">
+    <strong>Rank</strong> = average of the model&rsquo;s per-task ranks over the primary tasks (1&nbsp;=&nbsp;best)
+    &nbsp;&middot;&nbsp; <sup>p</sup> ranked on fewer tasks (see cells) &nbsp;&middot;&nbsp;
+    <sup>&#9702;</sup> multi-readout model &nbsp;&middot;&nbsp; &dagger; metric caveat (hover)
+    &nbsp;&middot;&nbsp; &mdash; not evaluated &nbsp;&middot;&nbsp; curve&nbsp;=&nbsp;full layer profile, dot&nbsp;=&nbsp;best layer
   </div>
   <div class="twrap">
     <table id="atlas">
@@ -124,6 +136,14 @@
         .forEach(r => tbody.appendChild(r));
     });
   });
+  function toggleExtras() {
+    const rows = document.querySelectorAll('tr.extra');
+    const show = rows[0] && rows[0].hidden;
+    rows.forEach(r => r.hidden = !show);
+    const b = document.getElementById('xtoggle');
+    b.innerHTML = (show ? 'Hide' : 'Show') + ' ' + rows.length +
+      ' additional models (beyond the paper&#39;s 12) ' + (show ? '&#9652;' : '&#9662;');
+  }
   function cellIndex(th) {   // visual column index accounting for hidden cells
     const cells = th.closest('table').querySelectorAll('thead th');
     let i = 0; for (const c of cells) { if (c === th) break; i++; }

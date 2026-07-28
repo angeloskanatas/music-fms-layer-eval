@@ -357,8 +357,19 @@ def render_atlas_table(task_registry):
                 f"<span class='lyr'>L{pt['layer']}</span></span>"
                 f"{sparkline(pt['scores'], pt['layer'])}</a></td>")
 
+    n_cols = 3 + sum(len(prim_tasks[tf]) + len(comp_tasks[tf])
+                     for tf in TASK_FAMILY_ORDER)
+    n_extra = sum(1 for m in models if not m["in_paper"])
     rows = []
+    emitted_divider = False
     for m in models:
+        if not m["in_paper"] and not emitted_divider:
+            rows.append(
+                f"<tr class='divider'><td colspan='{n_cols}'>"
+                f"<button id='xtoggle' onclick='toggleExtras()'>"
+                f"Show {n_extra} additional models (beyond the paper&#39;s 12) &#9662;"
+                f"</button></td></tr>")
+            emitted_divider = True
         c = FAMILY_COLOR.get(m["family"], "#94a3b8")
         extra = "" if m["in_paper"] else " <span class='xtra' title='not part of the paper&#39;s 12-model set'>+</span>"
         rk = (f"{m['mean_rank']:.1f}" if m["mean_rank"] else "&mdash;")
@@ -368,7 +379,8 @@ def render_atlas_table(task_registry):
         multi = ("<sup class='cav' title='multi-readout model: each cell shows its "
                  "best readout; click a cell to compare all readouts'>&#9702;</sup>"
                  if m.get("is_group") else "")
-        cells = [f"<tr style='--fam:{c}'>",
+        xcls = "" if m["in_paper"] else " class='extra' hidden"
+        cells = [f"<tr style='--fam:{c}'{xcls}>",
                  f"<td class='mname' title='{m['id']}'>{m['display']}{multi}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
                  f"<td class='num'>{rk}{part}</td>"]
