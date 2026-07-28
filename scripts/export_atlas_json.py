@@ -201,6 +201,20 @@ def write_registries(task_registry):
     (reg / "tasks.yaml").write_text("\n".join(tasks_yaml) + "\n")
 
 
+def sparkline(scores, best, color="#94a3b8", w=52, h=16):
+    """Inline SVG sparkline of a layer profile with the best layer dotted.
+    Build-time rendered: no JS, crawler-safe, ~200 bytes."""
+    lo, hi = min(scores), max(scores)
+    rng = (hi - lo) or 1.0
+    n = len(scores)
+    xs = [2 + i * (w - 4) / max(n - 1, 1) for i in range(n)]
+    ys = [h - 2 - (s - lo) / rng * (h - 5) for s in scores]
+    pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in zip(xs, ys))
+    return (f"<svg class='spark' width='{w}' height='{h}' viewBox='0 0 {w} {h}'>"
+            f"<polyline points='{pts}' fill='none' stroke='{color}' stroke-width='1.3'/>"
+            f"<circle cx='{xs[best]:.1f}' cy='{ys[best]:.1f}' r='2.4' fill='#2563eb'/></svg>")
+
+
 def render_atlas_table(task_registry):
     """Build-time render of the results table into atlas.html (real HTML for
     crawler/LLM legibility; JS adds only sort + expand). Derived numbers
@@ -211,75 +225,94 @@ def render_atlas_table(task_registry):
         if not f.exists():
             continue
         d = json.loads(f.read_text())
-        per_task, fam_scores = {}, {}
+        per_task = {}
         for r in d["records"]:
             t, scores = r["task"], r["layers"]
             best = max(range(len(scores)), key=lambda i: scores[i])
             per_task[t] = {"score": scores[best], "layer": best,
-                           "caveat": r.get("caveat")}
-            if t in PRIMARY_METRICS and r.get("task_family"):
-                fam_scores.setdefault(r["task_family"], []).append(scores[best])
+                           "scores": scores, "caveat": r.get("caveat")}
         models.append({
             "id": model_id, "family": d["family"], "in_paper": d["in_paper"],
             "n_layers": max((r["n_layers"] for r in d["records"]), default=0),
             "per_task": per_task,
-            "fam_mean": {k: sum(v) / len(v) for k, v in fam_scores.items()},
-            "fam_n": {k: len(v) for k, v in fam_scores.items()},
         })
-    models.sort(key=lambda m: (FAMILY_ORDER.index(m["family"])
-                               if m["family"] in FAMILY_ORDER else 9, m["id"]))
-    fam_tasks = {tf: sorted(t for t, f in TASK_FAMILY.items() if f == tf)
-                 for tf in TASK_FAMILY_ORDER}
+    # mean RANK over primary tasks (scale-free; value-means across mixed
+    # metrics are meaningless). Rank within each task over models that have it.
+    n_prim = len(PRIMARY_METRICS)
+    ranks = {m["id"]: [] for m in models}
+    for t in PRIMARY_METRICS:
+        have = sorted((m for m in models if t in m["per_task"]),
+                      key=lambda m: -m["per_task"][t]["score"])
+        for i, m in enumerate(have):
+            ranks[m["id"]].append(i + 1)
+    for m in models:
+        r = ranks[m["id"]]
+        m["mean_rank"] = sum(r) / len(r) if r else None
+        m["rank_n"] = len(r)
+    # sort: near-full-coverage models first by mean rank; partial-coverage
+    # models (few-task mean ranks are flattering, not comparable) sink below.
+    full_cov = max(m["rank_n"] for m in models)
+    models.sort(key=lambda m: (0 if m["rank_n"] >= 0.75 * full_cov else 1,
+                               m["mean_rank"] if m["mean_rank"] else 99))
+    prim_tasks = {tf: sorted(t for t, f in TASK_FAMILY.items()
+                             if f == tf and t in PRIMARY_METRICS)
+                  for tf in TASK_FAMILY_ORDER}
+    comp_tasks = {tf: sorted(t for t, f in TASK_FAMILY.items()
+                             if f == tf and t not in PRIMARY_METRICS)
+                  for tf in TASK_FAMILY_ORDER}
+
+    def th_task(t, tf, hidden):
+        h = " hidden" if hidden else ""
+        cls = "detail d-" + tf if hidden else "ptask"
+        return f"<th class='{cls}' data-sort='num'{h}>{t}</th>"
 
     head_top = ["<tr><th rowspan='2' data-sort='str'>Model</th>"
                 "<th rowspan='2' data-sort='str'>Paradigm</th>"
-                "<th rowspan='2' data-sort='num'>Layers</th>"]
+                "<th rowspan='2' data-sort='num' title='mean rank across primary "
+                "tasks the model was evaluated on; lower is better'>Rank</th>"]
     head_sub = ["<tr>"]
     for tf in TASK_FAMILY_ORDER:
-        n = len(fam_tasks[tf])
-        head_top.append(f"<th colspan='1' class='fam-agg expandable' data-fam='{tf}'>"
-                        f"{tf.capitalize()} <span class='chev'>&#9656;</span></th>")
-        head_sub.append(f"<th class='fam-agg' data-sort='num' data-fam='{tf}'>mean</th>")
-        for t in fam_tasks[tf]:
-            head_top[-1] = head_top[-1]  # keep aggregate col; detail cols follow, hidden
-            head_top.append(f"<th class='detail d-{tf}' hidden>{t}</th>")
-            head_sub.append(f"<th class='detail d-{tf}' data-sort='num' hidden>&nbsp;</th>")
+        n_p, n_c = len(prim_tasks[tf]), len(comp_tasks[tf])
+        exp = (f" <span class='chev' title='{n_c} companion metrics'>&#9656;</span>"
+               if n_c else "")
+        head_top.append(f"<th colspan='{n_p}' class='famgrp{' expandable' if n_c else ''}' "
+                        f"data-fam='{tf}'>{tf.capitalize()}{exp}</th>")
+        for t in prim_tasks[tf]:
+            head_sub.append(th_task(t, tf, hidden=False))
+        for t in comp_tasks[tf]:
+            head_top[-1] = head_top[-1]
+            head_sub.append(th_task(t, tf, hidden=True))
     head_top.append("</tr>")
     head_sub.append("</tr>")
+
+    def cell(pt, tf, hidden):
+        h = " hidden" if hidden else ""
+        cls = ("detail d-" + tf) if hidden else "ptask"
+        if pt is None:
+            return f"<td class='num {cls} na'{h} title='not evaluated'>&mdash;</td>"
+        cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
+              if pt.get("caveat") else "")
+        return (f"<td class='num {cls}'{h}><span class='sc'>{pt['score']:.1f}{cv}"
+                f"<span class='lyr'>L{pt['layer']}</span></span>"
+                f"{sparkline(pt['scores'], pt['layer'])}</td>")
 
     rows = []
     for m in models:
         c = FAMILY_COLOR.get(m["family"], "#94a3b8")
         extra = "" if m["in_paper"] else " <span class='xtra' title='not part of the paper&#39;s 12-model set'>+</span>"
+        rk = (f"{m['mean_rank']:.1f}" if m["mean_rank"] else "&mdash;")
+        part = ("" if m["rank_n"] == n_prim else
+                f"<sup class='cav' title='ranked on {m['rank_n']} of {n_prim} "
+                f"primary tasks'>p</sup>")
         cells = [f"<tr style='--fam:{c}'>",
                  f"<td class='mname'>{m['id']}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
-                 f"<td class='num'>{m['n_layers']}</td>"]
+                 f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:
-            v = m["fam_mean"].get(tf)
-            n_have = m["fam_n"].get(tf, 0)
-            n_full = len([t for t in fam_tasks[tf] if t in PRIMARY_METRICS])
-            if v is None:
-                cells.append(f"<td class='num fam-agg na' data-fam='{tf}' "
-                             f"title='not evaluated'>&mdash;</td>")
-            elif n_have < n_full:   # partial mean: NOT comparable down the column
-                cells.append(f"<td class='num fam-agg' data-fam='{tf}' "
-                             f"title='mean over {n_have} of {n_full} primary tasks "
-                             f"— not comparable to complete rows'>{v:.1f}"
-                             f"<sup class='cav'>p</sup></td>")
-            else:
-                cells.append(f"<td class='num fam-agg' data-fam='{tf}'>{v:.1f}</td>")
-            for t in fam_tasks[tf]:
-                pt = m["per_task"].get(t)
-                if pt is None:
-                    cells.append(f"<td class='num detail d-{tf} na' hidden "
-                                 f"title='not evaluated'>&mdash;</td>")
-                else:
-                    cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
-                          if pt.get("caveat") else "")
-                    cells.append(f"<td class='num detail d-{tf}' hidden>"
-                                 f"{pt['score']:.1f}{cv}"
-                                 f"<span class='lyr'>L{pt['layer']}</span></td>")
+            for t in prim_tasks[tf]:
+                cells.append(cell(m["per_task"].get(t), tf, hidden=False))
+            for t in comp_tasks[tf]:
+                cells.append(cell(m["per_task"].get(t), tf, hidden=True))
         cells.append("</tr>")
         rows.append("".join(cells))
 
