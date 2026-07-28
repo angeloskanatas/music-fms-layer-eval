@@ -286,13 +286,19 @@ def render_atlas_table(task_registry):
         if not f.exists():
             continue
         d = json.loads(f.read_text())
+        ff = OUT / "results" / model_id / "fusion.json"
+        fus = {}
+        if ff.exists():
+            for r in json.loads(ff.read_text())["records"]:
+                fus.setdefault(r["task"], {})[r["variant"]] = r["value"]
         per_task = {}
         for r in d["records"]:
             t, scores = r["task"], r["layers"]
             best = max(range(len(scores)), key=lambda i: scores[i])
             per_task[t] = {"score": scores[best], "layer": best, "scores": scores,
                            "caveat": r.get("caveat"), "model": model_id, "t": t,
-                           "readout_label": spec.get("readout_label")}
+                           "readout_label": spec.get("readout_label"),
+                           "fusion": fus.get(t)}
         models.append({
             "id": model_id, "display": spec["display"], "family": d["family"],
             "in_paper": d["in_paper"], "readout_of": spec.get("readout_of"),
@@ -379,6 +385,20 @@ def render_atlas_table(task_registry):
               if pt.get("caveat") else "")
         tip = ("open the full layer curve" if not pt.get("readout_label") else
                f"best readout: {pt['readout_label']} — open the curves for all readouts")
+        fus = pt.get("fusion")
+        if fus:
+            proxy = {k: v for k, v in fus.items()
+                     if k in ("topk_avg", "topk_stack", "top5_avg", "top5_stack")}
+            train = {k: v for k, v in fus.items()
+                     if k in ("learned_avg", "hconv", "attentive_ciernik")}
+            parts = []
+            for name, grp in (("proxy fusion", proxy), ("trainable fusion", train)):
+                if grp:
+                    bk = max(grp, key=grp.get)
+                    parts.append(f"best {name}: {VARIANT_LABEL[bk]} "
+                                 f"{grp[bk]:.1f} ({grp[bk] - pt['score']:+.1f})")
+            if parts:
+                tip += " | " + "; ".join(parts) + " — details on the Selection & Fusion page"
         return (f"<td class='num {cls}'{h}>"
                 f"<a class='cellink' href='explorer.html?model={pt['model']}&amp;task={pt['t']}' "
                 f"title='{tip}'>"
