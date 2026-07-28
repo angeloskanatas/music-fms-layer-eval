@@ -140,6 +140,8 @@ TASK_LABEL = {
     "dimsim_acc_l2": "DimSim L2",
 }
 
+PARAMS = {'mert-v1-95M': ('95M', 95), 'mert-v1-330M': ('330M', 330), 'musicfm': ('330M', 330), 'muq': ('310M', 310), 'omar-rq-multifeature-25hz': ('580M', 580), 'musicgen-small': ('300M', 300), 'musicgen-medium': ('1.5B', 1500), 'musicgen-large': ('3.3B', 3300), 'yue-0.5b': ('0.5B', 500), 'yue-7b': ('7B', 7000), 'clap': ('73M', 73), 'myna': ('22M', 22)}
+
 # Family identity colors — validated categorical palette (dataviz skill,
 # ALL CHECKS PASS on white; identity is never color-alone: names are printed).
 FAMILY_COLOR = {
@@ -325,6 +327,9 @@ def render_atlas_table(task_registry):
 
     head_top = ["<tr><th rowspan='2' data-sort='str'>Model</th>"
                 "<th rowspan='2' data-sort='str'>Paradigm</th>"
+                "<th rowspan='2' data-sort='num' title='parameters of the evaluated "
+                "encoder, as reported in each paper (audio tower for two-tower models, "
+                "decoder for autoregressive)'>Params</th>"
                 "<th rowspan='2' data-sort='num' title='mean rank across primary "
                 "tasks the model was evaluated on; lower is better'>Rank</th>"]
     head_sub = ["<tr>"]
@@ -371,6 +376,8 @@ def render_atlas_table(task_registry):
         cells = [f"<tr style='--fam:{c}'>",
                  f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
+                 (lambda p: f"<td class='num' data-val='{p[1]}'>{p[0]}</td>" if p else
+                  "<td class='num na' data-val='-1' title='not verified'>&mdash;</td>")(PARAMS.get(m['id'])),
                  f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:
             for t in prim_tasks[tf]:
