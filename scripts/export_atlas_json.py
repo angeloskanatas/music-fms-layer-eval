@@ -254,9 +254,8 @@ def render_atlas_table(task_registry):
     (best layer, family means) are computed HERE, never persisted."""
     models = []
     for model_id, spec in MODELS.items():
-        # the table shows the paper's 12 models only; extras and protocol
-        # variants live in data/ and in the explorer
-        if spec.get("hidden") or not spec.get("in_paper", True):
+        # all comparable models; only protocol-different rows stay data-only
+        if spec.get("hidden"):
             continue
         f = OUT / "results" / model_id / "downstream.json"
         if not f.exists():
@@ -366,8 +365,11 @@ def render_atlas_table(task_registry):
         part = ("" if m["rank_n"] == n_prim else
                 f"<sup class='cav' title='ranked on {m['rank_n']} of {n_prim} "
                 f"primary tasks'>p</sup>")
+        extra = ("" if m["in_paper"] else
+                 "<sup class='cav' title='beyond the paper&#39;s 12-model study'>+</sup>")
+        ncls = "mname" if m["in_paper"] else "mname mmuted"
         cells = [f"<tr style='--fam:{c}'>",
-                 f"<td class='mname' title='{m['id']}'>{m['display']}</td>",
+                 f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
                  f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:

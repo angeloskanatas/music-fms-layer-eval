@@ -51,6 +51,7 @@
                            padding-left: .75rem; }
     tbody tr:hover td { background: var(--bg-2); }
     .mname { font-weight: 600; }
+    .mmuted { color: var(--ink-2); }
     .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%;
            background: var(--fam); margin-right: .45rem; vertical-align: baseline; }
     .lyr { color: var(--ink-3); font-size: .72rem; font-weight: 400; margin-left: .35rem; }
@@ -85,7 +86,7 @@
   <div class="legend" style="max-width:1100px;margin:0 auto;padding:0 1.5rem .5rem;font-size:.8rem;color:#64748b;">
     <strong>Rank</strong> = average of the model&rsquo;s per-task ranks over the primary tasks (1&nbsp;=&nbsp;best)
     &nbsp;&middot;&nbsp; <sup>p</sup> ranked on fewer tasks (see cells) &nbsp;&middot;&nbsp;
-    &dagger; metric caveat (hover)
+    <sup>+</sup> beyond the paper&rsquo;s 12 models &nbsp;&middot;&nbsp; &dagger; metric caveat (hover)
     &nbsp;&middot;&nbsp; &mdash; not evaluated &nbsp;&middot;&nbsp; curve&nbsp;=&nbsp;full layer profile, dot&nbsp;=&nbsp;best layer
   </div>
   <div class="twrap">
