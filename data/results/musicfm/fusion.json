@@ -6,6 +6,141 @@
  "exported": "2026-07-28",
  "records": [
   {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 84.21,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.musicfm.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 77.56,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.musicfm.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 73.77,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.musicfm.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 84.92,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.musicfm.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 77.52,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.musicfm.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 74.34,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.musicfm.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 83.5,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.musicfm.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 76.5,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.musicfm.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 72.62,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.musicfm.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 81.83,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.musicfm.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 70.81,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.musicfm.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 67.61,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.musicfm.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 83.57,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.musicfm.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 75.78,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.musicfm.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 72.13,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.musicfm.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
    "task": "emo_r2",
    "metric_spec": "test/r2 x100",
    "value": 64.65,

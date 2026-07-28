@@ -560,8 +560,11 @@ FUSION_TASKS = {
     "MTGInstrument":    ("mtg_instrument", ("test/ap", "test/auroc")),
     "MTGMood":          ("mtg_mood", ("test/ap", "test/auroc")),
     "MTGTop50":         ("mtg_top50", ("test/ap", "test/auroc")),
+    "ChordsACE":        ("chords_ace_mirex", "test/mirex"),
 }
-FUSION_EXTRA_COLS = {"GTZANBeatTracking": ("downbeat_f1", "test/downbeat_f1")}
+FUSION_EXTRA_COLS = {"GTZANBeatTracking": [("downbeat_f1", "test/downbeat_f1")],
+                     "ChordsACE": [("chords_ace_root", "test/root"),
+                                   ("chords_ace_thirds", "test/thirds")]}
 FUSION_VARIANTS = {"uniform_avg", "softmax_avg", "learned_avg", "stack", "mlpreduce",
                    "hconv", "attentive", "attentive_ciernik",
                    "topk_avg", "topk_stack", "top5_avg", "top5_stack"}
@@ -630,10 +633,10 @@ def export_fusion():
                          "value": round(100 * vals[col], 2)})
         else:
             missing_col.append(d.name)
-        xt = FUSION_EXTRA_COLS.get(task_probe)
-        if xt and xt[1] in vals:
-            recs.append({"task": xt[0], "metric_spec": xt[1] + " x100",
-                         "value": round(100 * vals[xt[1]], 2)})
+        for xt in FUSION_EXTRA_COLS.get(task_probe, []):
+            if xt[1] in vals:
+                recs.append({"task": xt[0], "metric_spec": xt[1] + " x100",
+                             "value": round(100 * vals[xt[1]], 2)})
         for rec in recs:
             rec.update({"variant": variant, "source": d.name, "version": vdir,
                         "protocol": "published-map"})
@@ -694,6 +697,9 @@ FUSION_TASK_LABEL = {
     "nsynth_instrument": "Instrument (NSynth)", "genre": "Genre (GTZAN)",
     "beat_f1": "Beat (GTZAN)", "downbeat_f1": "Downbeat (GTZAN)",
     "emo_r2": "Emotion (EMO)", "hxmsa": "Structure (Harmonix)",
+    "chords_ace_mirex": "Chords MIREX (ChordsACE)",
+    "chords_ace_root": "Chords root (ChordsACE)",
+    "chords_ace_thirds": "Chords thirds (ChordsACE)",
     "mtt": "Tagging (MTT, avg AP/AUROC)", "mtg_genre": "MTG-Genre (avg AP/AUROC)",
     "mtg_instrument": "MTG-Instr (avg AP/AUROC)", "mtg_mood": "MTG-Mood (avg AP/AUROC)",
     "mtg_top50": "MTG-Top50 (avg AP/AUROC)",

@@ -6,6 +6,141 @@
  "exported": "2026-07-28",
  "records": [
   {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.29,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.mert-95M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 64.75,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.mert-95M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 61.51,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.mert-95M.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 81.84,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.mert-95M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 65.28,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.mert-95M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 62.37,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.mert-95M.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 81.75,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.mert-95M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 62.55,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.mert-95M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 59.14,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.mert-95M.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.11,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.mert-95M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 60.94,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.mert-95M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 57.57,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.mert-95M.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 81.86,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-95M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 60.63,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-95M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 57.27,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-95M.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
    "task": "emo_r2",
    "metric_spec": "test/r2 x100",
    "value": 60.85,

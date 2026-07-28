@@ -1,0 +1,144 @@
+{
+ "schema_version": "1.0.0",
+ "model": "omar-rq-multifeature-25hz",
+ "readout_family": "multi-layer fusion probes",
+ "note": "one score per (task, variant); fusion collapses the layer axis",
+ "exported": "2026-07-28",
+ "records": [
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.61,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 78.05,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 73.26,
+   "variant": "attentive_ciernik",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.attentive_ciernik",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 81.72,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 77.65,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 73.47,
+   "variant": "hconv",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.hconv",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 83.93,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 75.72,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 70.85,
+   "variant": "softmax_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.softmax_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.85,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 74.75,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 70.58,
+   "variant": "topk_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.topk_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.18,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 75.13,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 70.51,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.omar-rq-multifeature-25hz.uniform_avg",
+   "version": "version_1",
+   "protocol": "published-map"
+  }
+ ]
+}

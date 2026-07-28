@@ -6,6 +6,33 @@
  "exported": "2026-07-28",
  "records": [
   {
+   "task": "chords_ace_mirex",
+   "metric_spec": "test/mirex x100",
+   "value": 82.01,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_root",
+   "metric_spec": "test/root x100",
+   "value": 60.38,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
+   "task": "chords_ace_thirds",
+   "metric_spec": "test/thirds x100",
+   "value": 56.71,
+   "variant": "uniform_avg",
+   "source": "probe.ChordsACE.mert-330M.uniform_avg",
+   "version": "version_2",
+   "protocol": "published-map"
+  },
+  {
    "task": "emo_r2",
    "metric_spec": "test/r2 x100",
    "value": 55.81,
