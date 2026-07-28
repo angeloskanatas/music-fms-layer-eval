@@ -11,12 +11,12 @@ musicfm:
 muq:
   family: masked
   in_paper: true
-omar-rq-base:
-  family: masked
-  in_paper: true
 omar-rq-multifeature-25hz:
   family: masked
   in_paper: true
+omar-rq-base:
+  family: masked
+  in_paper: false
 musicgen-small:
   family: autoregressive
   in_paper: true
@@ -47,25 +47,22 @@ mt2:
 mt2-cls-avg:
   family: contrastive
   in_paper: false
-  variant_of: mt2
 mt2-cls-contrastive:
   family: contrastive
   in_paper: false
-  variant_of: mt2
 mt2-cls-equiv:
   family: contrastive
   in_paper: false
-  variant_of: mt2
 muq-paper:
   family: masked
   in_paper: false
   variant_of: muq
-  note: "replication of the MuQ paper's own eval suite (different task vocabulary)"
+  note: "replication of the MuQ paper's own eval suite (different protocol, not comparable)"
 musicfm-paper:
   family: masked
   in_paper: false
   variant_of: musicfm
-  note: "replication of the MusicFM paper's own eval suite"
+  note: "replication of the MuQ paper's own eval suite (different protocol, not comparable)"
 qwen2audio-instruct:
   family: audio-llm
   in_paper: false

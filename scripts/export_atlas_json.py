@@ -19,31 +19,46 @@ OUT = Path(__file__).resolve().parent.parent / "data"
 
 # canonical model id -> downstream filename stem. Variants reference their base
 # via variant_of; paper-replication files use the source paper's task keys.
+# display = the paper's official model name (tex Table 1 / source papers).
+# readout_of groups architecture-specific readouts of ONE model (MT2's
+# multi-class-token heads, cf. seq-JEPA agg/glance) — views merge these rows.
+# hidden = exported to data/ but excluded from views (different eval protocol,
+# not comparable: the MuQ paper's own suite replication rows).
 MODELS = {
-    "mert-v1-95M":     {"file": "mert-v1-95M",     "family": "masked"},
-    "mert-v1-330M":    {"file": "mert-v1-330M",    "family": "masked"},
-    "musicfm":         {"file": "musicfm",         "family": "masked"},
-    "muq":             {"file": "muq",             "family": "masked"},
-    "omar-rq-base":    {"file": "omar-rq-base",    "family": "masked"},
-    "omar-rq-multifeature-25hz": {"file": "omar-rq-multifeature-25hz", "family": "masked"},
-    "musicgen-small":  {"file": "musicgen-small",  "family": "autoregressive"},
-    "musicgen-medium": {"file": "musicgen-medium", "family": "autoregressive"},
-    "musicgen-large":  {"file": "musicgen-large",  "family": "autoregressive"},
-    "yue-0.5b":        {"file": "yue-0.5b",        "family": "autoregressive"},
-    "yue-7b":          {"file": "yue-7b",          "family": "autoregressive"},
-    "clap":            {"file": "clap",            "family": "contrastive"},
-    "myna":            {"file": "myna",            "family": "contrastive"},
-    "maest":           {"file": "maest",           "family": "supervised", "in_paper": False},
-    "mt2":             {"file": "mt2",             "family": "contrastive", "in_paper": False},
-    "mt2-cls-avg":     {"file": "mt2-cls-avg",     "family": "contrastive", "in_paper": False, "variant_of": "mt2"},
-    "mt2-cls-contrastive": {"file": "mt2-cls-contrastive", "family": "contrastive", "in_paper": False, "variant_of": "mt2"},
-    "mt2-cls-equiv":   {"file": "mt2-cls-equiv",   "family": "contrastive", "in_paper": False, "variant_of": "mt2"},
-    "muq-paper":       {"file": "muq_paper",       "family": "masked", "in_paper": False, "variant_of": "muq",
-                        "note": "replication of the MuQ paper's own eval suite (different task vocabulary)"},
-    "musicfm-paper":   {"file": "musicfm_paper",   "family": "masked", "in_paper": False, "variant_of": "musicfm",
-                        "note": "replication of the MusicFM paper's own eval suite"},
-    "qwen2audio-instruct": {"file": "qwen2audio-instruct", "family": "audio-llm", "in_paper": False},
-    "musicflamingo":   {"file": "musicflamingo",   "family": "audio-llm", "in_paper": False},
+    "mert-v1-95M":     {"file": "mert-v1-95M",  "display": "MERT-v1-95M",  "family": "masked"},
+    "mert-v1-330M":    {"file": "mert-v1-330M", "display": "MERT-v1-330M", "family": "masked"},
+    "musicfm":         {"file": "musicfm",      "display": "MusicFM (MSD)", "family": "masked"},
+    "muq":             {"file": "muq",          "display": "MuQ (iter)",    "family": "masked"},
+    "omar-rq-multifeature-25hz": {"file": "omar-rq-multifeature-25hz",
+                        "display": "OMAR-RQ (multifeature)", "family": "masked"},
+    "omar-rq-base":    {"file": "omar-rq-base", "display": "OMAR-RQ (base)",
+                        "family": "masked", "in_paper": False},
+    "musicgen-small":  {"file": "musicgen-small",  "display": "MusicGen-S", "family": "autoregressive"},
+    "musicgen-medium": {"file": "musicgen-medium", "display": "MusicGen-M", "family": "autoregressive"},
+    "musicgen-large":  {"file": "musicgen-large",  "display": "MusicGen-L", "family": "autoregressive"},
+    "yue-0.5b":        {"file": "yue-0.5b", "display": "YuE-s1-0.5B", "family": "autoregressive"},
+    "yue-7b":          {"file": "yue-7b",   "display": "YuE-s1-7B",   "family": "autoregressive"},
+    "clap":            {"file": "clap",     "display": "LAION-CLAP",  "family": "contrastive"},
+    "myna":            {"file": "myna",     "display": "Myna-Base",   "family": "contrastive"},
+    "maest":           {"file": "maest",    "display": "MAEST", "family": "supervised", "in_paper": False},
+    "mt2":             {"file": "mt2", "display": "MT2", "family": "contrastive",
+                        "in_paper": False, "readout_of": "mt2", "readout_label": "token-avg"},
+    "mt2-cls-avg":     {"file": "mt2-cls-avg", "display": "MT2", "family": "contrastive",
+                        "in_paper": False, "readout_of": "mt2", "readout_label": "CLS-avg"},
+    "mt2-cls-contrastive": {"file": "mt2-cls-contrastive", "display": "MT2", "family": "contrastive",
+                        "in_paper": False, "readout_of": "mt2", "readout_label": "contrastive CLS"},
+    "mt2-cls-equiv":   {"file": "mt2-cls-equiv", "display": "MT2", "family": "contrastive",
+                        "in_paper": False, "readout_of": "mt2", "readout_label": "equivariant CLS"},
+    "muq-paper":       {"file": "muq_paper", "display": "MuQ (paper suite)", "family": "masked",
+                        "in_paper": False, "variant_of": "muq", "hidden": True,
+                        "note": "replication of the MuQ paper's own eval suite (different protocol, not comparable)"},
+    "musicfm-paper":   {"file": "musicfm_paper", "display": "MusicFM (paper suite)", "family": "masked",
+                        "in_paper": False, "variant_of": "musicfm", "hidden": True,
+                        "note": "replication of the MuQ paper's own eval suite (different protocol, not comparable)"},
+    "qwen2audio-instruct": {"file": "qwen2audio-instruct", "display": "Qwen2-Audio-Instruct",
+                        "family": "audio-llm", "in_paper": False},
+    "musicflamingo":   {"file": "musicflamingo", "display": "Music-Flamingo",
+                        "family": "audio-llm", "in_paper": False},
 }
 
 # alias -> canonical task key (drift found in the source files)
@@ -239,6 +254,8 @@ def render_atlas_table(task_registry):
     (best layer, family means) are computed HERE, never persisted."""
     models = []
     for model_id, spec in MODELS.items():
+        if spec.get("hidden"):          # different protocol — data only, no views
+            continue
         f = OUT / "results" / model_id / "downstream.json"
         if not f.exists():
             continue
@@ -248,12 +265,31 @@ def render_atlas_table(task_registry):
             t, scores = r["task"], r["layers"]
             best = max(range(len(scores)), key=lambda i: scores[i])
             per_task[t] = {"score": scores[best], "layer": best, "scores": scores,
-                           "caveat": r.get("caveat"), "model": model_id, "t": t}
+                           "caveat": r.get("caveat"), "model": model_id, "t": t,
+                           "readout_label": spec.get("readout_label")}
         models.append({
-            "id": model_id, "family": d["family"], "in_paper": d["in_paper"],
+            "id": model_id, "display": spec["display"], "family": d["family"],
+            "in_paper": d["in_paper"], "readout_of": spec.get("readout_of"),
             "n_layers": max((r["n_layers"] for r in d["records"]), default=0),
             "per_task": per_task,
         })
+    # merge architecture-specific readouts of one model (MT2 heads) into a
+    # single row: per cell keep the best readout and tag it.
+    merged, groups = [], {}
+    for m in models:
+        g = m["readout_of"]
+        if not g:
+            merged.append(m)
+            continue
+        if g not in groups:
+            groups[g] = {**m, "id": g, "is_group": True}
+            merged.append(groups[g])
+        else:
+            base = groups[g]
+            for t, pt in m["per_task"].items():
+                if t not in base["per_task"] or pt["score"] > base["per_task"][t]["score"]:
+                    base["per_task"][t] = pt
+    models = merged
     # mean RANK over primary tasks (scale-free; value-means across mixed
     # metrics are meaningless). Rank within each task over models that have it.
     n_prim = len(PRIMARY_METRICS)
@@ -312,11 +348,13 @@ def render_atlas_table(task_registry):
             return f"<td class='num {cls} na'{h} title='not evaluated'>&mdash;</td>"
         cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
               if pt.get("caveat") else "")
+        ro = (f"<span class='lyr' title='best of this model&#39;s readouts'>"
+              f"&middot;{pt['readout_label']}</span>" if pt.get("readout_label") else "")
         return (f"<td class='num {cls}'{h}>"
                 f"<a class='cellink' href='explorer.html?model={pt['model']}&amp;task={pt['t']}' "
                 f"title='open the full layer curve'>"
                 f"<span class='sc'>{pt['score']:.1f}{cv}"
-                f"<span class='lyr'>L{pt['layer']}</span></span>"
+                f"<span class='lyr'>L{pt['layer']}</span>{ro}</span>"
                 f"{sparkline(pt['scores'], pt['layer'])}</a></td>")
 
     rows = []
@@ -328,7 +366,7 @@ def render_atlas_table(task_registry):
                 f"<sup class='cav' title='ranked on {m['rank_n']} of {n_prim} "
                 f"primary tasks'>p</sup>")
         cells = [f"<tr style='--fam:{c}'>",
-                 f"<td class='mname'>{m['id']}{extra}</td>",
+                 f"<td class='mname' title='{m['id']}'>{m['display']}{extra}</td>",
                  f"<td><span class='dot'></span>{m['family']}</td>",
                  f"<td class='num'>{rk}{part}</td>"]
         for tf in TASK_FAMILY_ORDER:
@@ -346,10 +384,20 @@ def render_atlas_table(task_registry):
                .replace("{{NMODELS}}", str(len(models))))
     (OUT.parent / "atlas.html").write_text(page)
 
-    # Layer Explorer: inject the model/task manifests into the template
-    models_json = json.dumps([
-        {"id": m["id"], "family": m["family"], "in_paper": m["in_paper"],
-         "color": FAMILY_COLOR.get(m["family"], "#94a3b8")} for m in models])
+    # Layer Explorer: inject the model/task manifests into the template.
+    # Readout-group members appear as their own selectable entries, properly
+    # labeled ("MT2 — equivariant CLS"), since each has its own curve file.
+    explorer_models = []
+    for mid, spec in MODELS.items():
+        if spec.get("hidden") or not (OUT / "results" / mid / "downstream.json").exists():
+            continue
+        label = spec["display"] + (f" — {spec['readout_label']}"
+                                   if spec.get("readout_label") else "")
+        explorer_models.append(
+            {"id": mid, "label": label, "family": spec["family"],
+             "in_paper": spec.get("in_paper", True),
+             "color": FAMILY_COLOR.get(spec["family"], "#94a3b8")})
+    models_json = json.dumps(explorer_models)
     tasks_seen = sorted({t for m in models for t in m["per_task"]},
                         key=lambda t: (TASK_FAMILY_ORDER.index(TASK_FAMILY[t])
                                        if TASK_FAMILY.get(t) in TASK_FAMILY_ORDER

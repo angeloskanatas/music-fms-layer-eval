@@ -62,7 +62,7 @@
         $g = document.getElementById('mates');
   const q = new URLSearchParams(location.search);
 
-  MODELS.forEach(m => $m.add(new Option(m.id + (m.in_paper ? '' : ' +'), m.id)));
+  MODELS.forEach(m => $m.add(new Option(m.label + (m.in_paper ? '' : ' +'), m.id)));
   TASKS.forEach(t => $t.add(new Option(t.label, t.id)));
   if (q.get('model') && MODELS.some(m => m.id === q.get('model'))) $m.value = q.get('model');
   if (q.get('task') && TASKS.some(t => t.id === q.get('task'))) $t.value = q.get('task');

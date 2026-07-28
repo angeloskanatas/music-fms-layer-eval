@@ -3,7 +3,7 @@
  "model": "mt2-cls-avg",
  "family": "contrastive",
  "in_paper": false,
- "variant_of": "mt2",
+ "variant_of": null,
  "source": "layerbylayer/output/downstream/data/mt2-cls-avg.json",
  "readout_spec": {
   "id": "mlp512-marble",

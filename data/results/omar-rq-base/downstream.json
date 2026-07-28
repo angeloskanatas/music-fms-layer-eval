@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "omar-rq-base",
  "family": "masked",
- "in_paper": true,
+ "in_paper": false,
  "variant_of": null,
  "source": "layerbylayer/output/downstream/data/omar-rq-base.json",
  "readout_spec": {
