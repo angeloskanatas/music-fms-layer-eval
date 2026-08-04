@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metric&ndash;Task Correlations | What Makes a Good Layer?</title>
+  <meta name="description" content="Which label-free representation metrics track layer quality on which music tasks? Mean within-model Spearman correlations between intrinsic metric profiles and per-layer downstream performance.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Metric–Task Correlations — what predicts a good layer">
+  <meta property="og:description" content="Mean within-model Spearman correlation between each intrinsic metric's layer profile and per-layer downstream performance, per task and per paradigm.">
+  <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/corr.html">
+  <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
+            --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Inter',-apple-system,sans-serif; color:var(--ink);
+           background:var(--bg); font-size:15px; line-height:1.55; }
+    header, .controls, .twrap, footer { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
+    header { padding-top:2.5rem; padding-bottom:.75rem; }
+    header h1 { font-size:1.7rem; font-weight:800; margin:0 0 .25rem; }
+    header p { color:var(--ink-2); margin:.25rem 0; max-width:760px; }
+    header a, footer a { color:var(--accent); text-decoration:none; }
+    .meta { font-size:.85rem; color:var(--ink-3); }
+    .controls { padding-bottom:1rem; }
+    .controls label { display:block; font-size:.72rem; text-transform:uppercase;
+                      letter-spacing:.04em; color:var(--ink-2); margin-bottom:.25rem; }
+    select { font:inherit; font-size:.9rem; padding:.4rem .6rem; border:1px solid var(--line);
+             border-radius:6px; background:var(--bg); color:var(--ink); min-width:220px; }
+    .twrap { margin-bottom:1rem; overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:.82rem; }
+    th, td { padding:.4rem .55rem; border-bottom:1px solid var(--line); text-align:left;
+             white-space:nowrap; }
+    thead th { font-size:.72rem; text-transform:uppercase; letter-spacing:.04em;
+               color:var(--ink-2); border-bottom:2px solid var(--line);
+               position:sticky; top:0; background:var(--bg); }
+    .num { text-align:center; font-variant-numeric:tabular-nums; cursor:help; }
+    .mlabel { font-weight:600; }
+    .na { color:var(--ink-3); cursor:default; }
+    .legend { max-width:1100px; margin:0 auto; padding:0 1.5rem .75rem;
+              font-size:.8rem; color:var(--ink-2); }
+    .swatch { display:inline-block; width:11px; height:11px; border-radius:3px;
+              vertical-align:-1px; margin:0 .25rem 0 .5rem; }
+    footer { padding-bottom:3rem; font-size:.8rem; color:var(--ink-3); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Metric&ndash;Task Correlations</h1>
+    <p>Which label-free metrics track layer quality on which tasks? Each cell: the mean, over
+       models, of the within-model Spearman correlation between a metric&rsquo;s layer profile and
+       a task&rsquo;s per-layer performance. Hover a cell for the per-model values.</p>
+    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
+       <a href="layers.html">layer cheat sheet</a> &middot;
+       <a href="explorer.html">layer explorer</a> &middot;
+       <a href="fusion.html">selection &amp; fusion</a> &middot;
+       <a href="index.html">paper</a> &middot; results as of {{DATE}}</p>
+  </header>
+  <div class="controls">
+    <label for="view">Models</label>
+    <select id="view" onchange="document.querySelectorAll('.cview').forEach(s => s.hidden = (s.id !== this.value))">
+      <!--OPTIONS-->
+    </select>
+  </div>
+  <div class="legend">
+    <span class="swatch" style="background:rgba(42,120,214,.75)"></span> positive
+    (higher metric &rarr; better layers)
+    <span class="swatch" style="background:rgba(235,104,52,.75)"></span> negative
+    &nbsp;&middot;&nbsp; saturation tracks |&rho;| &nbsp;&middot;&nbsp; &mdash; insufficient data
+  </div>
+  <div class="twrap">
+    <!--SECTIONS-->
+  </div>
+  <footer>
+    Metrics are the paper-canonical variants (ID via GRIDE at k=8 with the TwoNN estimator as a
+    separate row; spectral anisotropy; LiDAR effective rank; PTE = the linear-probe phase error of
+    the shared CPSD head). Curvature and PTE are lower-is-better, so both are negated here &mdash;
+    positive always means the metric tracks better layers. The paper&rsquo;s headline figure
+    additionally selects the best PTE configuration per model and task and aggregates by task
+    family, so its cells can differ from this canonical-variant recomputation. Raw profiles:
+    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
+  </footer>
+</body>
+</html>

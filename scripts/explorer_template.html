@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Layer Explorer | What Makes a Good Layer?</title>
-  <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task.">
+  <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task, with intrinsic-metric overlays.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Layer Explorer — per-layer curves for music foundation models">
-  <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, paradigm-mates for context.">
+  <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, paradigm-mates for context, intrinsic-metric overlays.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -45,16 +45,19 @@
   <header>
     <h1>Layer Explorer</h1>
     <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
-       marked; its paradigm-mates give context.</p>
+       marked; its paradigm-mates give context. Overlay an intrinsic metric to see whether
+       geometry tracks performance across depth.</p>
     <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
        <a href="layers.html">layer cheat sheet</a> &middot;
        <a href="fusion.html">selection &amp; fusion</a> &middot;
+       <a href="corr.html">correlations</a> &middot;
        <a href="index.html">paper</a> &middot; results as of {{DATE}} &middot;
        camera icon in the chart toolbar exports PNG</p>
   </header>
   <div class="controls">
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
     <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
+    <div class="ctrl"><label for="ov">Overlay metric</label><select id="ov"></select></div>
     <label class="toggle"><input type="checkbox" id="mates" checked> show paradigm-mates</label>
     <label class="toggle"><input type="checkbox" id="norm" checked> depth % (compare across depths)</label>
   </div>
@@ -62,40 +65,83 @@
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
   <footer>
     One fixed probe behind every number; x-axis: transformer block (0 = first hidden state).
-    Full protocol and raw data:
+    Overlays use the paper-canonical metric variants; curvature and PTE are negated so that up
+    always means better. Full protocol and raw data:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
   <script>
   const MODELS = /*MODELS_JSON*/;
   const TASKS  = /*TASKS_JSON*/;
-  const cache = {};
+  const OVERLAYS = [
+    ['', 'none'],
+    ['id|gride_k8', 'Intrinsic dimension (GRIDE k=8)'],
+    ['id|twonn', 'Intrinsic dimension (TwoNN)'],
+    ['effective_rank|default', 'Effective rank'],
+    ['anisotropy|spectral', 'Anisotropy'],
+    ['infonce|default', 'InfoNCE'],
+    ['lidar|default', 'LiDAR'],
+    ['curvature|default', '−Curvature'],
+    ['alpha|default', 'Alpha-ReQ'],
+    ['pte|lin_phase', 'PTE (−phase RMSE)'],
+  ];
+  const NEG = new Set(['curvature', 'pte']);
+  const cache = {}, mcache = {};
   const $m = document.getElementById('model'), $t = document.getElementById('task'),
-        $g = document.getElementById('mates'), $n = document.getElementById('norm');
+        $g = document.getElementById('mates'), $n = document.getElementById('norm'),
+        $o = document.getElementById('ov');
   const q = new URLSearchParams(location.search);
   const xs = r => $n.checked
     ? r.layers.map((_, i) => 100 * i / Math.max(r.layers.length - 1, 1))
     : [...r.layers.keys()];
+  const mm = v => { const lo = Math.min(...v), hi = Math.max(...v), r = (hi - lo) || 1;
+                    return v.map(x => (x - lo) / r); };
+  function spearman(a, b) {
+    const rank = v => { const s = [...v.keys()].sort((i, j) => v[i] - v[j]);
+      const r = new Array(v.length); let i = 0;
+      while (i < s.length) { let j = i;
+        while (j + 1 < s.length && v[s[j + 1]] === v[s[i]]) j++;
+        for (let k = i; k <= j; k++) r[s[k]] = (i + j) / 2 + 1; i = j + 1; }
+      return r; };
+    const ra = rank(a), rb = rank(b), n = a.length;
+    const ma = ra.reduce((x, y) => x + y) / n, mb = rb.reduce((x, y) => x + y) / n;
+    let num = 0, da = 0, db = 0;
+    for (let i = 0; i < n; i++) { num += (ra[i] - ma) * (rb[i] - mb);
+      da += (ra[i] - ma) ** 2; db += (rb[i] - mb) ** 2; }
+    const den = Math.sqrt(da * db);
+    return den ? num / den : 0;
+  }
 
   MODELS.forEach(m => $m.add(new Option(m.label + (m.in_paper ? '' : ' +'), m.id)));
   TASKS.forEach(t => $t.add(new Option(t.label, t.id)));
+  OVERLAYS.forEach(([v, l]) => $o.add(new Option(l, v)));
   let qm = q.get('model');
   if (qm) { const grp = MODELS.find(m => m.members && m.members.some(x => x.id === qm));
             if (grp) qm = grp.id;
             if (MODELS.some(m => m.id === qm)) $m.value = qm; }
   if (q.get('task') && TASKS.some(t => t.id === q.get('task'))) $t.value = q.get('task');
+  if (q.get('ov') && OVERLAYS.some(([v]) => v === q.get('ov'))) $o.value = q.get('ov');
 
   async function rec(model) {
     if (!cache[model])
       cache[model] = fetch('data/results/' + model + '/downstream.json').then(r => r.json());
     return cache[model];
   }
+  async function mrec(model) {
+    if (!(model in mcache))
+      mcache[model] = fetch('data/results/' + model + '/metrics.json')
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+    return mcache[model];
+  }
   async function draw() {
     const mid = $m.value, tid = $t.value;
     const meta = MODELS.find(m => m.id === mid);
     const tmeta = TASKS.find(t => t.id === tid);
-    history.replaceState(null, '', '?model=' + mid + '&task=' + tid);
+    const ov = meta.members ? '' : $o.value;   // overlays: single-readout models only
+    $o.disabled = !!meta.members;
+    history.replaceState(null, '', '?model=' + mid + '&task=' + tid + (ov ? '&ov=' + ov : ''));
     const traces = [];
-    if ($g.checked) {
+    const notes = [];
+    if ($g.checked && !ov) {
       for (const m of MODELS.filter(x => x.family === meta.family && x.id !== mid)) {
         const d = await rec(m.id);
         const r = d.records.find(x => x.task === tid);
@@ -126,9 +172,9 @@
           hovertemplate: mem.readout + ' best: L' + best + ' = %{y:.1f}<extra></extra>' });
         ci++;
       }
-      document.getElementById('rnote').textContent =
-        meta.label + ' exposes several class tokens; each curve reads the same frozen ' +
-        'model through a different one (a "readout"). Rings mark each readout’s best layer.';
+      notes.push(meta.label + ' exposes several class tokens; each curve reads the same ' +
+        'frozen model through a different one (a "readout"). Rings mark each readout’s ' +
+        'best layer.');
     } else {
       const d = await rec(mid);
       const r = d.records.find(x => x.task === tid);
@@ -136,21 +182,47 @@
       lastR = r;
       const best = r.layers.indexOf(Math.max(...r.layers));
       const x = xs(r);
-      traces.push({ x, y: r.layers, mode: 'lines+markers', name: meta.label,
+      let mvals = null, mlabel = '';
+      if (ov) {
+        const [mk, mv] = ov.split('|');
+        const md = await mrec(mid);
+        const mr = md && md.records.find(z => z.metric === mk && z.variant === mv);
+        if (mr && mr.layers.length === r.layers.length) {
+          mvals = NEG.has(mk) ? mr.layers.map(v => -v) : mr.layers.slice();
+          mlabel = OVERLAYS.find(([v]) => v === ov)[1];
+        } else {
+          notes.push('No ' + OVERLAYS.find(([v]) => v === ov)[1] +
+                     ' profile for this model — showing the score curve alone.');
+        }
+      }
+      const dispY = mvals ? mm(r.layers) : r.layers;
+      traces.push({ x, y: dispY, mode: 'lines+markers', name: meta.label,
         line: { color: meta.color, width: 2.6 }, marker: { size: 5 },
-        customdata: [...r.layers.keys()],
-        hovertemplate: 'L%{customdata}: %{y:.1f}<extra></extra>' });
-      traces.push({ x: [x[best]], y: [r.layers[best]], mode: 'markers',
+        customdata: r.layers.map((v, i) => [i, v]),
+        hovertemplate: 'L%{customdata[0]}: %{customdata[1]:.1f}<extra></extra>' });
+      traces.push({ x: [x[best]], y: [dispY[best]], mode: 'markers',
         name: 'best (L' + best + ')',
         marker: { color: '#2563eb', size: 12, symbol: 'circle-open', line: { width: 2.5 } },
-        hovertemplate: 'best: L' + best + ' = %{y:.1f}<extra></extra>' });
-      document.getElementById('rnote').textContent = '';
+        hovertemplate: 'best: L' + best + ' = ' + r.layers[best].toFixed(1) + '<extra></extra>' });
+      if (mvals) {
+        traces.push({ x, y: mm(mvals), mode: 'lines', name: mlabel,
+          line: { color: '#64748b', width: 2, dash: 'dash' },
+          customdata: mvals.map((v, i) => [i, v]),
+          hovertemplate: mlabel + ' L%{customdata[0]}: %{customdata[1]:.3g}<extra></extra>' });
+        const rho = spearman(mvals, r.layers);
+        notes.push('ρs(' + mlabel + ', score) = ' + (rho >= 0 ? '+' : '') +
+          rho.toFixed(2) + ' across layers. Curves are min–max normalized to share ' +
+          'one axis; hover shows raw values. Paradigm-mates are hidden while an overlay ' +
+          'is active.');
+      }
     }
+    document.getElementById('rnote').textContent = notes.join(' ');
     if (!lastR) { Plotly.newPlot('chart', [], note(meta.label + ' — not evaluated on ' + tmeta.label)); return; }
-    Plotly.newPlot('chart', traces, layout(tmeta, meta, lastR), { responsive: true,
-      displaylogo: false, toImageButtonOptions: { filename: mid + '_' + tid + '_layers' } });
+    Plotly.newPlot('chart', traces, layout(tmeta, meta, lastR, !!(ov && traces.length > 2)),
+      { responsive: true, displaylogo: false,
+        toImageButtonOptions: { filename: mid + '_' + tid + '_layers' } });
   }
-  function layout(tmeta, meta, r) {
+  function layout(tmeta, meta, r, overlaid) {
     const normed = $n.checked;
     return { font: { family: 'Inter, sans-serif', color: '#1e293b', size: 13 },
       title: { text: '<b>' + meta.label + '</b> — ' + tmeta.desc,
@@ -160,7 +232,8 @@
             gridcolor: '#f1f5f9', zeroline: false }
         : { title: 'layer', dtick: r.n_layers > 30 ? 4 : (r.n_layers > 16 ? 2 : 1),
             gridcolor: '#f1f5f9', zeroline: false },
-      yaxis: { title: 'score', gridcolor: '#f1f5f9', zeroline: false },
+      yaxis: { title: overlaid ? 'normalized (min–max)' : 'score',
+               gridcolor: '#f1f5f9', zeroline: false },
       plot_bgcolor: '#fff', paper_bgcolor: '#fff', hovermode: 'closest',
       showlegend: true,
       legend: { orientation: 'h', y: -0.22, font: { size: 12 } },
@@ -170,7 +243,7 @@
     return { annotations: [{ text, showarrow: false, font: { color: '#64748b' } }],
              xaxis: { visible: false }, yaxis: { visible: false } };
   }
-  $m.onchange = $t.onchange = $g.onchange = $n.onchange = draw;
+  $m.onchange = $t.onchange = $g.onchange = $n.onchange = $o.onchange = draw;
   draw();
   </script>
 </body>

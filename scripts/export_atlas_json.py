@@ -692,6 +692,267 @@ if __name__ == "__main__":
     main()
 
 
+# ------------- stage 1b: intrinsic-metric layer profiles (worklog 4z) -------------
+# One record per (model, metric, variant); canonical tags per the frozen 4z table.
+# Documented curation is encoded as tags on records, never as silent omission.
+
+METRIC_PREFIX = {
+    "mert-v1-95M": "mert-95M", "mert-v1-330M": "mert-330M", "musicfm": "musicfm",
+    "muq": "muq", "omar-rq-multifeature-25hz": "omar-rq-multifeature-25hz",
+    "omar-rq-base": "omar-rq-base",
+    "musicgen-small": "musicgen-small", "musicgen-medium": "musicgen-medium",
+    "musicgen-large": "musicgen-large", "yue-0.5b": "yue-0.5b", "yue-7b": "yue-7b",
+    "clap": "clap", "myna": "myna", "maest": "maest-30s-discogs-pw",
+    "mt2": "mt2", "mt2-cls-avg": "mt2-cls-avg",
+    "mt2-cls-contrastive": "mt2-cls-contrastive", "mt2-cls-equiv": "mt2-cls-equiv",
+    "qwen2audio-instruct": "qwen2-audio-7B", "musicflamingo": "music-flamingo",
+}
+# (metric, dir, json key, value key, [(variant, filename token, tags)])
+METRIC_SPECS = [
+    ("id", "sequence_level_intrinsic_dimension", "intrinsic_dimension", "id",
+     [("gride_k8", "gride_k8", ["paper-canonical", "heldout-canonical"]),
+      ("twonn", "twonn", ["methods-stated"])]),
+    ("alpha", "alpha_req", "alpha_req", "alpha",
+     [("default", None, ["computed-not-in-paper"])]),
+    ("effective_rank", "sequence_level_effective_rank", "effective_rank",
+     "effective_rank", [("default", None, ["paper-canonical"])]),
+    ("anisotropy", "sequence_level_anisotropy", "anisotropy", "anisotropy",
+     [("spectral", "spectral", ["paper-canonical"]),
+      ("cosine", "cosine", ["unpublished-variant"])]),
+    ("infonce", "infonce", "infonce", "raw",
+     [("default", None, ["paper-canonical"])]),
+    ("lidar", "lidar", "lidar", "effective_rank",
+     [("default", "effective_rank", ["paper-canonical"])]),
+    ("curvature", "curvature", "curvature", "raw",
+     [("default", None, ["paper-canonical"])]),
+]
+# view conventions (stated on every page that uses them): these two are
+# correlated negated in the paper — lower raw value = better representation.
+NEGATED_IN_VIEWS = {"curvature", "pte"}
+PTE_EXCLUDED = {"musicfm": "excluded from the paper's PTE analysis: all tonal "
+                           "correlations near zero"}
+
+
+def _pick_metric_file(data_dir, prefix, token):
+    """Replicates the paper loader's preference chain: filename-token match,
+    then discotube corpus, then n5000, then shortest name."""
+    if not data_dir.exists():
+        return None
+    cands = [f for f in data_dir.iterdir()
+             if f.name.startswith(prefix + "_") and f.suffix == ".json"]
+    if token:
+        cands = [f for f in cands if token in f.name]
+    disco = [f for f in cands if "discotube" in f.name]
+    cands = disco or cands
+    n5000 = [f for f in cands if "n5000" in f.name]
+    cands = n5000 or cands
+    return min(cands, key=lambda f: len(f.name)) if cands else None
+
+
+def export_metrics():
+    written, problems, n_rec = [], [], 0
+    for model_id, spec in MODELS.items():
+        if spec.get("hidden"):
+            continue
+        prefix = METRIC_PREFIX.get(model_id)
+        if not prefix:
+            continue
+        down = OUT / "results" / model_id / "downstream.json"
+        n_layers = None
+        if down.exists():
+            recs = json.loads(down.read_text())["records"]
+            n_layers = max((r["n_layers"] for r in recs), default=None)
+        records = []
+        for metric, mdir, mkey, vkey, variants in METRIC_SPECS:
+            for variant, token, tags in variants:
+                f = _pick_metric_file(SRC / mdir / "data", prefix, token)
+                if f is None:
+                    continue
+                try:
+                    vals = json.loads(f.read_text())[mkey][vkey]
+                except (KeyError, TypeError):
+                    continue
+                if not isinstance(vals, list) or not vals:
+                    continue
+                if n_layers and len(vals) != n_layers:
+                    problems.append(f"{model_id}/{metric}.{variant}: "
+                                    f"{len(vals)} layers vs downstream {n_layers}")
+                records.append({
+                    "metric": metric, "variant": variant, "layers": vals,
+                    "n_layers": len(vals), "tags": tags,
+                    "corpus": ("discotube" if "discotube" in f.name else
+                               "mtg-jamendo" if "mtg-jamendo" in f.name else None),
+                    "source": f.name,
+                })
+        # PTE / CPSD equivariance: {linear,mlp} x {phase,cpsd} RMSE configs
+        for fsuf, probe in [("", "linear"), ("_mlp", "mlp")]:
+            f = SRC / "cpsd_equivariance" / "data" / f"{prefix}{fsuf}.json"
+            if not f.exists():
+                continue
+            shared = json.loads(f.read_text()).get("cpsd_equivariance_shared", {})
+            for rkey, rname in [("phase_rmse", "phase"), ("cpsd_rmse", "cpsd")]:
+                vals = shared.get(rkey)
+                if not vals:
+                    continue
+                variant = f"{'lin' if probe == 'linear' else 'mlp'}_{rname}"
+                tags = (["paper-canonical", "heldout-canonical"]
+                        if variant == "lin_phase" else ["cherry-pick-pool"])
+                rec = {"metric": "pte", "variant": variant, "layers": vals,
+                       "n_layers": len(vals), "tags": list(tags),
+                       "lower_is_better": True, "source": f.name}
+                if model_id in PTE_EXCLUDED:
+                    rec["tags"].append("excluded-from-paper")
+                    rec["exclusion_reason"] = PTE_EXCLUDED[model_id]
+                records.append(rec)
+        if not records:
+            continue
+        out = OUT / "results" / model_id / "metrics.json"
+        if out.exists():                        # append-only
+            continue
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps({
+            "schema_version": SCHEMA_VERSION, "model": model_id,
+            "space": "sequence-level embeddings, same extraction as downstream",
+            "note": "variants tagged per the paper-canonical table; curvature and "
+                    "PTE are lower-is-better and correlated negated in the paper",
+            "exported": str(date.today()), "records": records}, indent=1))
+        written.append(model_id)
+        n_rec += len(records)
+    print(f"metrics: {n_rec} records -> {len(written)} models")
+    for p in problems:
+        print(f"  layer-count note: {p}")
+
+
+# ------------- stage 1b view: metric x task correlations page -------------
+
+METRIC_ROW_LABEL = {
+    ("id", "gride_k8"): "ID (GRIDE k=8)", ("id", "twonn"): "ID (TwoNN)",
+    ("alpha", "default"): "Alpha-ReQ",
+    ("effective_rank", "default"): "Effective rank",
+    ("anisotropy", "spectral"): "Anisotropy",
+    ("infonce", "default"): "InfoNCE", ("lidar", "default"): "LiDAR",
+    ("curvature", "default"): "&minus;Curvature",
+    ("pte", "lin_phase"): "PTE",
+}
+DIMSIM_EXCLUDE = {"muq", "musicfm"}             # documented curation (4z)
+
+
+def _spearman(x, y):
+    def rank(v):
+        s = sorted(range(len(v)), key=lambda i: v[i])
+        r = [0.0] * len(v)
+        i = 0
+        while i < len(s):
+            j = i
+            while j + 1 < len(s) and v[s[j + 1]] == v[s[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[s[k]] = (i + j) / 2 + 1
+            i = j + 1
+        return r
+    rx, ry = rank(x), rank(y)
+    n = len(x)
+    mx, my = sum(rx) / n, sum(ry) / n
+    num = sum((a - mx) * (b - my) for a, b in zip(rx, ry))
+    den = (sum((a - mx) ** 2 for a in rx) * sum((b - my) ** 2 for b in ry)) ** 0.5
+    return num / den if den else 0.0
+
+
+def render_correlations(task_registry):
+    """corr.html: mean within-model Spearman between each canonical metric
+    profile and each primary task's layer curve. Recomputed from data/;
+    conventions stated on the page."""
+    rows_data = {}                              # model -> {(metric,variant): layers}
+    tasks_data = {}                             # model -> {task: layers}
+    fam_of = {}
+    for model_id, spec in MODELS.items():
+        if spec.get("hidden") or spec.get("readout_of"):
+            continue                            # readout heads: base row only
+        mf = OUT / "results" / model_id / "metrics.json"
+        df = OUT / "results" / model_id / "downstream.json"
+        if not (mf.exists() and df.exists()):
+            continue
+        mrecs = json.loads(mf.read_text())["records"]
+        rows_data[model_id] = {
+            (r["metric"], r["variant"]): r for r in mrecs
+            if (r["metric"], r["variant"]) in METRIC_ROW_LABEL
+            and "excluded-from-paper" not in r.get("tags", [])}
+        tasks_data[model_id] = {
+            r["task"]: r["layers"]
+            for r in json.loads(df.read_text())["records"]
+            if r["task"] in PRIMARY_METRICS}
+        fam_of[model_id] = spec["family"]
+
+    tcols = [t for tf in TASK_FAMILY_ORDER
+             for t in sorted(t2 for t2, f in TASK_FAMILY.items()
+                             if f == tf and t2 in PRIMARY_METRICS)]
+
+    def table_for(models_subset):
+        head = ("<tr><th>Metric</th>" +
+                "".join(f"<th class='num' title='{task_registry.get(t, t)}'>"
+                        f"{TASK_LABEL.get(t, t)}</th>" for t in tcols) + "</tr>")
+        body = []
+        for key, label in METRIC_ROW_LABEL.items():
+            tds = []
+            for t in tcols:
+                vals = []
+                for m in models_subset:
+                    if t.startswith("dimsim") and m in DIMSIM_EXCLUDE:
+                        continue
+                    rec = rows_data.get(m, {}).get(key)
+                    curve = tasks_data.get(m, {}).get(t)
+                    if not rec or not curve or len(rec["layers"]) != len(curve):
+                        continue
+                    mvals = ([-v for v in rec["layers"]]
+                             if key[0] in NEGATED_IN_VIEWS else rec["layers"])
+                    vals.append((m, _spearman(mvals, curve)))
+                if not vals:
+                    tds.append("<td class='num na'>&mdash;</td>")
+                    continue
+                mean = sum(v for _, v in vals) / len(vals)
+                a = max(abs(mean), 0.06)
+                bg = (f"rgba(42,120,214,{a:.2f})" if mean >= 0
+                      else f"rgba(235,104,52,{a:.2f})")
+                fg = "#fff" if abs(mean) > 0.55 else "var(--ink)"
+                tip = f"n={len(vals)}: " + ", ".join(
+                    f"{MODELS[m]['display']} {v:+.2f}" for m, v in vals)
+                tds.append(f"<td class='num' style='background:{bg};color:{fg}' "
+                           f"title='{tip}'>{mean:+.2f}</td>")
+            if any("title" in td for td in tds):
+                body.append(f"<tr><td class='mlabel'>{label}</td>{''.join(tds)}</tr>")
+        return f"<table>{head}{''.join(body)}</table>"
+
+    all_models = list(rows_data)
+    sections = [f"<section class='cview' id='cv-all'>{table_for(all_models)}</section>"]
+    opts = ["<option value='cv-all'>all models</option>"]
+    for fam in FAMILY_ORDER:
+        sub = [m for m in all_models if fam_of[m] == fam]
+        if len(sub) < 2:
+            continue
+        sections.append(f"<section class='cview' id='cv-{fam}' hidden>"
+                        f"{table_for(sub)}</section>")
+        opts.append(f"<option value='cv-{fam}'>{fam} ({len(sub)} models)</option>")
+
+    tpl = (Path(__file__).resolve().parent / "corr_template.html").read_text()
+    (OUT.parent / "corr.html").write_text(
+        tpl.replace("<!--SECTIONS-->", "\n".join(sections))
+           .replace("<!--OPTIONS-->", "".join(opts))
+           .replace("{{DATE}}", str(date.today())))
+    print(f"corr.html: {len(METRIC_ROW_LABEL)} metrics x {len(tcols)} tasks, "
+          f"{len(all_models)} models")
+
+
+if __name__ == "__main__" and "--metrics" in sys.argv:
+    export_metrics()
+    _reg, _cur = {}, None
+    for _ln in (OUT / "registry" / "tasks.yaml").read_text().splitlines():
+        if _ln and not _ln.startswith((" ", "#")) and _ln.endswith(":"):
+            _cur = _ln[:-1]
+        elif _cur and _ln.strip().startswith("description:"):
+            _reg[_cur] = _ln.split("description:", 1)[1].strip().strip('"')
+    render_correlations(_reg)
+
+
 # ---------------- stage 1c: fusion / multi-layer probe results ----------------
 import csv
 
