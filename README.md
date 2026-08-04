@@ -24,11 +24,20 @@ outperforms trainable multi-layer fusion.
 
 ## Contents
 
-- **Project page** — [angeloskanatas.github.io/music-fms-layer-eval](https://angeloskanatas.github.io/music-fms-layer-eval/)
-- **Extended results** — layer-wise probing across all models and tasks, layer selection and fusion
-  results, and per-task / per-model correlation breakdowns are being published on the project page.
+- **[Project page](https://angeloskanatas.github.io/music-fms-layer-eval/)** — paper, abstract, findings.
+- **[Layer Atlas](https://angeloskanatas.github.io/music-fms-layer-eval/atlas.html)** — layer-wise
+  downstream results for 17 models across 15 tasks: best layer per cell, full layer-profile
+  sparklines, sortable, CSV/LaTeX export.
+- **[Layer Cheat Sheet](https://angeloskanatas.github.io/music-fms-layer-eval/layers.html)** — the
+  three-layer band to probe first, per model and task family, with depth rules of thumb.
+- **[Layer Explorer](https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html)** —
+  interactive per-layer curves for any model and task.
+- **[Selection & Fusion](https://angeloskanatas.github.io/music-fms-layer-eval/fusion.html)** —
+  proxy-guided and trainable multi-layer fusion against the best single layer.
+- **[`data/`](data/)** — the raw per-layer records behind every number: one JSON folder per model,
+  self-describing and append-only, with open model/task registries. See [`data/README.md`](data/README.md).
 - **Code** — the analysis toolkit (intrinsic metrics, PTE, layer selection and fusion) will be
-  released here after the camera-ready.
+  released separately after the camera-ready.
 
 ## Citation
 

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use the layer atlas, cheat sheet, or the per-layer records, please cite the paper below."
+title: "music-fms-layer-eval: layer-wise evaluation data for music foundation models"
+authors:
+  - family-names: Kanatas
+    given-names: Angelos-Nikolaos
+    affiliation: "Music Technology Group, Universitat Pompeu Fabra"
+repository-code: "https://github.com/angeloskanatas/music-fms-layer-eval"
+url: "https://angeloskanatas.github.io/music-fms-layer-eval/"
+preferred-citation:
+  type: conference-paper
+  title: "What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models"
+  authors:
+    - family-names: Kanatas
+      given-names: Angelos-Nikolaos
+    - family-names: Kong
+      given-names: Yuexuan
+    - family-names: Alonso-Jiménez
+      given-names: Pablo
+    - family-names: Serra
+      given-names: Xavier
+    - family-names: Bogdanov
+      given-names: Dmitry
+  collection-title: "Proceedings of the International Society for Music Information Retrieval Conference (ISMIR)"
+  year: 2026
