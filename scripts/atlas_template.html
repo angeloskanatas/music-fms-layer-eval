@@ -74,14 +74,12 @@
 <body>
   <header>
     <h1>Layer Atlas</h1>
-    <p>Layer-wise downstream results for {{NMODELS}} music foundation models.
-       Each cell: the best single layer's score with its index (L#) and a <strong>sparkline of the
-       full layer profile</strong> (dot = best layer). <strong>Rank</strong> = mean rank across primary
-       tasks (scale-free; lower is better). Click a family header (&#9656;) for companion metrics;
-       click any column header to sort. &dagger; = metric caveat (hover); &mdash; = not evaluated.</p>
+    <p>Layer-wise downstream results for {{NMODELS}} music foundation models. Each cell shows
+       the best layer's score, its index, and the <strong>full layer profile as a sparkline</strong>.
+       Click any column header to sort; family headers (&#9656;) expand companion metrics.</p>
     <p class="meta">Companion to <a href="index.html"><em>What Makes a Good Layer?</em> (ISMIR 2026)</a>
        &middot; results as of {{DATE}} &middot;
-       raw per-layer JSON: <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a></p>
+       raw per-layer records: <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a></p>
   </header>
   <div class="toolbar">
     <a href="layers.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Cheat Sheet</a>
@@ -92,11 +90,12 @@
     <button onclick="exportLatex()">Copy LaTeX table</button>
   </div>
   <div class="legend" style="max-width:1100px;margin:0 auto;padding:0 1.5rem .5rem;font-size:.8rem;color:#64748b;">
-    <strong>Rank</strong> = average of the model&rsquo;s per-task ranks over the primary tasks (1&nbsp;=&nbsp;best)
-    &nbsp;&middot;&nbsp; <sup>p</sup> ranked on fewer tasks (see cells) &nbsp;&middot;&nbsp;
-    <strong>Params</strong> = evaluated encoder, as reported (audio tower for two-tower; decoder for AR)
-    &nbsp;&middot;&nbsp; <sup>+</sup> beyond the paper&rsquo;s 12 models &nbsp;&middot;&nbsp; &dagger; metric caveat (hover)
-    &nbsp;&middot;&nbsp; &mdash; not evaluated &nbsp;&middot;&nbsp; curve&nbsp;=&nbsp;full layer profile, dot&nbsp;=&nbsp;best layer
+    <strong>Rank</strong> = mean of the model&rsquo;s per-task ranks (1&nbsp;=&nbsp;best;
+    <sup>p</sup>&nbsp;ranked on fewer tasks)
+    &nbsp;&middot;&nbsp; <strong>Params</strong> = evaluated encoder (audio tower for two-tower; decoder for AR)
+    &nbsp;&middot;&nbsp; <sup>+</sup> beyond the paper&rsquo;s 12 models
+    &nbsp;&middot;&nbsp; &dagger; metric caveat (hover) &nbsp;&middot;&nbsp; &mdash; not evaluated
+    &nbsp;&middot;&nbsp; dot&nbsp;=&nbsp;best layer
   </div>
   <div class="twrap">
     <table id="atlas">

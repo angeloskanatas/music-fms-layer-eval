@@ -47,19 +47,19 @@
     <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
        marked; its paradigm-mates give context. Overlay an intrinsic metric to see whether
        geometry tracks performance across depth.</p>
-    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
-       <a href="layers.html">layer cheat sheet</a> &middot;
-       <a href="fusion.html">selection &amp; fusion</a> &middot;
-       <a href="corr.html">correlations</a> &middot;
-       <a href="index.html">paper</a> &middot; results as of 2026-08-04 &middot;
-       camera icon in the chart toolbar exports PNG</p>
+    <p class="meta"><a href="atlas.html">&larr; Results table</a> &middot;
+       <a href="layers.html">Layer cheat sheet</a> &middot;
+       <a href="fusion.html">Selection &amp; fusion</a> &middot;
+       <a href="corr.html">Correlations</a> &middot;
+       <a href="index.html">Paper</a> &middot; results as of 2026-08-04 &middot;
+       PNG export via the camera icon in the chart toolbar</p>
   </header>
   <div class="controls">
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
     <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
     <div class="ctrl"><label for="ov">Overlay metric</label><select id="ov"></select></div>
-    <label class="toggle"><input type="checkbox" id="mates" checked> show paradigm-mates</label>
-    <label class="toggle"><input type="checkbox" id="norm" checked> depth % (compare across depths)</label>
+    <label class="toggle"><input type="checkbox" id="mates" checked> Show paradigm-mates</label>
+    <label class="toggle"><input type="checkbox" id="norm" checked> Depth % (compare across depths)</label>
   </div>
   <div id="chart"></div>
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
@@ -73,7 +73,7 @@
   const MODELS = [{"id": "mert-v1-95M", "label": "MERT-v1-95M", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "mert-v1-330M", "label": "MERT-v1-330M", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "musicfm", "label": "MusicFM (MSD)", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "muq", "label": "MuQ (iter)", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "omar-rq-multifeature-25hz", "label": "OMAR-RQ (multifeature)", "family": "masked", "in_paper": true, "color": "#2a78d6"}, {"id": "omar-rq-base", "label": "OMAR-RQ (base)", "family": "masked", "in_paper": false, "color": "#2a78d6"}, {"id": "musicgen-small", "label": "MusicGen-S", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicgen-medium", "label": "MusicGen-M", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "musicgen-large", "label": "MusicGen-L", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "yue-0.5b", "label": "YuE-s1-0.5B", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "yue-7b", "label": "YuE-s1-7B", "family": "autoregressive", "in_paper": true, "color": "#eb6834"}, {"id": "clap", "label": "LAION-CLAP", "family": "contrastive", "in_paper": true, "color": "#1baf7a"}, {"id": "myna", "label": "Myna-Base", "family": "contrastive", "in_paper": true, "color": "#1baf7a"}, {"id": "maest", "label": "MAEST", "family": "supervised", "in_paper": false, "color": "#e87ba4"}, {"id": "mt2", "label": "MT2", "family": "contrastive", "in_paper": false, "color": "#1baf7a", "members": [{"id": "mt2", "readout": "token-avg"}, {"id": "mt2-cls-avg", "readout": "CLS-avg"}, {"id": "mt2-cls-contrastive", "readout": "contrastive CLS"}, {"id": "mt2-cls-equiv", "readout": "equivariant CLS"}]}, {"id": "qwen2audio-instruct", "label": "Qwen2-Audio-Instruct", "family": "audio-llm", "in_paper": false, "color": "#eda100"}, {"id": "musicflamingo", "label": "Music-Flamingo", "family": "audio-llm", "in_paper": false, "color": "#eda100"}];
   const TASKS  = [{"id": "chords_ace_mirex", "label": "Chords", "desc": "Chord MIREX score (ChordsACE)"}, {"id": "key", "label": "Key", "desc": "Key estimation weighted score (GiantSteps)"}, {"id": "nsynth_pitch", "label": "Pitch", "desc": "Pitch classification accuracy (NSynth)"}, {"id": "chords_ace_root", "label": "Chords root", "desc": "Chord root score (ChordsACE)"}, {"id": "chords_ace_thirds", "label": "Chords thirds", "desc": "Chord thirds score (ChordsACE)"}, {"id": "beat_f1", "label": "Beat", "desc": "Beat tracking F1 (GTZAN)"}, {"id": "downbeat_f1", "label": "Downbeat", "desc": "Downbeat tracking F1 (GTZAN)"}, {"id": "nsynth_instrument", "label": "Instrument", "desc": "Instrument classification accuracy (NSynth)"}, {"id": "emo_r2", "label": "Emotion", "desc": "Emotion recognition R2 (EMO)"}, {"id": "genre", "label": "Genre", "desc": "Genre classification accuracy (GTZAN)"}, {"id": "hxmsa", "label": "Structure", "desc": "Clip-level music structure analysis accuracy (Harmonix)"}, {"id": "mtg_genre_ap", "label": "MTG-Genre", "desc": "Genre tagging AP (MTG-Jamendo)"}, {"id": "mtg_instrument_ap", "label": "MTG-Instr", "desc": "Instrument tagging AP (MTG-Jamendo)"}, {"id": "mtg_mood_ap", "label": "MTG-Mood", "desc": "Mood/theme tagging AP (MTG-Jamendo)"}, {"id": "mtg_top50_ap", "label": "MTG-Top50", "desc": "Top-50 tagging AP (MTG-Jamendo)"}, {"id": "mtt_ap", "label": "MTT", "desc": "Auto-tagging AP (MagnaTagATune)"}, {"id": "emo_r2a", "label": "Arousal", "desc": "Emotion recognition arousal R2 (EMO)"}, {"id": "emo_r2v", "label": "Valence", "desc": "Emotion recognition valence R2 (EMO)"}, {"id": "mtg_genre_auroc", "label": "MTG-Genre AUROC", "desc": "Genre tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_instrument_auroc", "label": "MTG-Instr AUROC", "desc": "Instrument tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_mood_auroc", "label": "MTG-Mood AUROC", "desc": "Mood/theme tagging AUROC (MTG-Jamendo)"}, {"id": "mtg_top50_auroc", "label": "MTG-Top50 AUROC", "desc": "Top-50 tagging AUROC (MTG-Jamendo)"}, {"id": "mtt_auroc", "label": "MTT AUROC", "desc": "Auto-tagging AUROC (MagnaTagATune)"}, {"id": "dimsim_acc_centered", "label": "DimSim", "desc": "Perceptual similarity accuracy, centered cosine (DimSim)"}, {"id": "dimsim_acc_cosine", "label": "DimSim cos", "desc": "Perceptual similarity accuracy, cosine (DimSim)"}, {"id": "dimsim_acc_l2", "label": "DimSim L2", "desc": "Perceptual similarity accuracy, raw L2 (DimSim)"}];
   const OVERLAYS = [
-    ['', 'none'],
+    ['', 'None'],
     ['id|gride_k8', 'Intrinsic dimension (GRIDE k=8)'],
     ['id|twonn', 'Intrinsic dimension (TwoNN)'],
     ['effective_rank|default', 'Effective rank'],

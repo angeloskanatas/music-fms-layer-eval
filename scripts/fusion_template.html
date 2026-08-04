@@ -70,11 +70,11 @@
        layer (the reference row, in bold), label-free proxy-guided fusion over a few chosen
        layers, and trainable multi-layer fusion. Small green/grey numbers show the gap to
        the best single layer.</p>
-    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
-       <a href="explorer.html">layer explorer</a> &middot;
-       <a href="layers.html">layer cheat sheet</a> &middot;
-       <a href="corr.html">correlations</a> &middot;
-       <a href="index.html">paper</a> &middot; results as of {{DATE}}</p>
+    <p class="meta"><a href="atlas.html">&larr; Results table</a> &middot;
+       <a href="layers.html">Layer cheat sheet</a> &middot;
+       <a href="explorer.html">Layer explorer</a> &middot;
+       <a href="corr.html">Correlations</a> &middot;
+       <a href="index.html">Paper</a> &middot; results as of {{DATE}}</p>
   </header>
   <div class="cards">
     <div class="card">
@@ -96,8 +96,8 @@
   <div class="controls">
     <div class="ctrl"><label for="view">View by</label>
       <select id="view" onchange="switchView()">
-        <option value="task">task (compare models)</option>
-        <option value="model">model (compare tasks)</option>
+        <option value="task">By task (compare models)</option>
+        <option value="model">By model (compare tasks)</option>
       </select></div>
     <div class="ctrl" id="c-task"><label for="task">Task</label>
       <select id="task" onchange="showTask(this.value)"><!--OPTIONS--></select></div>

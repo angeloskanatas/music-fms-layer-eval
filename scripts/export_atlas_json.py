@@ -177,6 +177,10 @@ FAMILY_COLOR = {
     "audio-llm": "#eda100", "supervised": "#e87ba4",
 }
 FAMILY_ORDER = ["masked", "autoregressive", "contrastive", "audio-llm", "supervised"]
+# user-facing paradigm names (paper's terms); machine tokens never face users
+FAMILY_LABEL = {"masked": "Masked", "autoregressive": "Autoregressive",
+                "contrastive": "Contrastive", "audio-llm": "Audio-Language",
+                "supervised": "Supervised"}
 TASK_FAMILY_ORDER = ["tonal", "rhythm", "timbre", "semantic", "similarity"]
 
 
@@ -368,10 +372,10 @@ def render_atlas_table(task_registry):
 
     head_top = ["<tr><th rowspan='2' data-sort='str'>Model</th>"
                 "<th rowspan='2' data-sort='str'>Paradigm</th>"
-                "<th rowspan='2' data-sort='num' title='parameters of the evaluated "
+                "<th rowspan='2' data-sort='num' title='Parameters of the evaluated "
                 "encoder, as reported in each paper (audio tower for two-tower models, "
                 "decoder for autoregressive)'>Params</th>"
-                "<th rowspan='2' data-sort='num' title='mean rank across primary "
+                "<th rowspan='2' data-sort='num' title='Mean rank across the primary "
                 "tasks the model was evaluated on; lower is better'>Rank</th>"]
     head_sub = ["<tr>"]
     for tf in TASK_FAMILY_ORDER:
@@ -429,8 +433,8 @@ def render_atlas_table(task_registry):
                  "<sup class='cav' title='beyond the paper&#39;s 12-model study'>+</sup>")
         ncls = "mname" if m["in_paper"] else "mname mmuted"
         cells = [f"<tr style='--fam:{c}'>",
-                 f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>",
-                 f"<td><span class='dot'></span>{m['family']}</td>",
+                 f"<td class='{ncls}' title='data id: {m['id']}'>{m['display']}{extra}</td>",
+                 f"<td><span class='dot'></span>{FAMILY_LABEL.get(m['family'], m['family'])}</td>",
                  (lambda p: (f"<td class='num' data-val='{p[1]}'"
                              + (f" title='{p[2]}'" if len(p) > 2 else "")
                              + f">{p[0]}{'<sup class=cav>*</sup>' if len(p) > 2 else ''}</td>")
@@ -553,7 +557,8 @@ def render_cheatsheet(task_registry):
                for fam in FAMILY_ORDER
                if any(m["family"] == fam for m, _, _ in pairs)}
     fam_bits = " &nbsp;&middot;&nbsp; ".join(
-        f"<span class='fdot' style='background:{FAMILY_COLOR[f]}'></span>{f} {v:.0f}%"
+        f"<span class='fdot' style='background:{FAMILY_COLOR[f]}'></span>"
+        f"{FAMILY_LABEL.get(f, f)} {v:.0f}%"
         for f, v in fam_med.items())
     cards = (
         "<div class='card'><h3>Don&rsquo;t default to the last layer</h3>"
@@ -601,8 +606,8 @@ def render_cheatsheet(task_registry):
         ncls = "mname" if m["in_paper"] else "mname mmuted"
         rows.append(
             f"<tr style='--fam:{c}'>"
-            f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>"
-            f"<td><span class='dot'></span>{m['family']}</td>"
+            f"<td class='{ncls}' title='data id: {m['id']}'>{m['display']}{extra}</td>"
+            f"<td><span class='dot'></span>{FAMILY_LABEL.get(m['family'], m['family'])}</td>"
             f"<td class='num'>{m['n_layers']}</td>"
             + "".join(cell(m, tf) for tf in TASK_FAMILY_ORDER) + "</tr>")
 
@@ -866,8 +871,11 @@ def render_correlations(task_registry):
     tasks_data = {}                             # model -> {task: layers}
     fam_of = {}
     for model_id, spec in MODELS.items():
-        if spec.get("hidden") or spec.get("readout_of"):
-            continue                            # readout heads: base row only
+        # readout groups: keep the group leader (its own metric profiles),
+        # skip the other heads so one model contributes once
+        if spec.get("hidden") or (spec.get("readout_of")
+                                  and spec["readout_of"] != model_id):
+            continue
         mf = OUT / "results" / model_id / "metrics.json"
         df = OUT / "results" / model_id / "downstream.json"
         if not (mf.exists() and df.exists()):
@@ -925,14 +933,15 @@ def render_correlations(task_registry):
 
     all_models = list(rows_data)
     sections = [f"<section class='cview' id='cv-all'>{table_for(all_models)}</section>"]
-    opts = ["<option value='cv-all'>all models</option>"]
+    opts = ["<option value='cv-all'>All models</option>"]
     for fam in FAMILY_ORDER:
         sub = [m for m in all_models if fam_of[m] == fam]
         if len(sub) < 2:
             continue
         sections.append(f"<section class='cview' id='cv-{fam}' hidden>"
                         f"{table_for(sub)}</section>")
-        opts.append(f"<option value='cv-{fam}'>{fam} ({len(sub)} models)</option>")
+        opts.append(f"<option value='cv-{fam}'>{FAMILY_LABEL.get(fam, fam)} "
+                    f"({len(sub)} models)</option>")
 
     tpl = (Path(__file__).resolve().parent / "corr_template.html").read_text()
     (OUT.parent / "corr.html").write_text(

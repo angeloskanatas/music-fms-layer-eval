@@ -70,11 +70,11 @@
        layer (the reference row, in bold), label-free proxy-guided fusion over a few chosen
        layers, and trainable multi-layer fusion. Small green/grey numbers show the gap to
        the best single layer.</p>
-    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
-       <a href="explorer.html">layer explorer</a> &middot;
-       <a href="layers.html">layer cheat sheet</a> &middot;
-       <a href="corr.html">correlations</a> &middot;
-       <a href="index.html">paper</a> &middot; results as of 2026-08-04</p>
+    <p class="meta"><a href="atlas.html">&larr; Results table</a> &middot;
+       <a href="layers.html">Layer cheat sheet</a> &middot;
+       <a href="explorer.html">Layer explorer</a> &middot;
+       <a href="corr.html">Correlations</a> &middot;
+       <a href="index.html">Paper</a> &middot; results as of 2026-08-04</p>
   </header>
   <div class="cards">
     <div class="card">
@@ -96,8 +96,8 @@
   <div class="controls">
     <div class="ctrl"><label for="view">View by</label>
       <select id="view" onchange="switchView()">
-        <option value="task">task (compare models)</option>
-        <option value="model">model (compare tasks)</option>
+        <option value="task">By task (compare models)</option>
+        <option value="model">By model (compare tasks)</option>
       </select></div>
     <div class="ctrl" id="c-task"><label for="task">Task</label>
       <select id="task" onchange="showTask(this.value)"><option value='ft-key'>Key (GiantSteps)</option><option value='ft-nsynth_pitch'>Pitch (NSynth)</option><option value='ft-nsynth_instrument'>Instrument (NSynth)</option><option value='ft-genre'>Genre (GTZAN)</option><option value='ft-beat_f1'>Beat (GTZAN)</option><option value='ft-downbeat_f1'>Downbeat (GTZAN)</option><option value='ft-emo_r2'>Emotion (EMO)</option><option value='ft-hxmsa'>Structure (Harmonix)</option><option value='ft-chords_ace_mirex'>Chords MIREX (ChordsACE)</option><option value='ft-chords_ace_root'>Chords root (ChordsACE)</option><option value='ft-chords_ace_thirds'>Chords thirds (ChordsACE)</option><option value='ft-mtt'>Tagging (MTT, avg AP/AUROC)</option><option value='ft-mtg_genre'>MTG-Genre (avg AP/AUROC)</option><option value='ft-mtg_instrument'>MTG-Instr (avg AP/AUROC)</option><option value='ft-mtg_mood'>MTG-Mood (avg AP/AUROC)</option><option value='ft-mtg_top50'>MTG-Top50 (avg AP/AUROC)</option></select></div>
