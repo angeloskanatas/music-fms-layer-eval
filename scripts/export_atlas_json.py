@@ -496,6 +496,125 @@ def render_atlas_table(task_registry):
 
 
 
+def render_cheatsheet(task_registry):
+    """layers.html: per (model, task family) the top-3 layer band of the
+    family-mean normalized curve. All numbers derived at build, never persisted."""
+    from statistics import median
+    models = []
+    for model_id, spec in MODELS.items():
+        if spec.get("hidden"):
+            continue
+        f = OUT / "results" / model_id / "downstream.json"
+        if not f.exists():
+            continue
+        d = json.loads(f.read_text())
+        per_task = {}
+        for r in d["records"]:
+            if r["task"] not in PRIMARY_METRICS:
+                continue
+            s = r["layers"]
+            per_task[r["task"]] = {"scores": s,
+                                   "best": max(range(len(s)), key=lambda i: s[i])}
+        models.append({"id": model_id, "display": spec["display"],
+                       "family": d["family"], "in_paper": d["in_paper"],
+                       "readout_of": spec.get("readout_of"),
+                       "n_layers": max((r["n_layers"] for r in d["records"]), default=0),
+                       "per_task": per_task})
+    merged, groups = [], {}
+    for m in models:                            # MT2 readout heads -> one row
+        g = m["readout_of"]
+        if not g:
+            merged.append(m)
+            continue
+        if g not in groups:
+            groups[g] = {**m, "id": g}
+            merged.append(groups[g])
+        else:
+            base = groups[g]["per_task"]
+            for t, pt in m["per_task"].items():
+                if t not in base or max(pt["scores"]) > max(base[t]["scores"]):
+                    base[t] = pt
+    models = merged
+    models.sort(key=lambda m: (FAMILY_ORDER.index(m["family"]), not m["in_paper"]))
+
+    def norm(s):
+        lo, hi = min(s), max(s)
+        rng = (hi - lo) or 1.0
+        return [(x - lo) / rng for x in s]
+
+    def depth(pt):
+        return 100 * pt["best"] / max(len(pt["scores"]) - 1, 1)
+
+    pairs = [(m, t, pt) for m in models for t, pt in m["per_task"].items()]
+    last_pct = 100 * sum(pt["best"] == len(pt["scores"]) - 1
+                         for _, _, pt in pairs) / len(pairs)
+    mid_pct = 100 * sum(33 <= depth(pt) <= 67 for _, _, pt in pairs) / len(pairs)
+    fam_med = {fam: median(depth(pt) for m, _, pt in pairs if m["family"] == fam)
+               for fam in FAMILY_ORDER
+               if any(m["family"] == fam for m, _, _ in pairs)}
+    fam_bits = " &nbsp;&middot;&nbsp; ".join(
+        f"<span class='fdot' style='background:{FAMILY_COLOR[f]}'></span>{f} {v:.0f}%"
+        for f, v in fam_med.items())
+    cards = (
+        "<div class='card'><h3>Don&rsquo;t default to the last layer</h3>"
+        f"<span class='big'>{last_pct:.0f}%</span> of model&times;task pairs have their best "
+        "layer at the top of the network. Everywhere else, the default choice leaves "
+        "performance behind.</div>"
+        "<div class='card'><h3>The middle is the workhorse</h3>"
+        f"<span class='big'>{mid_pct:.0f}%</span> of best layers sit in the middle third of "
+        "the network (33&ndash;67% depth).</div>"
+        "<div class='card'><h3>Depth habits differ by paradigm</h3>"
+        f"Median depth of the best layer: {fam_bits}.</div>")
+
+    fam_tasks = {tf: [t for t in TASK_FAMILY
+                      if TASK_FAMILY[t] == tf and t in PRIMARY_METRICS]
+                 for tf in TASK_FAMILY_ORDER}
+    famhead = "".join(
+        f"<th class='num' title='{', '.join(TASK_LABEL.get(t, t) for t in fam_tasks[tf])}'>"
+        f"{tf.capitalize()}</th>" for tf in TASK_FAMILY_ORDER)
+
+    def cell(m, tf):
+        tasks = [t for t in fam_tasks[tf] if t in m["per_task"]]
+        if not tasks:
+            return "<td class='num na' title='not evaluated'>&mdash;</td>"
+        curves = [norm(m["per_task"][t]["scores"]) for t in tasks]
+        n = len(curves[0])
+        mean = [sum(c[i] for c in curves) / len(curves) for i in range(n)]
+        top3 = sorted(sorted(range(n), key=lambda i: -mean[i])[:3])
+        best = max(range(n), key=lambda i: mean[i])
+        band = (f"L{top3[0]}&ndash;{top3[-1]}" if top3[-1] - top3[0] == 2
+                else "&thinsp;&middot;&thinsp;".join(f"L{i}" for i in top3))
+        dp = round(100 * best / max(n - 1, 1))
+        det = "; ".join(f"{TASK_LABEL.get(t, t)} best L{m['per_task'][t]['best']}"
+                        for t in tasks)
+        return (f"<td class='num band' title='top-3 layers of the family-mean curve "
+                f"({len(tasks)} task{'s' if len(tasks) > 1 else ''}) &mdash; {det}'>"
+                f"<span class='sc'>{band}"
+                f"<span class='lyr'>best L{best} &middot; {dp}% depth</span></span>"
+                f"{sparkline(mean, best)}</td>")
+
+    rows = []
+    for m in models:
+        c = FAMILY_COLOR.get(m["family"], "#94a3b8")
+        extra = ("" if m["in_paper"] else
+                 "<sup class='cav' title='beyond the paper&#39;s 12-model study'>+</sup>")
+        ncls = "mname" if m["in_paper"] else "mname mmuted"
+        rows.append(
+            f"<tr style='--fam:{c}'>"
+            f"<td class='{ncls}' title='{m['id']}'>{m['display']}{extra}</td>"
+            f"<td><span class='dot'></span>{m['family']}</td>"
+            f"<td class='num'>{m['n_layers']}</td>"
+            + "".join(cell(m, tf) for tf in TASK_FAMILY_ORDER) + "</tr>")
+
+    tpl = (Path(__file__).resolve().parent / "cheatsheet_template.html").read_text()
+    (OUT.parent / "layers.html").write_text(
+        tpl.replace("<!--CARDS-->", cards)
+           .replace("<!--FAMHEAD-->", famhead)
+           .replace("<!--ROWS-->", "\n".join(rows))
+           .replace("{{DATE}}", str(date.today())))
+    return len(models)
+
+
 DATA_README = """# Atlas data
 
 Raw records behind every number on the site. One folder per model.
@@ -552,6 +671,8 @@ def main():
     write_registries(task_registry)
     n = render_atlas_table(task_registry)
     print(f"atlas.html rendered: {n} models")
+    nc = render_cheatsheet(task_registry)
+    print(f"layers.html rendered: {nc} models")
     write_data_readme()
     missing = coverage_report()
     print(f"coverage: {sum(len(v) for v in missing.values())} primary cells missing "

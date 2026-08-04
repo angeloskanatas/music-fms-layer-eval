@@ -74,10 +74,11 @@
        tasks (scale-free; lower is better). Click a family header (&#9656;) for companion metrics;
        click any column header to sort. &dagger; = metric caveat (hover); &mdash; = not evaluated.</p>
     <p class="meta">Companion to <a href="index.html"><em>What Makes a Good Layer?</em> (ISMIR 2026)</a>
-       &middot; results as of 2026-07-28 &middot;
+       &middot; results as of 2026-08-04 &middot;
        raw per-layer JSON: <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a></p>
   </header>
   <div class="toolbar">
+    <a href="layers.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Cheat Sheet</a>
     <a href="fusion.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Selection &amp; Fusion</a>
     <a href="explorer.html" style="font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Explorer &rarr;</a>
     <button onclick="exportCSV()">Download CSV (current view)</button>
@@ -170,7 +171,7 @@
     const csv = visibleGrid().map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
-    a.download = 'layer_atlas_2026-07-28.csv'; a.click();
+    a.download = 'layer_atlas_2026-08-04.csv'; a.click();
   }
   function exportLatex() {
     const g = visibleGrid();
@@ -178,7 +179,7 @@
       g[0].join(' & ') + ' \\\\', '\\midrule',
       ...g.slice(2).map(r => r.join(' & ') + ' \\\\'),
       '\\bottomrule', '\\end{tabular}',
-      '% Layer Atlas, results as of 2026-07-28 — angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
+      '% Layer Atlas, results as of 2026-08-04 — angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
     navigator.clipboard.writeText(tex).then(() => alert('LaTeX table copied.'));
   }
   </script>

@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-28",
+ "generated": "2026-08-04",
  "policy": "fill-as-we-go, append-only; new cells run 3 seeds",
  "missing_primary_cells": {
   "musicgen-small": [

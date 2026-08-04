@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layer Cheat Sheet | What Makes a Good Layer?</title>
+  <meta name="description" content="Which layer of a music foundation model should you probe? Recommended layer bands per model and task family, from full per-layer evaluations — with depth rules of thumb.">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
+            --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:'Inter',-apple-system,sans-serif; color:var(--ink);
+           background:var(--bg); font-size:15px; line-height:1.55; }
+    header, .cards, .twrap, footer { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
+    header { padding-top:2.5rem; padding-bottom:.75rem; }
+    header h1 { font-size:1.7rem; font-weight:800; margin:0 0 .25rem; }
+    header p { color:var(--ink-2); margin:.25rem 0; max-width:760px; }
+    header a, footer a { color:var(--accent); text-decoration:none; }
+    .meta { font-size:.85rem; color:var(--ink-3); }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+             gap:1rem; padding-bottom:1.25rem; }
+    .card { border:1px solid var(--line); border-radius:8px; padding:.9rem 1.1rem;
+            font-size:.86rem; }
+    .card h3 { margin:0 0 .35rem; font-size:.92rem; }
+    .card .big { font-size:1.35rem; font-weight:800; color:var(--accent); }
+    .fdot { display:inline-block; width:8px; height:8px; border-radius:50%;
+            margin-right:.3rem; vertical-align:baseline; }
+    .twrap { margin-bottom:1.5rem; overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:.85rem; }
+    th, td { padding:.45rem .6rem; border-bottom:1px solid var(--line); text-align:left;
+             white-space:nowrap; }
+    thead th { font-size:.74rem; text-transform:uppercase; letter-spacing:.04em;
+               color:var(--ink-2); border-bottom:2px solid var(--line);
+               position:sticky; top:0; background:var(--bg); }
+    .num { text-align:center; font-variant-numeric:tabular-nums; }
+    td.band { font-weight:600; cursor:help; }
+    .sc { display:block; line-height:1.15; }
+    .lyr { display:block; color:var(--ink-3); font-size:.72rem; font-weight:400; }
+    .spark { display:block; margin:2px auto 0; opacity:.85; }
+    tbody tr { border-left:3px solid var(--fam, transparent); }
+    tbody td:first-child { border-left:3px solid var(--fam, transparent);
+                           padding-left:.75rem; }
+    tbody tr:hover td { background:var(--bg-2); }
+    .mname { font-weight:600; }
+    .mmuted { color:var(--ink-2); }
+    .dot { display:inline-block; width:9px; height:9px; border-radius:50%;
+           background:var(--fam); margin-right:.45rem; vertical-align:baseline; }
+    .na { color:var(--ink-3); font-weight:400; }
+    .cav { color:var(--ink-2); cursor:help; }
+    footer { padding-bottom:3rem; font-size:.8rem; color:var(--ink-3); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Layer Cheat Sheet</h1>
+    <p>Using a frozen music foundation model and need to pick a layer? Each cell gives the
+       <strong>three-layer band to probe first</strong> for that model and task family, from our
+       full per-layer evaluations. The single best layer is task- and seed-sensitive; a top-3
+       band is the robust recommendation. Hover any cell for the per-task best layers.</p>
+    <p class="meta"><a href="atlas.html">&larr; results table</a> &middot;
+       <a href="explorer.html">layer explorer</a> &middot;
+       <a href="fusion.html">selection &amp; fusion</a> &middot;
+       <a href="index.html">paper</a> &middot; results as of {{DATE}}</p>
+  </header>
+  <div class="cards">
+    <!--CARDS-->
+  </div>
+  <div class="twrap">
+    <table>
+      <thead><tr>
+        <th>Model</th><th>Paradigm</th>
+        <th class="num" title="transformer blocks probed; 0 = first hidden state">Layers</th>
+        <!--FAMHEAD-->
+      </tr></thead>
+      <tbody><!--ROWS--></tbody>
+    </table>
+  </div>
+  <footer>
+    Bands are the three best layers of the family-mean curve (per-task layer profiles min&ndash;max
+    normalized, then averaged over the family&rsquo;s primary tasks); the sparkline shows that curve
+    with the best layer dotted, and the small line gives the best layer and its network depth.
+    One fixed probe behind every number &mdash; full protocol and raw per-layer records:
+    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
+    No labels for your target task? The <a href="fusion.html">Selection &amp; Fusion</a> page shows
+    how far label-free proxy selection gets. To cite these recommendations, cite the
+    <a href="index.html">paper</a>.
+  </footer>
+</body>
+</html>
