@@ -887,8 +887,7 @@ METRIC_ROW_LABEL = {
     ("anisotropy", "spectral"): "Anisotropy",
     ("infonce", "default"): "InfoNCE", ("lidar", "default"): "LiDAR",
     ("curvature", "default"): "Curvature",
-    ("pte", "lin_phase"): "PTE",
-    ("pte", "best"): "PTE (best config)",       # the published cherry-pick rule
+    ("pte", "best"): "PTE",                     # published rule: best of 4 configs
 }
 DIMSIM_EXCLUDE = {"muq", "musicfm"}             # documented curation (4z)
 # chord recognition is shown per mir_eval metric, never aggregated: the story

@@ -79,12 +79,11 @@
   </div>
   <footer>
     Metrics use the paper&rsquo;s conventions: curvature in the signed convention (monotone to the
-    stored absolute values), and PTE defined as negated phase error, so positive always means the
-    metric tracks better layers. <strong>PTE (best config)</strong> applies the published rule
-    &mdash; the strongest of the four probe&thinsp;&times;&thinsp;error configurations per model
-    and task; the plain PTE row fixes one canonical configuration. Chord recognition is shown per
-    <code>mir_eval</code> metric because the story differs by metric. Correlations here cover all
-    models with data &mdash; more than the paper&rsquo;s figure. Raw profiles:
+    stored absolute values), and PTE defined as negated phase error with the published rule of
+    taking the strongest of its four probe&thinsp;&times;&thinsp;error configurations per model
+    and task &mdash; so positive always means the metric tracks better layers. Chord recognition
+    is shown per <code>mir_eval</code> metric because the story differs by metric. Correlations
+    here cover all models with data &mdash; more than the paper&rsquo;s figure. Raw profiles:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
 </body>
