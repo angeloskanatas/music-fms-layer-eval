@@ -561,6 +561,28 @@
     67.46
    ],
    "n_layers": 13
+  },
+  {
+   "task": "chords_ace_triads",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    40.23,
+    39.95,
+    42.01,
+    41.51,
+    41.34,
+    40.25,
+    38.67,
+    39.74,
+    42.49,
+    42.43,
+    43.57,
+    43.28,
+    41.82
+   ],
+   "n_layers": 13,
+   "source_note": "appended from probe.ChordsACE.mert-95M.layerwise (thirds-column reconciliation passed)"
   }
  ]
 }

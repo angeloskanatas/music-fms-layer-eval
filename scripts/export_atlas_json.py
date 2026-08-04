@@ -85,7 +85,8 @@ METRIC_CAVEATS = {
 # the site renders them generically -- open-vocabulary rule)
 TASK_FAMILY = {
     "key": "tonal", "nsynth_pitch": "tonal",
-    "chords_ace_root": "tonal", "chords_ace_thirds": "tonal", "chords_ace_mirex": "tonal",
+    "chords_ace_root": "tonal", "chords_ace_thirds": "tonal",
+    "chords_ace_triads": "tonal", "chords_ace_mirex": "tonal",
     "beat_f1": "rhythm", "downbeat_f1": "rhythm",
     "nsynth_instrument": "timbre",
     "genre": "semantic", "hxmsa": "semantic",
@@ -136,6 +137,7 @@ VARIANT_LABEL = {
 TASK_LABEL = {
     "key": "Key", "nsynth_pitch": "Pitch", "chords_ace_mirex": "Chords",
     "chords_ace_root": "Chords root", "chords_ace_thirds": "Chords thirds",
+    "chords_ace_triads": "Chords triads",
     "beat_f1": "Beat", "downbeat_f1": "Downbeat",
     "nsynth_instrument": "Instrument",
     "genre": "Genre", "hxmsa": "Structure",
@@ -259,6 +261,7 @@ def write_registries(task_registry):
             models_yaml.append(f"  note: \"{spec['note']}\"")
     (reg / "models.yaml").write_text("\n".join(models_yaml) + "\n")
 
+    task_registry.setdefault("chords_ace_triads", "Chord triads score (ChordsACE)")
     tasks_yaml = ["# canonical task registry; aliases map source-file drift onto one vocabulary"]
     for tid in sorted(task_registry):
         tasks_yaml.append(f"{tid}:")
@@ -828,6 +831,53 @@ def export_metrics():
         print(f"  layer-count note: {p}")
 
 
+# ------- one-shot record append: chords triads from the layerwise harvests -------
+# The curated files carry root/thirds/MIREX; triads lives only in the raw
+# per-layer harvests. Gate: the harvest's thirds column must reproduce the
+# existing chords_ace_thirds record exactly, proving layer order and scaling.
+
+TRIADS_TOKEN = {"mert-v1-330M": "mert-330M", "mert-v1-95M": "mert-95M",
+                "muq": "muq", "musicfm": "musicfm", "mt2": "mt2",
+                "omar-rq-multifeature-25hz": "omar-rq-multifeature-25hz",
+                "omar-rq-base": "omar-rq-base"}
+LAYERWISE_DIR = Path("/home/akanatas/projects/layerbylayer/MARBLE/output")
+
+
+def append_triads():
+    added, gated = [], []
+    for model_id, token in TRIADS_TOKEN.items():
+        out = OUT / "results" / model_id / "downstream.json"
+        lw_file = (LAYERWISE_DIR / f"probe.ChordsACE.{token}.layerwise"
+                   / "layerwise_results.json")
+        if not (out.exists() and lw_file.exists()):
+            continue
+        doc = json.loads(out.read_text())
+        if any(r["task"] == "chords_ace_triads" for r in doc["records"]):
+            continue                            # append-only: already present
+        lw = json.loads(lw_file.read_text())
+        keys = sorted(lw, key=lambda s: int(s.split("_")[1]))
+        thirds = [round(lw[k]["test/thirds"] * 100, 2) for k in keys]
+        triads = [round(lw[k]["test/triads"] * 100, 2) for k in keys]
+        cur = next((r["layers"] for r in doc["records"]
+                    if r["task"] == "chords_ace_thirds"), None)
+        if cur is None or len(cur) != len(thirds) or any(
+                abs(a - b) > 0.06 for a, b in zip(cur, thirds)):
+            gated.append(model_id)
+            continue
+        doc["records"].append({
+            "task": "chords_ace_triads", "task_family": "tonal",
+            "readout": READOUT["id"], "layers": triads, "n_layers": len(triads),
+            "source_note": f"appended from {lw_file.parent.name} "
+                           "(thirds-column reconciliation passed)"})
+        out.write_text(json.dumps(doc, indent=1))
+        added.append(model_id)
+    print(f"triads appended: {added or 'none'}; gate failed: {gated or 'none'}")
+
+
+if __name__ == "__main__" and "--append-triads" in sys.argv:
+    append_triads()
+
+
 # ------------- stage 1b view: metric x task correlations page -------------
 
 METRIC_ROW_LABEL = {
@@ -836,10 +886,15 @@ METRIC_ROW_LABEL = {
     ("effective_rank", "default"): "Effective rank",
     ("anisotropy", "spectral"): "Anisotropy",
     ("infonce", "default"): "InfoNCE", ("lidar", "default"): "LiDAR",
-    ("curvature", "default"): "&minus;Curvature",
+    ("curvature", "default"): "Curvature",
     ("pte", "lin_phase"): "PTE",
+    ("pte", "best"): "PTE (best config)",       # the published cherry-pick rule
 }
 DIMSIM_EXCLUDE = {"muq", "musicfm"}             # documented curation (4z)
+# chord recognition is shown per mir_eval metric, never aggregated: the story
+# differs by metric (root/thirds/triads track PTE; MIREX does not)
+CORR_EXTRA_TASKS = {"chords_ace_root", "chords_ace_thirds", "chords_ace_triads"}
+CORR_LABEL = {"chords_ace_mirex": "Chords MIREX"}
 
 
 def _spearman(x, y):
@@ -885,20 +940,25 @@ def render_correlations(task_registry):
             (r["metric"], r["variant"]): r for r in mrecs
             if (r["metric"], r["variant"]) in METRIC_ROW_LABEL
             and "excluded-from-paper" not in r.get("tags", [])}
+        rows_data[model_id][("pte", "best")] = [
+            r["layers"] for r in mrecs if r["metric"] == "pte"
+            and "excluded-from-paper" not in r.get("tags", [])]
         tasks_data[model_id] = {
             r["task"]: r["layers"]
             for r in json.loads(df.read_text())["records"]
-            if r["task"] in PRIMARY_METRICS}
+            if r["task"] in PRIMARY_METRICS or r["task"] in CORR_EXTRA_TASKS}
         fam_of[model_id] = spec["family"]
 
     tcols = [t for tf in TASK_FAMILY_ORDER
              for t in sorted(t2 for t2, f in TASK_FAMILY.items()
-                             if f == tf and t2 in PRIMARY_METRICS)]
+                             if f == tf and (t2 in PRIMARY_METRICS
+                                             or t2 in CORR_EXTRA_TASKS))]
 
     def table_for(models_subset):
         head = ("<tr><th>Metric</th>" +
                 "".join(f"<th class='num' title='{task_registry.get(t, t)}'>"
-                        f"{TASK_LABEL.get(t, t)}</th>" for t in tcols) + "</tr>")
+                        f"{CORR_LABEL.get(t, TASK_LABEL.get(t, t))}</th>"
+                        for t in tcols) + "</tr>")
         body = []
         for key, label in METRIC_ROW_LABEL.items():
             tds = []
@@ -907,9 +967,23 @@ def render_correlations(task_registry):
                 for m in models_subset:
                     if t.startswith("dimsim") and m in DIMSIM_EXCLUDE:
                         continue
-                    rec = rows_data.get(m, {}).get(key)
                     curve = tasks_data.get(m, {}).get(t)
-                    if not rec or not curve or len(rec["layers"]) != len(curve):
+                    if not curve:
+                        continue
+                    if key == ("pte", "best"):  # published rule: best |rho| of 4 configs
+                        best = None
+                        for layers in rows_data.get(m, {}).get(key, []):
+                            if len(layers) != len(curve):
+                                continue
+                            r = _spearman(layers, curve)
+                            if best is None or abs(r) > abs(best):
+                                best = r
+                        if best is None:
+                            continue
+                        vals.append((m, -best))  # PTE convention: negate RMSE-rho
+                        continue
+                    rec = rows_data.get(m, {}).get(key)
+                    if not rec or len(rec["layers"]) != len(curve):
                         continue
                     mvals = ([-v for v in rec["layers"]]
                              if key[0] in NEGATED_IN_VIEWS else rec["layers"])

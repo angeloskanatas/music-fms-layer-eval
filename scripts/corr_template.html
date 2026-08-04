@@ -78,12 +78,13 @@
     <!--SECTIONS-->
   </div>
   <footer>
-    Metrics are the paper-canonical variants (ID via GRIDE at k=8 with the TwoNN estimator as a
-    separate row; spectral anisotropy; LiDAR effective rank; PTE = the linear-probe phase error of
-    the shared CPSD head). Curvature and PTE are lower-is-better, so both are negated here &mdash;
-    positive always means the metric tracks better layers. The paper&rsquo;s headline figure
-    additionally selects the best PTE configuration per model and task and aggregates by task
-    family, so its cells can differ from this canonical-variant recomputation. Raw profiles:
+    Metrics use the paper&rsquo;s conventions: curvature in the signed convention (monotone to the
+    stored absolute values), and PTE defined as negated phase error, so positive always means the
+    metric tracks better layers. <strong>PTE (best config)</strong> applies the published rule
+    &mdash; the strongest of the four probe&thinsp;&times;&thinsp;error configurations per model
+    and task; the plain PTE row fixes one canonical configuration. Chord recognition is shown per
+    <code>mir_eval</code> metric because the story differs by metric. Correlations here cover all
+    models with data &mdash; more than the paper&rsquo;s figure. Raw profiles:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
 </body>

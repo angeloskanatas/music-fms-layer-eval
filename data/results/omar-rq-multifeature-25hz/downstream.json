@@ -847,6 +847,39 @@
     76.0
    ],
    "n_layers": 24
+  },
+  {
+   "task": "chords_ace_triads",
+   "task_family": "tonal",
+   "readout": "mlp512-marble",
+   "layers": [
+    41.24,
+    51.07,
+    52.98,
+    52.67,
+    52.15,
+    51.72,
+    50.36,
+    48.75,
+    46.87,
+    46.92,
+    45.55,
+    43.26,
+    42.66,
+    42.87,
+    44.24,
+    48.58,
+    48.62,
+    48.81,
+    48.68,
+    47.53,
+    50.26,
+    49.46,
+    48.71,
+    47.13
+   ],
+   "n_layers": 24,
+   "source_note": "appended from probe.ChordsACE.omar-rq-multifeature-25hz.layerwise (thirds-column reconciliation passed)"
   }
  ]
 }

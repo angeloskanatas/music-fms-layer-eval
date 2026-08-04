@@ -65,8 +65,8 @@
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
   <footer>
     One fixed probe behind every number; x-axis: transformer block (0 = first hidden state).
-    Overlays use the paper-canonical metric variants; curvature and PTE are negated so that up
-    always means better. Full protocol and raw data:
+    Overlays use the paper-canonical metric variants and conventions (signed curvature; PTE =
+    negated phase error), so up always means better. Full protocol and raw data:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
   <script>
@@ -80,7 +80,7 @@
     ['anisotropy|spectral', 'Anisotropy'],
     ['infonce|default', 'InfoNCE'],
     ['lidar|default', 'LiDAR'],
-    ['curvature|default', '−Curvature'],
+    ['curvature|default', 'Curvature (signed)'],
     ['alpha|default', 'Alpha-ReQ'],
     ['pte|lin_phase', 'PTE (−phase RMSE)'],
   ];

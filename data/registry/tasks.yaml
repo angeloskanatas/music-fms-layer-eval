@@ -11,6 +11,9 @@ chords_ace_root:
 chords_ace_thirds:
   description: "Chord thirds score (ChordsACE)"
   family: tonal
+chords_ace_triads:
+  description: "Chord triads score (ChordsACE)"
+  family: tonal
 dimsim_acc_centered:
   description: "Perceptual similarity accuracy, centered cosine (DimSim)"
   family: similarity
