@@ -911,8 +911,9 @@ def render_correlations(task_registry):
                     continue
                 mean = sum(v for _, v in vals) / len(vals)
                 a = max(abs(mean), 0.06)
-                bg = (f"rgba(42,120,214,{a:.2f})" if mean >= 0
-                      else f"rgba(235,104,52,{a:.2f})")
+                # paper polarity (RdBu_r): warm = positive, blue = negative
+                bg = (f"rgba(235,104,52,{a:.2f})" if mean >= 0
+                      else f"rgba(42,120,214,{a:.2f})")
                 fg = "#fff" if abs(mean) > 0.55 else "var(--ink)"
                 tip = f"n={len(vals)}: " + ", ".join(
                     f"{MODELS[m]['display']} {v:+.2f}" for m, v in vals)
