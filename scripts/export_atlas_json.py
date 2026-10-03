@@ -560,20 +560,19 @@ def render_cheatsheet(task_registry):
     fam_med = {fam: median(depth(pt) for m, _, pt in pairs if m["family"] == fam)
                for fam in FAMILY_ORDER
                if any(m["family"] == fam for m, _, _ in pairs)}
-    fam_bits = " &nbsp;&middot;&nbsp; ".join(
+    fam_bits = "<br>".join(
         f"<span class='fdot' style='background:{FAMILY_COLOR[f]}'></span>"
         f"{FAMILY_LABEL.get(f, f)} {v:.0f}%"
         for f, v in fam_med.items())
     cards = (
-        "<div class='card'><h3>Don&rsquo;t default to the last layer</h3>"
+        "<div class='card'><h3>Last layer</h3>"
         f"<span class='big'>{last_pct:.0f}%</span> of model&times;task pairs have their best "
-        "layer at the top of the network. Everywhere else, the default choice leaves "
-        "performance behind.</div>"
-        "<div class='card'><h3>The middle is the workhorse</h3>"
+        "layer at the top of the network.</div>"
+        "<div class='card'><h3>Middle third</h3>"
         f"<span class='big'>{mid_pct:.0f}%</span> of best layers sit in the middle third of "
         "the network (33&ndash;67% depth).</div>"
-        "<div class='card'><h3>Depth habits differ by paradigm</h3>"
-        f"Median depth of the best layer: {fam_bits}.</div>")
+        "<div class='card'><h3>Depth by paradigm</h3>"
+        f"Median depth of the best layer:<br>{fam_bits}</div>")
 
     fam_tasks = {tf: [t for t in TASK_FAMILY
                       if TASK_FAMILY[t] == tf and t in PRIMARY_METRICS]

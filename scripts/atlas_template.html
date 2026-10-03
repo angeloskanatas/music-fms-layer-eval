@@ -97,10 +97,10 @@
   <div class="legend" style="max-width:1100px;margin:0 auto;padding:0 1.5rem .5rem;font-size:.8rem;color:#64748b;">
     <strong>Rank</strong> = mean of the model&rsquo;s per-task ranks (1&nbsp;=&nbsp;best;
     <sup>p</sup>&nbsp;ranked on fewer tasks)
-    &nbsp;&middot;&nbsp; <strong>Params</strong> = evaluated encoder (audio tower for two-tower; decoder for AR)
-    &nbsp;&middot;&nbsp; <sup>+</sup> beyond the paper&rsquo;s 12 models
-    &nbsp;&middot;&nbsp; &dagger; metric caveat (hover) &nbsp;&middot;&nbsp; &mdash; not evaluated (<a href="https://github.com/angeloskanatas/music-fms-layer-eval/blob/master/data/coverage.json">coverage</a>)
-    &nbsp;&middot;&nbsp; dot&nbsp;=&nbsp;best layer
+    &emsp; <strong>Params</strong> = evaluated encoder (audio tower for two-tower; decoder for AR)
+    &emsp; <sup>+</sup> beyond the paper&rsquo;s 12 models
+    &emsp; &dagger; metric caveat (hover) &emsp; &mdash; not evaluated (<a href="https://github.com/angeloskanatas/music-fms-layer-eval/blob/master/data/coverage.json">coverage</a>)
+    &emsp; dot&nbsp;=&nbsp;best layer
   </div>
   <div class="twrap">
     <table id="atlas">
@@ -112,7 +112,7 @@
     All results are our own evaluations under a single fixed protocol, so they can differ from the
     numbers in each model&rsquo;s paper (different probes, model variants, or splits). Cells show one
     primary metric per dataset; companion metrics sit behind the family expanders. Rank averages each
-    model&rsquo;s per-task position &mdash; score means across different metrics would not be meaningful.
+    model&rsquo;s per-task position, because means of scores in different metrics are not meaningful.
     Full protocol, coverage, and raw per-layer records:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>

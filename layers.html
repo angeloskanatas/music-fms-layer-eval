@@ -63,10 +63,9 @@
 <body>
   <header>
     <h1>Layer Cheat Sheet</h1>
-    <p>Using a frozen music foundation model and need to pick a layer? Each cell gives the
-       <strong>three-layer band to probe first</strong> for that model and task family, from our
-       full per-layer evaluations. The single best layer is task- and seed-sensitive; a top-3
-       band is the robust recommendation. Hover any cell for the per-task best layers.</p>
+    <p>The <strong>three layers to probe first</strong> for each model and task family, from the
+       full per-layer evaluations. The single best layer depends on the task and the seed, so
+       the top three are the more reliable recommendation. Hover a cell for the per-task best layers.</p>
     <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
       <a href="index.html">Paper</a>
       <a href="atlas.html">Results</a>
@@ -79,7 +78,7 @@
     <p class="meta" style="margin-top:.25rem;">Results as of 2026-08-04</p>
   </header>
   <div class="cards">
-    <div class='card'><h3>Don&rsquo;t default to the last layer</h3><span class='big'>7%</span> of model&times;task pairs have their best layer at the top of the network. Everywhere else, the default choice leaves performance behind.</div><div class='card'><h3>The middle is the workhorse</h3><span class='big'>43%</span> of best layers sit in the middle third of the network (33&ndash;67% depth).</div><div class='card'><h3>Depth habits differ by paradigm</h3>Median depth of the best layer: <span class='fdot' style='background:#2a78d6'></span>Masked 42% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#eb6834'></span>Autoregressive 58% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#1baf7a'></span>Contrastive 86% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#eda100'></span>Audio-Language 87% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#e87ba4'></span>Supervised 45%.</div>
+    <div class='card'><h3>Last layer</h3><span class='big'>7%</span> of model&times;task pairs have their best layer at the top of the network.</div><div class='card'><h3>Middle third</h3><span class='big'>43%</span> of best layers sit in the middle third of the network (33&ndash;67% depth).</div><div class='card'><h3>Depth by paradigm</h3>Median depth of the best layer:<br><span class='fdot' style='background:#2a78d6'></span>Masked 42%<br><span class='fdot' style='background:#eb6834'></span>Autoregressive 58%<br><span class='fdot' style='background:#1baf7a'></span>Contrastive 86%<br><span class='fdot' style='background:#eda100'></span>Audio-Language 87%<br><span class='fdot' style='background:#e87ba4'></span>Supervised 45%</div>
   </div>
   <div class="twrap">
     <table>
@@ -110,7 +109,7 @@
   <footer>
     Bands are the three best layers of the family-mean curve (per-task profiles min&ndash;max
     normalized, then averaged); the sparkline shows that curve with the best layer dotted.
-    One fixed probe behind every number &mdash; protocol and raw records:
+    All numbers use one fixed probe. Protocol and raw records:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
     To cite these recommendations, cite the <a href="index.html">paper</a>.
   </footer>

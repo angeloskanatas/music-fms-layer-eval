@@ -7,7 +7,7 @@
   <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task, with intrinsic-metric overlays.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Layer Explorer — per-layer curves for music foundation models">
-  <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, paradigm-mates for context, intrinsic-metric overlays.">
+  <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, models of the same paradigm for comparison, intrinsic-metric overlays.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -45,8 +45,8 @@
   <header>
     <h1>Layer Explorer</h1>
     <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
-       marked; its paradigm-mates give context. Overlay an intrinsic metric to see whether
-       geometry tracks performance across depth.</p>
+       marked, next to the models of the same paradigm. An intrinsic metric can be overlaid to
+       compare its depth profile with performance.</p>
     <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
       <a href="index.html">Paper</a>
       <a href="atlas.html">Results</a>
@@ -62,15 +62,15 @@
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
     <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
     <div class="ctrl"><label for="ov">Overlay metric</label><select id="ov"></select></div>
-    <label class="toggle"><input type="checkbox" id="mates" checked> Show paradigm-mates</label>
-    <label class="toggle"><input type="checkbox" id="norm" checked> Depth % (compare across depths)</label>
+    <label class="toggle"><input type="checkbox" id="mates" checked> Same-paradigm models</label>
+    <label class="toggle"><input type="checkbox" id="norm" checked> Relative depth (%)</label>
   </div>
   <div id="chart"></div>
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
   <footer>
-    One fixed probe behind every number; x-axis: transformer block (0 = first hidden state).
-    Overlays use the paper-canonical metric variants and conventions (signed curvature; PTE =
-    negated phase error), so up always means better. Full protocol and raw data:
+    All numbers use one fixed probe. The x-axis is the transformer block (0 = first hidden state).
+    Overlays use the metric variants and conventions of the paper (signed curvature; PTE as
+    negated phase error), so higher always means better. Protocol and raw data:
     <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
   </footer>
   <script>

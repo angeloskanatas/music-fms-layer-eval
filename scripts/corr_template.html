@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Metric&ndash;Task Correlations | What Makes a Good Layer?</title>
-  <meta name="description" content="Which label-free representation metrics track layer quality on which music tasks? Mean within-model Spearman correlations between intrinsic metric profiles and per-layer downstream performance.">
+  <meta name="description" content="Mean within-model Spearman correlations between intrinsic metric profiles and per-layer downstream performance.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Metric–Task Correlations — what predicts a good layer">
   <meta property="og:description" content="Mean within-model Spearman correlation between each intrinsic metric's layer profile and per-layer downstream performance, per task and per paradigm.">
@@ -52,9 +52,9 @@
 <body>
   <header>
     <h1>Metric&ndash;Task Correlations</h1>
-    <p>Which label-free metrics track layer quality on which tasks? Each cell: the mean, over
-       models, of the within-model Spearman correlation between a metric&rsquo;s layer profile and
-       a task&rsquo;s per-layer performance. Hover a cell for the per-model values.</p>
+    <p>Each cell is the mean, over models, of the within-model Spearman correlation between a
+       label-free metric&rsquo;s layer profile and a task&rsquo;s per-layer performance. Hover a cell for
+       the per-model values.</p>
     <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
       <a href="index.html">Paper</a>
       <a href="atlas.html">Results</a>
@@ -76,8 +76,8 @@
     <span class="swatch" style="background:rgba(235,104,52,.75)"></span> positive
     (higher metric &rarr; better layers)
     <span class="swatch" style="background:rgba(42,120,214,.75)"></span> negative
-    &nbsp;&middot;&nbsp; saturation tracks |&rho;| &nbsp;&middot;&nbsp; &mdash; insufficient data
-    &nbsp;&middot;&nbsp; same polarity as the paper&rsquo;s figure
+    &emsp; colour intensity shows |&rho;| &emsp; &mdash; insufficient data
+    &emsp; same polarity as the paper&rsquo;s figure
   </div>
   <div class="twrap">
     <!--SECTIONS-->
