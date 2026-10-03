@@ -28,7 +28,9 @@ append-only: existing records are never rewritten.
 New models and tasks are added append-only, by pull request or issue:
 1. Evaluate every layer under the protocol above, with three seeds per new cell.
 2. Provide `results/<model>/downstream.json` in the schema of the existing files and an entry
-   for the model in `registry/models.yaml` (paradigm, parameter count, checkpoint).
+   for the model in `registry/models.yaml` (`family`, `display`, `in_paper: false`).
 3. Optionally provide `results/<model>/metrics.json`, the per-layer intrinsic metrics written by
    [req-metrics](https://github.com/angeloskanatas/req-metrics) (`Records.to_atlas_json`).
 4. State the checkpoint, the clip length and the pooling used for extraction.
+
+The pages are rebuilt from this folder alone with `python scripts/export_atlas_json.py --render`.

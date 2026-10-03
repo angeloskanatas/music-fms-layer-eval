@@ -16,6 +16,7 @@ from pathlib import Path
 SCHEMA_VERSION = "1.0.0"
 SRC = Path("/home/akanatas/projects/layerbylayer/layerbylayer/output")
 OUT = Path(__file__).resolve().parent.parent / "data"
+BUILD_DATE = str(date.today())  # "results as of" on every page; --render sets it from the records
 
 # canonical model id -> downstream filename stem. Variants reference their base
 # via variant_of; paper-replication files use the source paper's task keys.
@@ -455,7 +456,7 @@ def render_atlas_table(task_registry):
     tpl = (Path(__file__).resolve().parent / "atlas_template.html").read_text()
     page = (tpl.replace("<!--THEAD-->", "".join(head_top) + "".join(head_sub))
                .replace("<!--TBODY-->", "\n".join(rows))
-               .replace("{{DATE}}", str(date.today()))
+               .replace("{{DATE}}", BUILD_DATE)
                .replace("{{NMODELS}}", str(len(models))))
     (OUT.parent / "atlas.html").write_text(page)
 
@@ -497,7 +498,7 @@ def render_atlas_table(task_registry):
     (OUT.parent / "explorer.html").write_text(
         etpl.replace("/*MODELS_JSON*/", models_json)
             .replace("/*TASKS_JSON*/", tasks_json)
-            .replace("{{DATE}}", str(date.today())))
+            .replace("{{DATE}}", BUILD_DATE))
     return len(models)
 
 
@@ -619,7 +620,7 @@ def render_cheatsheet(task_registry):
         tpl.replace("<!--CARDS-->", cards)
            .replace("<!--FAMHEAD-->", famhead)
            .replace("<!--ROWS-->", "\n".join(rows))
-           .replace("{{DATE}}", str(date.today())))
+           .replace("{{DATE}}", BUILD_DATE))
     return len(models)
 
 
@@ -653,10 +654,12 @@ append-only: existing records are never rewritten.
 New models and tasks are added append-only, by pull request or issue:
 1. Evaluate every layer under the protocol above, with three seeds per new cell.
 2. Provide `results/<model>/downstream.json` in the schema of the existing files and an entry
-   for the model in `registry/models.yaml` (paradigm, parameter count, checkpoint).
+   for the model in `registry/models.yaml` (`family`, `display`, `in_paper: false`).
 3. Optionally provide `results/<model>/metrics.json`, the per-layer intrinsic metrics written by
    [req-metrics](https://github.com/angeloskanatas/req-metrics) (`Records.to_atlas_json`).
 4. State the checkpoint, the clip length and the pooling used for extraction.
+
+The pages are rebuilt from this folder alone with `python scripts/export_atlas_json.py --render`.
 """
 
 
@@ -676,7 +679,7 @@ def coverage_report():
         if gaps:
             missing[model_id] = gaps
     (OUT / "coverage.json").write_text(json.dumps({
-        "generated": str(date.today()),
+        "generated": BUILD_DATE,
         "policy": "fill-as-we-go, append-only; new cells run 3 seeds",
         "missing_primary_cells": missing,
         "n_missing": sum(len(v) for v in missing.values()),
@@ -706,7 +709,7 @@ def main():
     print("validation: clean")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--render" not in sys.argv:
     main()
 
 
@@ -1030,7 +1033,7 @@ def render_correlations(task_registry):
     (OUT.parent / "corr.html").write_text(
         tpl.replace("<!--SECTIONS-->", "\n".join(sections))
            .replace("<!--OPTIONS-->", "".join(opts))
-           .replace("{{DATE}}", str(date.today())))
+           .replace("{{DATE}}", BUILD_DATE))
     print(f"corr.html: {len(METRIC_ROW_LABEL)} metrics x {len(tcols)} tasks, "
           f"{len(all_models)} models")
 
@@ -1311,9 +1314,62 @@ def render_fusion_panel():
         tpl.replace("<!--OPTIONS-->", opts)
            .replace("<!--MOPTIONS-->", mopts)
            .replace("<!--SECTIONS-->", "\n".join(sections + msections))
-           .replace("{{DATE}}", str(date.today())))
+           .replace("{{DATE}}", BUILD_DATE))
     print(f"fusion.html: {len(order)} tasks x {len(models_here)} models")
 
 
 if __name__ == "__main__" and "--fusion" in sys.argv:
     render_fusion_panel()
+
+
+# ---------------- render-only mode: every page from data/ alone ----------------
+# Reads the model and task registries and the records under data/, never the analysis
+# outputs, so anyone with a clone can rebuild the site, and a model added to
+# data/registry/models.yaml with its records under data/results/<id>/ appears on the pages.
+
+def _read_registry(path):
+    """The two-level YAML of data/registry: {key: {field: value}}, values as strings or booleans."""
+    out, cur = {}, None
+    for line in path.read_text().splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        if not line.startswith(" ") and line.endswith(":"):
+            cur = line[:-1]
+            out[cur] = {}
+        elif cur is not None and ":" in line:
+            k, v = line.strip().split(":", 1)
+            v = v.strip().strip('"')
+            out[cur][k] = {"true": True, "false": False}.get(v, v)
+    return out
+
+
+def _records_date():
+    """The latest export date among the records, which is when the shown results last changed."""
+    dates = [json.loads(f.read_text()).get("exported", "") for f in (OUT / "results").glob("*/*.json")]
+    cov = OUT / "coverage.json"
+    if cov.exists():
+        dates.append(json.loads(cov.read_text()).get("generated", ""))
+    return max(d for d in dates if d)
+
+
+def render_all():
+    """Rebuild every page and the data README from data/ only."""
+    global BUILD_DATE
+    BUILD_DATE = _records_date()
+    for mid, spec in _read_registry(OUT / "registry" / "models.yaml").items():
+        if mid not in MODELS and (OUT / "results" / mid / "downstream.json").exists():
+            MODELS[mid] = {"file": mid, "display": spec.get("display", mid), "family": spec.get("family", "masked"),
+                           "in_paper": bool(spec.get("in_paper", False))}
+    tasks = {t: spec.get("description", t) for t, spec in _read_registry(OUT / "registry" / "tasks.yaml").items()}
+    print(f"atlas.html rendered: {render_atlas_table(tasks)} models")
+    print(f"layers.html rendered: {render_cheatsheet(tasks)} models")
+    render_correlations(tasks)
+    render_fusion_panel()
+    write_data_readme()
+    coverage_report()
+    print(f"rendered from data/ (results as of {BUILD_DATE})")
+
+
+if __name__ == "__main__" and "--render" in sys.argv:
+    render_all()
+
