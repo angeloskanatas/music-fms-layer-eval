@@ -57,6 +57,8 @@
                            padding-left: .75rem; }
     tbody tr:hover td { background: var(--bg-2); }
     .mname { font-weight: 600; }
+    tbody td.mname, thead tr:first-child th:first-child { position: sticky; left: 0; z-index: 1; background: var(--bg); }
+    thead tr:first-child th:first-child { z-index: 3; }
     .mmuted { color: var(--ink-2); }
     .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%;
            background: var(--fam); margin-right: .45rem; vertical-align: baseline; }
@@ -77,15 +79,18 @@
     <p>Layer-wise downstream results for {{NMODELS}} music foundation models. Each cell shows
        the best layer's score, its index, and the <strong>full layer profile as a sparkline</strong>.
        Click any column header to sort; family headers (&#9656;) expand companion metrics.</p>
-    <p class="meta">Companion to <a href="index.html"><em>What Makes a Good Layer?</em> (ISMIR 2026)</a>
-       &middot; results as of {{DATE}} &middot;
-       raw per-layer records: <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a></p>
+    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
+      <a href="index.html">Paper</a>
+      <strong>Results</strong>
+      <a href="layers.html">Cheat sheet</a>
+      <a href="explorer.html">Explorer</a>
+      <a href="fusion.html">Selection &amp; fusion</a>
+      <a href="corr.html">Correlations</a>
+      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
+    </nav>
+    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
   </header>
   <div class="toolbar">
-    <a href="layers.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Cheat Sheet</a>
-    <a href="fusion.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Selection &amp; Fusion</a>
-    <a href="corr.html" style="font-size:.85rem;font-weight:600;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Correlations</a>
-    <a href="explorer.html" style="font-size:.85rem;font-weight:600;color:#fff;background:var(--accent);border-radius:6px;padding:.45rem .9rem;text-decoration:none;">Layer Explorer &rarr;</a>
     <button onclick="exportCSV()">Download CSV (current view)</button>
     <button onclick="exportLatex()">Copy LaTeX table</button>
   </div>
@@ -94,7 +99,7 @@
     <sup>p</sup>&nbsp;ranked on fewer tasks)
     &nbsp;&middot;&nbsp; <strong>Params</strong> = evaluated encoder (audio tower for two-tower; decoder for AR)
     &nbsp;&middot;&nbsp; <sup>+</sup> beyond the paper&rsquo;s 12 models
-    &nbsp;&middot;&nbsp; &dagger; metric caveat (hover) &nbsp;&middot;&nbsp; &mdash; not evaluated
+    &nbsp;&middot;&nbsp; &dagger; metric caveat (hover) &nbsp;&middot;&nbsp; &mdash; not evaluated (<a href="https://github.com/angeloskanatas/music-fms-layer-eval/blob/master/data/coverage.json">coverage</a>)
     &nbsp;&middot;&nbsp; dot&nbsp;=&nbsp;best layer
   </div>
   <div class="twrap">

@@ -67,11 +67,16 @@
        <strong>three-layer band to probe first</strong> for that model and task family, from our
        full per-layer evaluations. The single best layer is task- and seed-sensitive; a top-3
        band is the robust recommendation. Hover any cell for the per-task best layers.</p>
-    <p class="meta"><a href="atlas.html">&larr; Results table</a> &middot;
-       <a href="explorer.html">Layer explorer</a> &middot;
-       <a href="fusion.html">Selection &amp; fusion</a> &middot;
-       <a href="corr.html">Correlations</a> &middot;
-       <a href="index.html">Paper</a> &middot; results as of 2026-08-04</p>
+    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
+      <a href="index.html">Paper</a>
+      <a href="atlas.html">Results</a>
+      <strong>Cheat sheet</strong>
+      <a href="explorer.html">Explorer</a>
+      <a href="fusion.html">Selection &amp; fusion</a>
+      <a href="corr.html">Correlations</a>
+      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
+    </nav>
+    <p class="meta" style="margin-top:.25rem;">Results as of 2026-08-04</p>
   </header>
   <div class="cards">
     <div class='card'><h3>Don&rsquo;t default to the last layer</h3><span class='big'>7%</span> of model&times;task pairs have their best layer at the top of the network. Everywhere else, the default choice leaves performance behind.</div><div class='card'><h3>The middle is the workhorse</h3><span class='big'>43%</span> of best layers sit in the middle third of the network (33&ndash;67% depth).</div><div class='card'><h3>Depth habits differ by paradigm</h3>Median depth of the best layer: <span class='fdot' style='background:#2a78d6'></span>Masked 42% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#eb6834'></span>Autoregressive 58% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#1baf7a'></span>Contrastive 86% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#eda100'></span>Audio-Language 87% &nbsp;&middot;&nbsp; <span class='fdot' style='background:#e87ba4'></span>Supervised 45%.</div>

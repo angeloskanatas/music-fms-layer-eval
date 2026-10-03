@@ -47,12 +47,16 @@
     <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
        marked; its paradigm-mates give context. Overlay an intrinsic metric to see whether
        geometry tracks performance across depth.</p>
-    <p class="meta"><a href="atlas.html">&larr; Results table</a> &middot;
-       <a href="layers.html">Layer cheat sheet</a> &middot;
-       <a href="fusion.html">Selection &amp; fusion</a> &middot;
-       <a href="corr.html">Correlations</a> &middot;
-       <a href="index.html">Paper</a> &middot; results as of {{DATE}} &middot;
-       PNG export via the camera icon in the chart toolbar</p>
+    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
+      <a href="index.html">Paper</a>
+      <a href="atlas.html">Results</a>
+      <a href="layers.html">Cheat sheet</a>
+      <strong>Explorer</strong>
+      <a href="fusion.html">Selection &amp; fusion</a>
+      <a href="corr.html">Correlations</a>
+      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
+    </nav>
+    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
   </header>
   <div class="controls">
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
