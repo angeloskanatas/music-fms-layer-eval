@@ -18,7 +18,6 @@
   <meta property="og:title" content="What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models">
   <meta property="og:description" content="Which layer of a music foundation model should you extract from? A layer-wise analysis of 12 models across 15 MIR tasks: intrinsic metrics that predict layer quality, pitch-transposition equivariance for tonal tasks, and label-free layer selection and fusion.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/">
-  <!-- TODO: create a 1200x630 preview image at static/images/social_preview.png -->
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -43,9 +42,8 @@
   <meta name="citation_author" content="Bogdanov, Dmitry">
   <meta name="citation_publication_date" content="2026">
   <meta name="citation_conference_title" content="International Society for Music Information Retrieval Conference (ISMIR)">
-  <!-- citation_pdf_url deliberately absent until the arXiv upload: Scholar penalizes dead PDF links.
-       Then add: <meta name="citation_pdf_url" content="https://arxiv.org/pdf/ARXIV_ID">
-                 <meta name="citation_arxiv_id" content="ARXIV_ID"> -->
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2608.14819">
+  <meta name="citation_arxiv_id" content="2608.14819">
 
   <!-- Additional SEO -->
   <meta name="theme-color" content="#0f172a">
@@ -94,11 +92,6 @@
     .caption {                    /* single caption style for all future figures */
       font-size: 0.9rem; color: #64748b;
       max-width: 90%; margin: 0.75rem auto 0; text-align: left;
-    }
-    .soon {
-      display: inline-block; font-size: 0.72rem; letter-spacing: .04em;
-      text-transform: uppercase; background: #e2e8f0; color: #475569;
-      padding: 0.15rem 0.5rem; border-radius: 999px; vertical-align: middle;
     }
   </style>
 
@@ -159,28 +152,15 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <span class="button is-normal is-rounded is-dark" style="opacity:.55;cursor:default;" title="The paper will be available on arXiv shortly">
-                    <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv&nbsp;&middot;&nbsp;soon</span>
-                  </span>
-                </span>
-                <span class="link-block">
-                  <span class="button is-normal is-rounded is-dark" style="opacity:.55;cursor:default;" title="The evaluation toolkit is being prepared for release">
-                    <span class="icon"><i class="fab fa-github"></i></span><span>Code&nbsp;&middot;&nbsp;soon</span>
-                  </span>
-                </span>
-                <!-- When the toolkit repo is public: replace the disabled chip above with
-                <span class="link-block">
-                  <a href="TOOLKIT_REPO_URL" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
-                  </a>
-                </span> -->
-                <!-- When the arXiv id exists, replace the disabled chip above with:
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/ARXIV_ID" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://arxiv.org/abs/2608.14819" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
                   </a>
                 </span>
-                and restore citation_pdf_url (-> arxiv.org/pdf/ARXIV_ID) + citation_arxiv_id in <head>. -->
+                <span class="link-block">
+                  <a href="https://github.com/angeloskanatas/req-metrics" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                  </a>
+                </span>
               </div>
               <p class="is-size-6" style="margin-top:.5rem;color:#64748b;">
                 Raw per-layer records:
@@ -244,12 +224,12 @@
           </p>
           <div class="content is-size-6">
             <ul>
-              <li><a href="atlas.html"><strong>Layer-wise downstream results</strong></a> — every model × task, best layer per cell <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
-              <li><a href="layers.html"><strong>Layer cheat sheet</strong></a> — the three-layer band to probe first, per model and task family, with depth rules of thumb <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
-              <li><a href="explorer.html"><strong>Layer explorer</strong></a> — interactive per-layer curves for any model and task <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
-              <li><a href="fusion.html"><strong>Layer selection &amp; fusion</strong></a> — proxy-guided vs. trainable fusion vs. the best single layer, per model and per task <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
-              <li><a href="corr.html"><strong>Metric–task correlations</strong></a> — per task and per model, beyond the paper's paradigm-level averages <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
-              <li><a href="explorer.html"><strong>Intrinsic-metric profiles across depth</strong></a> — overlaid on downstream performance in the Layer Explorer <span class="soon" style="background:#dbeafe;color:#1d4ed8;">Live</span></li>
+              <li><a href="atlas.html"><strong>Layer-wise downstream results</strong></a> — every model × task, best layer per cell</li>
+              <li><a href="layers.html"><strong>Layer cheat sheet</strong></a> — the three-layer band to probe first, per model and task family, with depth rules of thumb</li>
+              <li><a href="explorer.html"><strong>Layer explorer</strong></a> — interactive per-layer curves for any model and task</li>
+              <li><a href="fusion.html"><strong>Layer selection &amp; fusion</strong></a> — proxy-guided vs. trainable fusion vs. the best single layer, per model and per task</li>
+              <li><a href="corr.html"><strong>Metric–task correlations</strong></a> — per task and per model, beyond the paper's paradigm-level averages</li>
+              <li><a href="explorer.html"><strong>Intrinsic-metric profiles across depth</strong></a> — overlaid on downstream performance in the Layer Explorer</li>
             </ul>
           </div>
         </div>

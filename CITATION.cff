@@ -23,3 +23,6 @@ preferred-citation:
       given-names: Dmitry
   collection-title: "Proceedings of the International Society for Music Information Retrieval Conference (ISMIR)"
   year: 2026
+  identifiers:
+    - type: other
+      value: "arXiv:2608.14819"

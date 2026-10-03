@@ -36,8 +36,9 @@ outperforms trainable multi-layer fusion.
   proxy-guided and trainable multi-layer fusion against the best single layer.
 - **[`data/`](data/)** — the raw per-layer records behind every number: one JSON folder per model,
   self-describing and append-only, with open model/task registries. See [`data/README.md`](data/README.md).
-- **Code** — the analysis toolkit (intrinsic metrics, PTE, layer selection and fusion) will be
-  released separately after the camera-ready.
+- **[Code](https://github.com/angeloskanatas/req-metrics)** — req-metrics, the library of label-free
+  representation-quality metrics used in the paper (intrinsic metrics, pitch-transposition
+  equivariance, layer selection rules).
 
 ## Citation
 
@@ -46,7 +47,8 @@ outperforms trainable multi-layer fusion.
   title     = {What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models},
   author    = {Kanatas, Angelos-Nikolaos and Kong, Yuexuan and Alonso-Jim{\'e}nez, Pablo and Serra, Xavier and Bogdanov, Dmitry},
   booktitle = {Proceedings of the International Society for Music Information Retrieval Conference (ISMIR)},
-  year      = {2026}
+  year      = {2026},
+  note      = {arXiv:2608.14819}
 }
 ```
 
