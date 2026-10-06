@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Layer Atlas | What Makes a Good Layer?</title>
-  <meta name="description" content="Which layer of a music foundation model works best for each task? Layer-wise results for 17 models across 15 music tasks — per-layer performance profiles, best layers, and sortable comparisons.">
+  <meta name="description" content="Which layer of a music foundation model works best for each task? Layer-wise results for 17 models across 15 music tasks: per-layer performance profiles, best layers, and sortable comparisons.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Layer Atlas — layer-wise results for music foundation models">
+  <meta property="og:title" content="Layer Atlas: layer-wise results for music foundation models">
   <meta property="og:description" content="Best layer per model and task, full layer-profile sparklines, sortable, with CSV/LaTeX export. 17 models, 15 tasks, one fixed probe.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/atlas.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
@@ -174,7 +174,7 @@
       g[0].join(' & ') + ' \\\\', '\\midrule',
       ...g.slice(2).map(r => r.join(' & ') + ' \\\\'),
       '\\bottomrule', '\\end{tabular}',
-      '% Layer Atlas, results as of {{DATE}} — angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
+      '% Layer Atlas, results as of {{DATE}}, angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
     navigator.clipboard.writeText(tex).then(() => alert('LaTeX table copied.'));
   }
   </script>

@@ -404,7 +404,7 @@ def render_atlas_table(task_registry):
         cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
               if pt.get("caveat") else "")
         tip = ("open the full layer curve" if not pt.get("readout_label") else
-               f"best readout: {pt['readout_label']} — open the curves for all readouts")
+               f"best readout: {pt['readout_label']}; open the curves for all readouts")
         fus = pt.get("fusion")
         if fus:
             proxy = {k: v for k, v in fus.items()
@@ -418,7 +418,7 @@ def render_atlas_table(task_registry):
                     parts.append(f"best {name}: {VARIANT_LABEL[bk]} "
                                  f"{grp[bk]:.1f} ({grp[bk] - pt['score']:+.1f})")
             if parts:
-                tip += " | " + "; ".join(parts) + " — details on the Selection & Fusion page"
+                tip += " | " + "; ".join(parts) + "; details on the Selection & Fusion page"
         return (f"<td class='num {cls}'{h}>"
                 f"<a class='cellink' href='explorer.html?model={pt['model']}&amp;task={pt['t']}' "
                 f"title='{tip}'>"
@@ -596,7 +596,7 @@ def render_cheatsheet(task_registry):
         det = "; ".join(f"{TASK_LABEL.get(t, t)} best L{m['per_task'][t]['best']}"
                         for t in tasks)
         return (f"<td class='num band' title='top-3 layers of the family-mean curve "
-                f"({len(tasks)} task{'s' if len(tasks) > 1 else ''}) &mdash; {det}'>"
+                f"({len(tasks)} task{'s' if len(tasks) > 1 else ''}): {det}'>"
                 f"<span class='sc'>{band}"
                 f"<span class='lyr'>best L{best} &middot; {dp}% depth</span></span>"
                 f"{sparkline(mean, best)}</td>")

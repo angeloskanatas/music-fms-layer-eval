@@ -6,7 +6,7 @@
   <title>Layer Explorer | What Makes a Good Layer?</title>
   <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task, with intrinsic-metric overlays.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Layer Explorer — per-layer curves for music foundation models">
+  <meta property="og:title" content="Layer Explorer: per-layer curves for music foundation models">
   <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, models of the same paradigm for comparison, intrinsic-metric overlays.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
@@ -182,7 +182,7 @@
     } else {
       const d = await rec(mid);
       const r = d.records.find(x => x.task === tid);
-      if (!r) { Plotly.newPlot('chart', [], note(meta.label + ' — not evaluated on ' + tmeta.label)); return; }
+      if (!r) { Plotly.newPlot('chart', [], note(meta.label + ': not evaluated on ' + tmeta.label)); return; }
       lastR = r;
       const best = r.layers.indexOf(Math.max(...r.layers));
       const x = xs(r);
@@ -196,7 +196,7 @@
           mlabel = OVERLAYS.find(([v]) => v === ov)[1];
         } else {
           notes.push('No ' + OVERLAYS.find(([v]) => v === ov)[1] +
-                     ' profile for this model — showing the score curve alone.');
+                     ' profile for this model; the score curve is shown alone.');
         }
       }
       const dispY = mvals ? mm(r.layers) : r.layers;
@@ -221,7 +221,7 @@
       }
     }
     document.getElementById('rnote').textContent = notes.join(' ');
-    if (!lastR) { Plotly.newPlot('chart', [], note(meta.label + ' — not evaluated on ' + tmeta.label)); return; }
+    if (!lastR) { Plotly.newPlot('chart', [], note(meta.label + ': not evaluated on ' + tmeta.label)); return; }
     Plotly.newPlot('chart', traces, layout(tmeta, meta, lastR, !!(ov && traces.length > 2)),
       { responsive: true, displaylogo: false,
         toImageButtonOptions: { filename: mid + '_' + tid + '_layers' } });
@@ -229,7 +229,7 @@
   function layout(tmeta, meta, r, overlaid) {
     const normed = $n.checked;
     return { font: { family: 'Inter, sans-serif', color: '#1e293b', size: 13 },
-      title: { text: '<b>' + meta.label + '</b> — ' + tmeta.desc,
+      title: { text: '<b>' + meta.label + '</b>: ' + tmeta.desc,
                font: { size: 15 }, x: 0, xanchor: 'left' },
       xaxis: normed
         ? { title: 'depth (%)', range: [-2, 102], dtick: 25,
