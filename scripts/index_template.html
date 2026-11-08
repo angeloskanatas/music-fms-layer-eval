@@ -229,9 +229,9 @@
       </table>
       <p>Every column, including the expanded ones, can be opened in <a href="explorer.html">Layer profiles</a>.</p>
     </details>
-    <p>Each layer of the frozen encoder is evaluated separately with a trained probe: an MLP with one hidden
-       layer of 512 units and, for most models, a linear probe (we will extend this to further probe architectures,
-       such as attentive probes).
+    <p>Each layer of the frozen encoder is evaluated separately with a trained probe, an MLP with one hidden
+       layer of 512 units or a linear probe (we will extend this to further probe architectures, such as attentive
+       probes).
        Scores may differ from those reported in the original papers, which use other probes, checkpoints or
        splits. Per-layer results are available in the
        <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data folder</a>.</p>
