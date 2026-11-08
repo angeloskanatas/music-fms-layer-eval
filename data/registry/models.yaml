@@ -53,19 +53,9 @@ mt2-cls-contrastive:
 mt2-cls-equiv:
   family: contrastive
   in_paper: false
-muq-paper:
+mert-v2-30s:
   family: masked
   in_paper: false
-  variant_of: muq
-  note: "replication of the MuQ paper's own eval suite (different protocol, not comparable)"
-musicfm-paper:
+mert-v2-fullsong:
   family: masked
-  in_paper: false
-  variant_of: musicfm
-  note: "replication of the MuQ paper's own eval suite (different protocol, not comparable)"
-qwen2audio-instruct:
-  family: audio-llm
-  in_paper: false
-musicflamingo:
-  family: audio-llm
   in_paper: false

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Makes a Good Layer? Layer-wise results for music foundation models</title>
+  <meta name="description" content="Per-layer downstream results and label-free metrics for {{NMODELS}} music foundation models on {{NTASKS}} tasks: the best layer for each task, the three layers to probe first, layer profiles and metric-task correlations. Companion site of the ISMIR 2026 paper.">
+  <meta name="author" content="Angelos-Nikolaos Kanatas, Yuexuan Kong, Pablo Alonso-Jiménez, Xavier Serra, Dmitry Bogdanov">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Music Technology Group, Universitat Pompeu Fabra">
+  <meta property="og:title" content="What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models">
+  <meta property="og:description" content="Per-layer results for {{NMODELS}} music foundation models on {{NTASKS}} tasks, with the label-free metrics of every layer.">
+  <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/">
+  <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Makes a Good Layer? Layer-wise results for music foundation models">
+  <meta name="twitter:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
+  <meta name="citation_title" content="What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models">
+  <meta name="citation_author" content="Kanatas, Angelos-Nikolaos">
+  <meta name="citation_author" content="Kong, Yuexuan">
+  <meta name="citation_author" content="Alonso-Jiménez, Pablo">
+  <meta name="citation_author" content="Serra, Xavier">
+  <meta name="citation_author" content="Bogdanov, Dmitry">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="International Society for Music Information Retrieval Conference (ISMIR)">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2608.14819">
+  <meta name="citation_arxiv_id" content="2608.14819">
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models",
+    "author": [
+      { "@type": "Person", "name": "Angelos-Nikolaos Kanatas", "affiliation": { "@type": "Organization", "name": "Music Technology Group, Universitat Pompeu Fabra" } },
+      { "@type": "Person", "name": "Yuexuan Kong", "affiliation": { "@type": "Organization", "name": "Deezer Research; Nantes Université" } },
+      { "@type": "Person", "name": "Pablo Alonso-Jiménez", "affiliation": { "@type": "Organization", "name": "Music Technology Group, Universitat Pompeu Fabra" } },
+      { "@type": "Person", "name": "Xavier Serra", "affiliation": { "@type": "Organization", "name": "Music Technology Group, Universitat Pompeu Fabra" } },
+      { "@type": "Person", "name": "Dmitry Bogdanov", "affiliation": { "@type": "Organization", "name": "Music Technology Group, Universitat Pompeu Fabra" } }
+    ],
+    "datePublished": "2026",
+    "publisher": { "@type": "Organization", "name": "International Society for Music Information Retrieval Conference (ISMIR)" },
+    "url": "https://angeloskanatas.github.io/music-fms-layer-eval/",
+    "sameAs": "https://arxiv.org/abs/2608.14819",
+    "isAccessibleForFree": true
+  }
+  </script>
+  <style>
+    :root {
+      --ink: #1e293b; --ink-2: #64748b; --ink-3: #94a3b8;
+      --accent: #2563eb; --line: #e2e8f0; --bg: #ffffff; --bg-2: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Inter', -apple-system, sans-serif; color: var(--ink);
+           background: var(--bg); font-size: 15px; line-height: 1.55; }
+    a { color: var(--accent); text-decoration: none; }
+    .paper { max-width: 1100px; margin: 0 auto; padding: 2.25rem 1.5rem 1rem; }
+    .paper h1 { font-size: 1.9rem; font-weight: 800; margin: 0; line-height: 1.2; }
+    .paper .sub { font-size: 1.15rem; font-weight: 500; color: var(--ink-2); margin: .3rem 0 .9rem; }
+    .paper .authors { margin: 0; }
+    .paper .affil { font-size: .85rem; color: var(--ink-2); margin: .2rem 0 0; }
+    .paper .lede { max-width: 760px; margin: 1.1rem 0 0; }
+    .toolbar { max-width: 1100px; margin: 0 auto; padding: .75rem 1.5rem .5rem;
+               display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+    .toolbar button { font: inherit; font-size: .85rem; font-weight: 600; color: var(--ink);
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+      padding: .4rem .8rem; cursor: pointer; }
+    .toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+    .seg { display: inline-flex; margin-right: .75rem; }
+    .seg button { border-radius: 0; }
+    .seg button:first-child { border-radius: 6px 0 0 6px; }
+    .seg button:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
+    .seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .toolbar label { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em;
+                     color: var(--ink-2); margin-left: .5rem; }
+    .toolbar select { font: inherit; font-size: .85rem; color: var(--ink); background: var(--bg);
+      border: 1px solid var(--line); border-radius: 6px; padding: .4rem .6rem; align-self: stretch; }
+    .toolbar .spacer { flex: 1; }
+    .howto { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem .5rem; font-size: .85rem; color: var(--ink-2); }
+    .howto p { margin: .15rem 0; max-width: 860px; }
+    .legend { font-size: .8rem; }
+    .legend span { margin-right: 1.1rem; display: inline-block; }
+    .twrap { max-width: 1100px; margin: 0 auto 1.5rem; padding: 0 1.5rem; overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+    th, td { padding: .45rem .6rem; border-bottom: 1px solid var(--line); text-align: left;
+             white-space: nowrap; }
+    thead th { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em;
+               color: var(--ink-2); border-bottom: 2px solid var(--line); background: var(--bg); }
+    #atlas thead th, #atlas-probes thead th { cursor: pointer; }
+    thead th.detail { text-transform: none; letter-spacing: 0; }
+    th.famgrp { text-align: center; border-bottom: 1px solid var(--line); }
+    th.famgrp.expandable:hover { color: var(--accent); }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.num { font-weight: 500; }
+    td.ptask, td.detail, #bands td.num, #bands th.num { text-align: center; }
+    td.band { font-weight: 600; cursor: help; }
+    .cellink { color: inherit; text-decoration: none; display: block; }
+    .cellink:hover .sc { color: var(--accent); }
+    .sc { display: block; line-height: 1.15; }
+    #bands .lyr { display: block; margin-left: 0; }
+    .spark { display: block; margin: 1px auto 0; opacity: .85; }
+    tbody tr:hover .spark { opacity: 1; }
+    tbody tr { border-left: 3px solid var(--fam, transparent); }
+    tbody td:first-child { border-left: 3px solid var(--fam, transparent); padding-left: .75rem; }
+    tbody tr:hover td { background: var(--bg-2); }
+    .mname { font-weight: 600; }
+    tbody td.mname, thead tr:first-child th:first-child { position: sticky; left: 0; z-index: 1; background: var(--bg); }
+    thead tr:first-child th:first-child { z-index: 3; }
+    .mmuted { color: var(--ink-2); }
+    .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+           background: var(--fam); margin-right: .45rem; vertical-align: baseline; }
+    .lyr { color: var(--ink-3); font-size: .72rem; font-weight: 400; margin-left: .35rem; }
+    .na  { color: var(--ink-3); font-weight: 400; }
+    .cav { color: var(--ink-2); cursor: help; }
+    .chev { font-size: .7rem; color: var(--ink-3); }
+    th.sorted-asc .chev, th.sorted-desc .chev { color: var(--accent); }
+    .notes { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 1.5rem; font-size: .85rem; color: var(--ink-2); }
+    .notes p { max-width: 860px; margin: .3rem 0; }
+    .notes details { margin: 0 0 1rem; }
+    .notes summary { cursor: pointer; font-weight: 600; color: var(--ink); }
+    table.tasks { width: auto; margin-top: .5rem; font-size: .82rem; }
+    table.tasks td, table.tasks th { white-space: normal; padding: .3rem .8rem .3rem 0; }
+    table.tasks thead th { text-transform: none; letter-spacing: 0; font-size: .8rem; cursor: default; }
+    #cite { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem 2rem; }
+    #cite h2 { font-size: 1.1rem; margin: 0 0 .6rem; }
+    #cite pre { background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px; padding: 1rem;
+                font-size: .8rem; overflow-x: auto; margin: 0; }
+    #cite button { font: inherit; font-size: .8rem; font-weight: 600; color: var(--ink); background: var(--bg-2);
+                   border: 1px solid var(--line); border-radius: 6px; padding: .3rem .7rem; cursor: pointer;
+                   margin-left: .75rem; vertical-align: middle; }
+    @media (max-width: 640px) {
+      .paper, .toolbar, .howto, .twrap, .notes, #cite { padding-left: 1rem; padding-right: 1rem; }
+      .paper h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <!--NAV-->
+  <header class="paper">
+    <h1>What Makes a Good Layer?</h1>
+    <p class="sub">Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models</p>
+    <p class="authors">Angelos-Nikolaos Kanatas<sup>1</sup>, Yuexuan Kong<sup>2,3</sup>,
+       Pablo Alonso-Jiménez<sup>1</sup>, Xavier Serra<sup>1</sup>, Dmitry Bogdanov<sup>1</sup>.
+       ISMIR 2026.</p>
+    <p class="affil"><sup>1</sup>Music Technology Group, Universitat Pompeu Fabra;
+       <sup>2</sup>Deezer Research; <sup>3</sup>Nantes Université, École Centrale Nantes, CNRS, LS2N</p>
+    <p class="lede">Layer-wise downstream performance of {{NMODELS}} music foundation models on {{NTASKS}} tasks.
+       The label-free metrics of each layer and their correlation with performance are on the
+       <a href="corr.html">Metrics</a> page.</p>
+  </header>
+
+  <div class="toolbar">
+    <span class="seg" role="group" aria-label="View">
+      <button type="button" data-view="best" aria-pressed="true">Best layer per task</button>
+      <button type="button" data-view="bands" aria-pressed="false">Three layers to probe first</button>
+    </span>
+    <!--IF PROBES-->
+    <label for="probe" class="only-best">Probe</label>
+    <select id="probe" class="only-best" autocomplete="off"><!--PROBE_OPTIONS--></select>
+    <!--END PROBES-->
+    <span class="spacer"></span>
+    <button class="only-best" onclick="exportCSV()">Download CSV</button>
+    <button class="only-best" onclick="exportLatex()">Copy LaTeX</button>
+  </div>
+
+  <div id="v-best">
+    <div class="howto">
+      <p>Each cell reports the best layer of a model for a task, its score and the profile across layers.
+         Select a cell to open the full curve, or a column header to sort. Headers marked &#9656; expand to
+         further metrics of the same datasets. Params counts the evaluated encoder (the audio tower of
+         two-tower models, the decoder of autoregressive models).</p>
+    </div>
+    <div class="twrap">
+      <table id="atlas">
+        <thead><!--THEAD--></thead>
+        <tbody><!--TBODY--></tbody>
+      </table>
+      <!--IF PROBES-->
+      <table id="atlas-probes" hidden>
+        <!--PROBE_TBODIES-->
+      </table>
+      <!--END PROBES-->
+    </div>
+  </div>
+
+  <div id="v-bands" hidden>
+    <div class="howto">
+      <p>For each model and task family, the three layers with the highest mean score after min-max
+         normalization of each task's layer profile, with the best of the three, its relative depth and the mean
+         profile. Hover over a cell for the best layer of each task.</p>
+    </div>
+    <div class="twrap">
+      <table id="bands">
+        <thead><tr>
+          <th>Model</th><th>Paradigm</th>
+          <th class="num" title="number of layer outputs evaluated">Probed layers</th>
+          <!--BANDS_HEAD-->
+        </tr></thead>
+        <tbody><!--BANDS_ROWS--></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="notes">
+    <details>
+      <summary>Tasks and metrics</summary>
+      <table class="tasks">
+        <thead><tr><th>Column</th><th>Dataset</th><th>Metric</th></tr></thead>
+        <tbody>
+          <tr><td>Key</td><td>GiantSteps</td><td>weighted score, mir_eval 0.8.2</td></tr>
+          <tr><td>Pitch</td><td>NSynth</td><td>accuracy</td></tr>
+          <tr><td>Chords</td><td>Chords1217</td><td>MIREX score, mir_eval 0.8.2 (root, thirds and triads under the expanded Tonal header)</td></tr>
+          <tr><td>Beat, Downbeat</td><td>GTZAN</td><td>F-measure, 70 ms tolerance</td></tr>
+          <tr><td>Instrument</td><td>NSynth</td><td>instrument family accuracy</td></tr>
+          <tr><td>Genre</td><td>GTZAN</td><td>accuracy</td></tr>
+          <tr><td>Structure</td><td>Harmonix</td><td>clip-level section accuracy</td></tr>
+          <tr><td>Emotion</td><td>Emomusic</td><td>R&sup2; (arousal and valence under the expanded Semantic header)</td></tr>
+          <tr><td>MTT</td><td>MagnaTagATune, 50 tags</td><td>macro-averaged AP (macro AUROC under the expanded Semantic header)</td></tr>
+          <tr><td>MTG genre, instrument, mood, top 50</td><td>MTG-Jamendo, 87, 40, 56 and 50 tags</td><td>macro-averaged AP (macro AUROC under the expanded Semantic header)</td></tr>
+          <tr><td>Similarity</td><td>DimSim</td><td>triplet accuracy with centered cosine similarity (cosine and L2 under the expanded Similarity header)</td></tr>
+        </tbody>
+      </table>
+      <p>Every column, including the expanded ones, can be opened in <a href="explorer.html">Layer profiles</a>.</p>
+    </details>
+    <p>Each layer of the frozen encoder is evaluated separately with a trained probe: an MLP with one hidden
+       layer of 512 units and, for most models, a linear probe (we will extend this to further probe architectures,
+       such as attentive probes).
+       Scores may differ from those reported in the original papers, which use other probes, checkpoints or
+       splits. Per-layer results are available in the
+       <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data folder</a>.</p>
+  </div>
+
+  <section id="cite">
+    <h2>Citation<button type="button" onclick="copyBib(this)">Copy</button></h2>
+    <pre id="bibtex"><code>@inproceedings{kanatas2026goodlayer,
+  title     = {What Makes a Good Layer? Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models},
+  author    = {Kanatas, Angelos-Nikolaos and Kong, Yuexuan and Alonso-Jim{\'e}nez, Pablo and Serra, Xavier and Bogdanov, Dmitry},
+  booktitle = {Proceedings of the International Society for Music Information Retrieval Conference (ISMIR)},
+  year      = {2026}
+}</code></pre>
+  </section>
+
+  <!--FOOT-->
+
+  <script>
+  // view switch: the best-layer table or the three-layer bands (index.html?view=bands)
+  function setView(v) {
+    document.getElementById('v-best').hidden = v !== 'best';
+    document.getElementById('v-bands').hidden = v !== 'bands';
+    document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === v));
+    document.querySelectorAll('.only-best').forEach(e => e.hidden = v !== 'best');
+    history.replaceState(null, '', v === 'bands' ? '?view=bands' : location.pathname);
+  }
+  document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+  if (new URLSearchParams(location.search).get('view') === 'bands') setView('bands');
+
+  function copyBib(btn) {
+    navigator.clipboard.writeText(document.getElementById('bibtex').innerText).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+    });
+  }
+
+  // expand/collapse a task family's companion-metric columns
+  document.querySelectorAll('th.famgrp.expandable').forEach(th => {
+    th.addEventListener('click', e => {
+      const fam = th.dataset.fam;
+      const cells = document.querySelectorAll('.detail.d-' + fam);
+      const show = cells[0] && cells[0].hidden;
+      cells.forEach(c => c.hidden = !show);
+      th.querySelector('.chev').innerHTML = show ? '&#9662;' : '&#9656;';
+      e.stopPropagation();
+    });
+  });
+  // click-to-sort on any header with data-sort
+  document.querySelectorAll('#atlas thead th[data-sort]').forEach((th) => {
+    th.addEventListener('click', () => {
+      const table = th.closest('table'), tbody = table.tBodies[0];
+      const idx = cellIndex(th), num = th.dataset.sort === 'num';
+      const dir = th.classList.contains('sorted-desc') ? 1 : -1;
+      table.querySelectorAll('thead th').forEach(h => h.classList.remove('sorted-asc', 'sorted-desc'));
+      th.classList.add(dir === -1 ? 'sorted-desc' : 'sorted-asc');
+      Array.from(tbody.rows)
+        .sort((a, b) => cmp(val(a, idx, num), val(b, idx, num)) * dir)
+        .forEach(r => tbody.appendChild(r));
+    });
+  });
+  function cellIndex(th) {   // body column of a header: the leading headers, then the task headers in order
+    const head = th.closest('thead').rows;
+    return th.parentNode === head[0] ? th.cellIndex
+                                     : head[0].querySelectorAll('th[rowspan]').length + th.cellIndex;
+  }
+  function val(row, i, num) {
+    const c = row.cells[i];
+    if (c && c.dataset.val !== undefined) return parseFloat(c.dataset.val);
+    const t = (c ? c.textContent : '').replace(/L\d+$/, '').trim(), v = parseFloat(t);
+    return num ? (isNaN(v) ? -Infinity : v) : t;   // a cell without a number sorts below every number
+  }
+  function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
+  function visibleGrid() {   // one header row (the leading headers, then the task headers) and the body rows
+    const shown = tr => Array.from(tr.children).filter(c => !c.hidden);
+    const text = c => c.textContent.replace(/†/g, '').trim();
+    const head = document.querySelector('#atlas thead').rows;
+    const rows = [shown(head[0]).filter(c => c.rowSpan > 1).concat(shown(head[1])).map(text)];
+    document.querySelectorAll('#atlas tbody tr').forEach(tr => rows.push(shown(tr).map(text)));
+    return rows;
+  }
+  function exportCSV() {
+    const csv = visibleGrid().map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
+    a.download = 'layer_results_{{DATE}}.csv'; a.click();
+  }
+  function exportLatex() {
+    const g = visibleGrid();
+    const tex = ['\\begin{tabular}{l' + 'r'.repeat(g[0].length - 1) + '}', '\\toprule',
+      g[0].join(' & ') + ' \\\\', '\\midrule',
+      ...g.slice(1).map(r => r.join(' & ') + ' \\\\'),
+      '\\bottomrule', '\\end{tabular}',
+      '% Layer-wise results as of {{DATE}}, angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
+    navigator.clipboard.writeText(tex).then(() => alert('LaTeX table copied.'));
+  }
+  /*IF PROBES*/
+  // probe choice: the rows of each further probe wait in a hidden table and swap with the shown ones
+  {
+    const probe = document.getElementById('probe'), table = document.getElementById('atlas'),
+          store = document.getElementById('atlas-probes');
+    table.tBodies[0].dataset.probe = probe.options[0].value;
+    const show = () => {
+      const next = Array.from(store.tBodies).find(b => b.dataset.probe === probe.value);
+      if (!next) return;                        // these rows are the shown ones
+      store.appendChild(table.tBodies[0]);
+      table.appendChild(next);
+      // the incoming rows take the current sort: one more click on the sorted header, same direction
+      const th = table.querySelector('thead th.sorted-asc, thead th.sorted-desc');
+      if (th) { th.classList.toggle('sorted-desc'); th.classList.remove('sorted-asc'); th.click(); }
+    };
+    probe.addEventListener('change', show);
+    show();
+  }
+  /*END PROBES*/
+  </script>
+</body>
+</html>

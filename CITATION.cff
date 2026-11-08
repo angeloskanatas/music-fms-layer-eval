@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use the layer atlas, cheat sheet, or the per-layer records, please cite the paper below."
+message: "If you use the results on this site or the per-layer records, please cite the paper below."
 title: "music-fms-layer-eval: layer-wise evaluation data for music foundation models"
 authors:
   - family-names: Kanatas

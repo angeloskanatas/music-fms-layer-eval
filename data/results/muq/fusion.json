@@ -6,141 +6,6 @@
  "exported": "2026-07-28",
  "records": [
   {
-   "task": "chords_ace_mirex",
-   "metric_spec": "test/mirex x100",
-   "value": 85.9,
-   "variant": "attentive_ciernik",
-   "source": "probe.ChordsACE.muq.attentive_ciernik",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_root",
-   "metric_spec": "test/root x100",
-   "value": 79.72,
-   "variant": "attentive_ciernik",
-   "source": "probe.ChordsACE.muq.attentive_ciernik",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_thirds",
-   "metric_spec": "test/thirds x100",
-   "value": 76.27,
-   "variant": "attentive_ciernik",
-   "source": "probe.ChordsACE.muq.attentive_ciernik",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_mirex",
-   "metric_spec": "test/mirex x100",
-   "value": 86.63,
-   "variant": "hconv",
-   "source": "probe.ChordsACE.muq.hconv",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_root",
-   "metric_spec": "test/root x100",
-   "value": 80.0,
-   "variant": "hconv",
-   "source": "probe.ChordsACE.muq.hconv",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_thirds",
-   "metric_spec": "test/thirds x100",
-   "value": 76.68,
-   "variant": "hconv",
-   "source": "probe.ChordsACE.muq.hconv",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_mirex",
-   "metric_spec": "test/mirex x100",
-   "value": 84.61,
-   "variant": "softmax_avg",
-   "source": "probe.ChordsACE.muq.softmax_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_root",
-   "metric_spec": "test/root x100",
-   "value": 78.34,
-   "variant": "softmax_avg",
-   "source": "probe.ChordsACE.muq.softmax_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_thirds",
-   "metric_spec": "test/thirds x100",
-   "value": 74.71,
-   "variant": "softmax_avg",
-   "source": "probe.ChordsACE.muq.softmax_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_mirex",
-   "metric_spec": "test/mirex x100",
-   "value": 84.68,
-   "variant": "topk_avg",
-   "source": "probe.ChordsACE.muq.topk_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_root",
-   "metric_spec": "test/root x100",
-   "value": 77.41,
-   "variant": "topk_avg",
-   "source": "probe.ChordsACE.muq.topk_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_thirds",
-   "metric_spec": "test/thirds x100",
-   "value": 73.8,
-   "variant": "topk_avg",
-   "source": "probe.ChordsACE.muq.topk_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_mirex",
-   "metric_spec": "test/mirex x100",
-   "value": 83.91,
-   "variant": "uniform_avg",
-   "source": "probe.ChordsACE.muq.uniform_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_root",
-   "metric_spec": "test/root x100",
-   "value": 77.31,
-   "variant": "uniform_avg",
-   "source": "probe.ChordsACE.muq.uniform_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
-   "task": "chords_ace_thirds",
-   "metric_spec": "test/thirds x100",
-   "value": 73.6,
-   "variant": "uniform_avg",
-   "source": "probe.ChordsACE.muq.uniform_avg",
-   "version": "version_1",
-   "protocol": "published-map"
-  },
-  {
    "task": "emo_r2",
    "metric_spec": "test/r2 x100",
    "value": 63.04,
@@ -2569,6 +2434,490 @@
    "source": "probe.NSynthP.muq.uniform_avg",
    "version": "version_1",
    "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "oracle",
+   "value": 75.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "middle",
+   "value": 75.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "last",
+   "value": 74.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "oracle",
+   "value": 46.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "middle",
+   "value": 42.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "last",
+   "value": 46.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "oracle",
+   "value": 67.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "middle",
+   "value": 67.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "last",
+   "value": 64.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "oracle",
+   "value": 85.2,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "middle",
+   "value": 84.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "last",
+   "value": 80.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "oracle",
+   "value": 59.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "middle",
+   "value": 57.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "last",
+   "value": 59.4,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "oracle",
+   "value": 64.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "middle",
+   "value": 61.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "last",
+   "value": 58.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "oracle",
+   "value": 51.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "middle",
+   "value": 50.65,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "last",
+   "value": 50.25,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "oracle",
+   "value": 17.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "middle",
+   "value": 17.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "last",
+   "value": 17.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "oracle",
+   "value": 84.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "middle",
+   "value": 84.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "last",
+   "value": 83.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "oracle",
+   "value": 47.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "middle",
+   "value": 47.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "last",
+   "value": 47.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "oracle",
+   "value": 19.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "middle",
+   "value": 19.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "last",
+   "value": 19.0,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "oracle",
+   "value": 76.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "middle",
+   "value": 75.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "last",
+   "value": 75.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "oracle",
+   "value": 44.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "middle",
+   "value": 44.2,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "last",
+   "value": 43.85,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "oracle",
+   "value": 13.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "middle",
+   "value": 13.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "last",
+   "value": 12.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "oracle",
+   "value": 75.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "middle",
+   "value": 75.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "last",
+   "value": 74.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "oracle",
+   "value": 54.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "middle",
+   "value": 54.15,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "last",
+   "value": 54.35,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "oracle",
+   "value": 28.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "middle",
+   "value": 27.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "last",
+   "value": 27.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "oracle",
+   "value": 81.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "middle",
+   "value": 80.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "last",
+   "value": 80.8,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "oracle",
+   "value": 65.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "middle",
+   "value": 64.15,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "last",
+   "value": 64.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "oracle",
+   "value": 39.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "middle",
+   "value": 37.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "last",
+   "value": 37.9,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "oracle",
+   "value": 91.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "middle",
+   "value": 90.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "last",
+   "value": 90.7,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "oracle",
+   "value": 79.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "middle",
+   "value": 78.3,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "last",
+   "value": 75.2,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "oracle",
+   "value": 92.5,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "middle",
+   "value": 90.1,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "last",
+   "value": 87.6,
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
   }
- ]
+ ],
+ "updated": "2026-11-08"
 }

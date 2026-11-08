@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Layer Explorer | What Makes a Good Layer?</title>
-  <meta name="description" content="Interactive layer-wise performance curves for music foundation models: per-layer downstream scores with the best layer marked, per model and task, with intrinsic-metric overlays.">
+  <title>Layer profiles | What Makes a Good Layer?</title>
+  <meta name="description" content="Downstream score at every layer of a music foundation model, per task, next to the models of the same paradigm, with a label-free metric overlaid if you choose one.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Layer Explorer: per-layer curves for music foundation models">
-  <meta property="og:description" content="Interactive per-layer downstream curves for any model and task, best layer marked, models of the same paradigm for comparison, intrinsic-metric overlays.">
+  <meta property="og:title" content="Layer profiles of music foundation models">
+  <meta property="og:description" content="Downstream score at every layer, per model and task, with label-free metric overlays.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -15,6 +15,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/site.css">
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
   <style>
     :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
@@ -37,42 +38,30 @@
               gap:.4rem; padding-bottom:.45rem; }
     #chart { max-width:1000px; margin:0 auto; padding:0 1.5rem; height:480px; }
     footer { max-width:1000px; margin:0 auto; padding:1rem 1.5rem 3rem;
-             font-size:.8rem; color:var(--ink-3); }
+             font-size:.85rem; color:var(--ink-2); }
     footer a { color:var(--accent); text-decoration:none; }
   </style>
 </head>
 <body>
+  <!--NAV-->
   <header>
-    <h1>Layer Explorer</h1>
-    <p>Per-layer downstream performance. The selected model's curve is bold with its best layer
-       marked, next to the models of the same paradigm. An intrinsic metric can be overlaid to
-       compare its depth profile with performance.</p>
-    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
-      <a href="index.html">Paper</a>
-      <a href="atlas.html">Results</a>
-      <a href="layers.html">Cheat sheet</a>
-      <strong>Explorer</strong>
-      <a href="fusion.html">Selection &amp; fusion</a>
-      <a href="corr.html">Correlations</a>
-      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
-    </nav>
-    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
+    <h1>Layer profiles</h1>
+    <p>Downstream performance at every layer for a chosen model and task, with the models of the same paradigm
+       in grey. A label-free metric can be overlaid to compare its layer profile with performance.</p>
   </header>
   <div class="controls">
     <div class="ctrl"><label for="model">Model</label><select id="model"></select></div>
     <div class="ctrl"><label for="task">Task</label><select id="task"></select></div>
+    <!--IF PROBES-->
+    <div class="ctrl"><label for="probe">Probe</label><select id="probe"></select></div>
+    <!--END PROBES-->
     <div class="ctrl"><label for="ov">Overlay metric</label><select id="ov"></select></div>
-    <label class="toggle"><input type="checkbox" id="mates" checked> Same-paradigm models</label>
+    <label class="toggle"><input type="checkbox" id="mates" checked> Models of the same paradigm</label>
     <label class="toggle"><input type="checkbox" id="norm" checked> Relative depth (%)</label>
   </div>
   <div id="chart"></div>
   <p id="rnote" style="max-width:1000px;margin:0 auto;padding:0 1.5rem;font-size:.82rem;color:#64748b;"></p>
-  <footer>
-    All numbers use one fixed probe. The x-axis is the transformer block (0 = first hidden state).
-    Overlays use the metric variants and conventions of the paper (signed curvature; PTE as
-    negated phase error), so higher always means better. Protocol and raw data:
-    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
-  </footer>
+  <!--FOOT-->
   <script>
   const MODELS = /*MODELS_JSON*/;
   const TASKS  = /*TASKS_JSON*/;
@@ -115,7 +104,7 @@
     return den ? num / den : 0;
   }
 
-  MODELS.forEach(m => $m.add(new Option(m.label + (m.in_paper ? '' : ' +'), m.id)));
+  MODELS.forEach(m => $m.add(new Option(m.label, m.id)));
   TASKS.forEach(t => $t.add(new Option(t.label, t.id)));
   OVERLAYS.forEach(([v, l]) => $o.add(new Option(l, v)));
   let qm = q.get('model');
@@ -124,10 +113,26 @@
             if (MODELS.some(m => m.id === qm)) $m.value = qm; }
   if (q.get('task') && TASKS.some(t => t.id === q.get('task'))) $t.value = q.get('task');
   if (q.get('ov') && OVERLAYS.some(([v]) => v === q.get('ov'))) $o.value = q.get('ov');
+  /*IF PROBES*/
+  // probe choice, the first being the default; a task with a protocol of its own (the OWN_PROTOCOL
+  // prefixes) has one record and no choice
+  const PROBES = /*PROBES_JSON*/;
+  const OWN_PROTOCOL = /*OWN_PROTOCOL_JSON*/;
+  const $p = document.getElementById('probe');
+  const ownProtocol = task => OWN_PROTOCOL.some(prefix => task.startsWith(prefix));
+  PROBES.forEach(p => $p.add(new Option(p.label, p.id)));
+  if (q.get('probe') && PROBES.some(p => p.id === q.get('probe'))) $p.value = q.get('probe');
+  $p.onchange = draw;
+  /*END PROBES*/
 
   async function rec(model) {
     if (!cache[model])
       cache[model] = fetch('data/results/' + model + '/downstream.json').then(r => r.json());
+    /*IF PROBES*/
+    if (PROBES.length > 1)                      // the chosen probe's records of this model
+      return cache[model].then(d => ({ ...d, records: d.records.filter(
+        x => ownProtocol(x.task) || (x.readout || PROBES[0].id) === $p.value) }));
+    /*END PROBES*/
     return cache[model];
   }
   async function mrec(model) {
@@ -145,6 +150,13 @@
     history.replaceState(null, '', '?model=' + mid + '&task=' + tid + (ov ? '&ov=' + ov : ''));
     const traces = [];
     const notes = [];
+    /*IF PROBES*/
+    $p.disabled = ownProtocol(tid);
+    if (!$p.disabled && $p.value !== PROBES[0].id) {
+      history.replaceState(null, '', location.search + '&probe=' + $p.value);
+      notes.push('Probe: ' + $p.selectedOptions[0].text + '.');
+    }
+    /*END PROBES*/
     if ($g.checked && !ov) {
       for (const m of MODELS.filter(x => x.family === meta.family && x.id !== mid)) {
         const d = await rec(m.id);
@@ -176,9 +188,8 @@
           hovertemplate: mem.readout + ' best: L' + best + ' = %{y:.1f}<extra></extra>' });
         ci++;
       }
-      notes.push(meta.label + ' exposes several class tokens; each curve reads the same ' +
-        'frozen model through a different one (a "readout"). Rings mark each readout’s ' +
-        'best layer.');
+      notes.push(meta.label + ' has several class tokens. Each curve reads the same frozen model ' +
+        'through a different one, and the rings mark the best layer of each.');
     } else {
       const d = await rec(mid);
       const r = d.records.find(x => x.task === tid);
@@ -195,8 +206,8 @@
           mvals = NEG.has(mk) ? mr.layers.map(v => -v) : mr.layers.slice();
           mlabel = OVERLAYS.find(([v]) => v === ov)[1];
         } else {
-          notes.push('No ' + OVERLAYS.find(([v]) => v === ov)[1] +
-                     ' profile for this model; the score curve is shown alone.');
+          notes.push('This model has no ' + OVERLAYS.find(([v]) => v === ov)[1] +
+                     ' profile, so only the score is shown.');
         }
       }
       const dispY = mvals ? mm(r.layers) : r.layers;
@@ -214,10 +225,10 @@
           customdata: mvals.map((v, i) => [i, v]),
           hovertemplate: mlabel + ' L%{customdata[0]}: %{customdata[1]:.3g}<extra></extra>' });
         const rho = spearman(mvals, r.layers);
-        notes.push('ρs(' + mlabel + ', score) = ' + (rho >= 0 ? '+' : '') +
-          rho.toFixed(2) + ' across layers. Curves are min–max normalized to share ' +
-          'one axis; hover shows raw values. Paradigm-mates are hidden while an overlay ' +
-          'is active.');
+        notes.push('Spearman correlation between ' + mlabel + ' and the score across layers: ' +
+          (rho >= 0 ? '+' : '') + rho.toFixed(2) + '. Both curves are rescaled to the range 0 to 1 ' +
+          'to share the axis, and the hover shows the raw values. The other models of the paradigm ' +
+          'are hidden while a metric is overlaid.');
       }
     }
     document.getElementById('rnote').textContent = notes.join(' ');
@@ -236,7 +247,7 @@
             gridcolor: '#f1f5f9', zeroline: false }
         : { title: 'layer', dtick: r.n_layers > 30 ? 4 : (r.n_layers > 16 ? 2 : 1),
             gridcolor: '#f1f5f9', zeroline: false },
-      yaxis: { title: overlaid ? 'normalized (min–max)' : 'score',
+      yaxis: { title: overlaid ? 'rescaled to 0 to 1' : 'score',
                gridcolor: '#f1f5f9', zeroline: false },
       plot_bgcolor: '#fff', paper_bgcolor: '#fff', hovermode: 'closest',
       showlegend: true,

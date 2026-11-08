@@ -53,8 +53,7 @@
     84.9,
     85.3
    ],
-   "n_layers": 33,
-   "caveat": "MARBLE corpus-pooled F-measure; per-track mir_eval variant differs"
+   "n_layers": 33
   },
   {
    "task": "downbeat_f1",
@@ -95,8 +94,7 @@
     45.2,
     45.6
    ],
-   "n_layers": 33,
-   "caveat": "MARBLE corpus-pooled F-measure; per-track mir_eval variant differs"
+   "n_layers": 33
   },
   {
    "task": "emo_r2",

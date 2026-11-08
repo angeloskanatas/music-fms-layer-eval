@@ -1,0 +1,21 @@
+/* Shared by every page: the navigation bar and the closing line. Page-specific styles stay in each page. */
+.site-nav { border-bottom: 1px solid #e2e8f0; background: #fff; position: sticky; top: 0; z-index: 20; }
+.site-nav .inner { max-width: 1100px; margin: 0 auto; padding: .7rem 1.5rem; display: flex;
+                   align-items: baseline; gap: .4rem 1.4rem; flex-wrap: wrap; }
+.site-nav .brand { font-weight: 800; color: #1e293b; text-decoration: none; margin-right: auto; }
+.site-nav a { color: #475569; text-decoration: none; font-size: .9rem; font-weight: 500; }
+.site-nav a:hover { color: #2563eb; }
+.site-nav a.here { color: #1e293b; font-weight: 700; box-shadow: inset 0 -2px 0 #2563eb; }
+.site-nav .ext { display: flex; gap: 1rem; padding-left: 1.1rem; border-left: 1px solid #e2e8f0; }
+.site-nav .ext a { color: #64748b; font-size: .85rem; }
+.site-foot { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; text-align: center;
+             border-top: 1px solid #e2e8f0; color: #64748b; font-size: .85rem; }
+.site-foot .update { font-size: 1rem; color: #1e293b; margin: 0 0 .5rem; }
+.site-foot p { margin: .3rem 0; }
+.site-foot a { color: #2563eb; text-decoration: none; }
+@media (max-width: 640px) {
+  .site-nav { position: static; }
+  .site-nav .inner { padding: .6rem 1rem; }
+  .site-nav .brand { width: 100%; }
+  .site-nav .ext { border-left: 0; padding-left: 0; }
+}

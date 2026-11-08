@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Layer Atlas | What Makes a Good Layer?</title>
-  <meta name="description" content="Which layer of a music foundation model works best for each task? Layer-wise results for 17 models across 15 music tasks: per-layer performance profiles, best layers, and sortable comparisons.">
+  <title>Probe-free Tasks | What Makes a Good Layer?</title>
+  <meta name="description" content="Layer-wise results for music foundation models on probe-free tasks: best layer per model and task, per-layer profiles, and sortable comparisons.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Layer Atlas: layer-wise results for music foundation models">
-  <meta property="og:description" content="Best layer per model and task, full layer-profile sparklines, sortable, with CSV/LaTeX export. 17 models, 15 tasks, one fixed probe.">
-  <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/atlas.html">
+  <meta property="og:title" content="Probe-free Tasks: layer-wise results for music foundation models">
+  <meta property="og:description" content="Best layer per model and task on probe-free tasks, full layer-profile sparklines, sortable, with CSV/LaTeX export.">
+  <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/probefree.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/site.css">
   <style>
     :root {
       --ink: #1e293b; --ink-2: #64748b; --ink-3: #94a3b8;
@@ -74,34 +75,27 @@
   </style>
 </head>
 <body>
+  <!--NAV-->
   <header>
-    <h1>Layer Atlas</h1>
-    <p>Layer-wise downstream results for {{NMODELS}} music foundation models. Each cell shows
-       the best layer's score, its index, and the <strong>full layer profile as a sparkline</strong>.
-       Click any column header to sort; family headers (&#9656;) expand companion metrics.</p>
-    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
-      <a href="index.html">Paper</a>
-      <strong>Results</strong>
-      <a href="layers.html">Cheat sheet</a>
-      <a href="explorer.html">Explorer</a>
-      <a href="fusion.html">Selection &amp; fusion</a>
-      <a href="corr.html">Correlations</a>
-      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
-    </nav>
-    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
+    <h1>Probe-free tasks</h1>
+    <p>Results on tasks scored without a trained probe, for the models of the <a href="index.html">results
+       table</a>. Each cell gives the best layer's score, its index and the profile over all layers. Click a
+       column header to sort.
+       <!--IF COMPANIONS-->
+       Group headers with &#9656; open the other scores of each protocol.
+       <!--END COMPANIONS-->
+    </p>
   </header>
   <div class="toolbar">
     <button onclick="exportCSV()">Download CSV (current view)</button>
     <button onclick="exportLatex()">Copy LaTeX table</button>
   </div>
   <div class="legend" style="max-width:1100px;margin:0 auto;padding:0 1.5rem .5rem;font-size:.8rem;color:#64748b;">
-    <strong>Rank</strong> = mean of the model&rsquo;s per-task ranks (1&nbsp;=&nbsp;best;
-    <sup>p</sup>&nbsp;ranked on fewer tasks)
+    <!--PROTOCOLS-->
     &emsp; <strong>Params</strong> = evaluated encoder (audio tower for two-tower; decoder for AR)
-    &emsp; <sup>+</sup> beyond the paper&rsquo;s 12 models
-    &emsp; &dagger; metric caveat (hover) &emsp; &mdash; not evaluated (<a href="https://github.com/angeloskanatas/music-fms-layer-eval/blob/master/data/coverage.json">coverage</a>)
-    &emsp; dot&nbsp;=&nbsp;best layer
-  </div>
+    &emsp; <sup>+</sup> evaluated after the paper
+    &emsp; &mdash; not evaluated
+      </div>
   <div class="twrap">
     <table id="atlas">
       <thead><!--THEAD--></thead>
@@ -109,13 +103,11 @@
     </table>
   </div>
   <footer>
-    All results are our own evaluations under a single fixed protocol, so they can differ from the
-    numbers in each model&rsquo;s paper (different probes, model variants, or splits). Cells show one
-    primary metric per dataset; companion metrics sit behind the family expanders. Rank averages each
-    model&rsquo;s per-task position, because means of scores in different metrics are not meaningful.
-    Full protocol, coverage, and raw per-layer records:
-    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
+    All results are our own evaluations of each layer of the frozen encoder, with the protocol given above for
+    each group of columns. The per-layer records are in the
+    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data folder</a>.
   </footer>
+  <!--FOOT-->
   <script>
   // expand/collapse a task family's companion-metric columns
   document.querySelectorAll('th.famgrp.expandable').forEach(th => {
@@ -141,40 +133,39 @@
         .forEach(r => tbody.appendChild(r));
     });
   });
-  function cellIndex(th) {   // visual column index accounting for hidden cells
-    const cells = th.closest('table').querySelectorAll('thead th');
-    let i = 0; for (const c of cells) { if (c === th) break; i++; }
-    return i;
+  function cellIndex(th) {   // body column of a header: the leading headers, then the task headers in order
+    const head = th.closest('thead').rows;
+    return th.parentNode === head[0] ? th.cellIndex
+                                     : head[0].querySelectorAll('th[rowspan]').length + th.cellIndex;
   }
   function val(row, i, num) {
     const c = row.cells[i];
     if (c && c.dataset.val !== undefined) return parseFloat(c.dataset.val);
-    const t = (c ? c.textContent : '').replace(/L\d+$/, '').trim();
-    return num ? (t === '—' ? -Infinity : parseFloat(t)) : t;
+    const t = (c ? c.textContent : '').replace(/L\d+$/, '').trim(), v = parseFloat(t);
+    return num ? (isNaN(v) ? -Infinity : v) : t;   // a cell without a number sorts below every number
   }
   function cmp(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
-  function visibleGrid() {
-    const rows = [];
-    document.querySelectorAll('#atlas tr').forEach(tr => {
-      const cells = Array.from(tr.children).filter(c => !c.hidden)
-        .map(c => c.textContent.replace(/†/g, '').trim());
-      if (cells.length) rows.push(cells);
-    });
+  function visibleGrid() {   // one header row (the leading headers, then the task headers) and the body rows
+    const shown = tr => Array.from(tr.children).filter(c => !c.hidden);
+    const text = c => c.textContent.replace(/†/g, '').trim();
+    const head = document.querySelector('#atlas thead').rows;
+    const rows = [shown(head[0]).filter(c => c.rowSpan > 1).concat(shown(head[1])).map(text)];
+    document.querySelectorAll('#atlas tbody tr').forEach(tr => rows.push(shown(tr).map(text)));
     return rows;
   }
   function exportCSV() {
     const csv = visibleGrid().map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
-    a.download = 'layer_atlas_{{DATE}}.csv'; a.click();
+    a.download = 'probe_free_{{DATE}}.csv'; a.click();
   }
   function exportLatex() {
     const g = visibleGrid();
     const tex = ['\\begin{tabular}{l' + 'r'.repeat(g[0].length - 1) + '}', '\\toprule',
       g[0].join(' & ') + ' \\\\', '\\midrule',
-      ...g.slice(2).map(r => r.join(' & ') + ' \\\\'),
+      ...g.slice(1).map(r => r.join(' & ') + ' \\\\'),
       '\\bottomrule', '\\end{tabular}',
-      '% Layer Atlas, results as of {{DATE}}, angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
+      '% Probe-free tasks, results as of {{DATE}}, angeloskanatas.github.io/music-fms-layer-eval'].join('\n');
     navigator.clipboard.writeText(tex).then(() => alert('LaTeX table copied.'));
   }
   </script>

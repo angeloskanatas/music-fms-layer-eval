@@ -1,44 +1,43 @@
 # What Makes a Good Layer?
 
-### Assessing the Layer-Wise Intrinsic Properties of Music Foundation Models
+Per-layer results for music foundation models, from the ISMIR 2026 paper *What Makes a Good Layer? Assessing the
+Layer-Wise Intrinsic Properties of Music Foundation Models* ([arXiv:2608.14819](https://arxiv.org/abs/2608.14819)).
 
-**ISMIR 2026** &nbsp;|&nbsp; [Project page](https://angeloskanatas.github.io/music-fms-layer-eval/)
+Angelos-Nikolaos Kanatas<sup>1</sup>, Yuexuan Kong<sup>2,3</sup>, Pablo Alonso-Jiménez<sup>1</sup>,
+Xavier Serra<sup>1</sup>, Dmitry Bogdanov<sup>1</sup>
 
-Angelos-Nikolaos Kanatas<sup>1</sup>, Yuexuan Kong<sup>2,3</sup>, Pablo Alonso-Jiménez<sup>1</sup>, Xavier Serra<sup>1</sup>, Dmitry Bogdanov<sup>1</sup>
+<sup>1</sup> Music Technology Group, Universitat Pompeu Fabra; <sup>2</sup> Deezer Research;
+<sup>3</sup> Nantes Université, École Centrale Nantes, CNRS, LS2N
 
-<sup>1</sup> Music Technology Group, Universitat Pompeu Fabra &nbsp;·&nbsp; <sup>2</sup> Deezer Research &nbsp;·&nbsp; <sup>3</sup> Nantes Université, École Centrale Nantes, CNRS, LS2N
+The site is at **https://angeloskanatas.github.io/music-fms-layer-eval/** and has four pages:
 
----
+- [Results](https://angeloskanatas.github.io/music-fms-layer-eval/): the downstream score of every layer of each
+  model on each task, shown as the best layer per task or as the three layers to probe first, with a choice of
+  probe where we have more than one.
+- [Layer profiles](https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html): the score at every layer
+  for one model and task, with a label-free metric laid over it if you pick one.
+- [Metrics](https://angeloskanatas.github.io/music-fms-layer-eval/corr.html): how closely each label-free metric
+  follows the per-layer scores, per task and per paradigm.
+- [Layer selection](https://angeloskanatas.github.io/music-fms-layer-eval/fusion.html): the best single layer
+  against the layers ranked highest by a metric and against multi-layer fusion.
 
-Music foundation models are used as frozen feature extractors, but *which layer* you extract from is
-usually a guess. We analyze 12 music foundation models layer by layer, across masked, autoregressive
-and contrastive pre-training, and ask whether label-free properties of a representation predict how
-well that layer transfers.
+We keep adding models and tasks. The pages mark the models evaluated after the paper with a +.
 
-**No single property is a universal proxy.** Intrinsic dimension and curvature track layer quality for
-genre, emotion, tagging and beat — but every standard metric fails on tonal tasks. We introduce
-**Pitch-Transposition Equivariance (PTE)**, a self-supervised diagnostic that provides a consistent
-indicator of tonal quality across model families. Used together, these metrics reduce an exhaustive
-layer search to a three-layer shortlist that lands within 0.4 pp of the per-task oracle and
-outperforms trainable multi-layer fusion.
+## Data
 
-## Contents
+[`data/`](data/) holds the records behind every number, one folder per model: `downstream.json` for the
+per-layer scores, `metrics.json` for the per-layer metrics and `fusion.json` for the multi-layer methods.
+[`data/README.md`](data/README.md) describes the protocol and the file format. The metrics are computed with
+[req-metrics](https://github.com/angeloskanatas/req-metrics).
 
-- **[Project page](https://angeloskanatas.github.io/music-fms-layer-eval/)** — paper, abstract, findings.
-- **[Layer Atlas](https://angeloskanatas.github.io/music-fms-layer-eval/atlas.html)** — layer-wise
-  downstream results for 17 models across 15 tasks: best layer per cell, full layer-profile
-  sparklines, sortable, CSV/LaTeX export.
-- **[Layer Cheat Sheet](https://angeloskanatas.github.io/music-fms-layer-eval/layers.html)** — the
-  three-layer band to probe first, per model and task family, with depth rules of thumb.
-- **[Layer Explorer](https://angeloskanatas.github.io/music-fms-layer-eval/explorer.html)** —
-  interactive per-layer curves for any model and task.
-- **[Selection & Fusion](https://angeloskanatas.github.io/music-fms-layer-eval/fusion.html)** —
-  proxy-guided and trainable multi-layer fusion against the best single layer.
-- **[`data/`](data/)** — the raw per-layer records behind every number: one JSON folder per model,
-  self-describing and append-only, with open model/task registries. See [`data/README.md`](data/README.md).
-- **[Code](https://github.com/angeloskanatas/req-metrics)** — req-metrics, the library of label-free
-  representation-quality metrics used in the paper (intrinsic metrics, pitch-transposition
-  equivariance, layer selection rules).
+## Rebuilding the pages
+
+```bash
+python scripts/export_atlas_json.py --render
+```
+
+This rebuilds every page from `data/` alone and needs only the Python standard library. Without `--render`,
+the script first exports new records from our analysis outputs, which are not in this repository.
 
 ## Citation
 
@@ -52,8 +51,9 @@ outperforms trainable multi-layer fusion.
 }
 ```
 
-## Acknowledgments
+## License
 
-The project page uses the [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template),
-adopted from the [Nerfies](https://nerfies.github.io/) page. Website content is licensed under
-[CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
+The website content is licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/). The first
+version of the page was built from the
+[Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template), adapted from
+[Nerfies](https://nerfies.github.io/).

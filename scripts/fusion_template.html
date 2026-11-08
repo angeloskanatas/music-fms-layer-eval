@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Selection &amp; Fusion | What Makes a Good Layer?</title>
-  <meta name="description" content="Single-layer selection versus multi-layer fusion for music foundation models, per model and task, against the best-single-layer reference.">
+  <title>Layer selection | What Makes a Good Layer?</title>
+  <meta name="description" content="The best single layer of each music foundation model and task, against layers chosen by a label-free metric and against trained multi-layer fusion.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Selection &amp; Fusion: single layer vs multi-layer fusion">
-  <meta property="og:description" content="Proxy-guided and trainable multi-layer fusion against the best single layer, per model and task, in published and held-out lanes.">
+  <meta property="og:title" content="Layer selection for music foundation models">
+  <meta property="og:description" content="Layers chosen by a label-free metric and trained multi-layer fusion against the best single layer, per model and task.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/fusion.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -15,13 +15,14 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/site.css">
   <style>
     :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
             --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
     * { box-sizing:border-box; }
     body { margin:0; font-family:'Inter',-apple-system,sans-serif; color:var(--ink);
            background:var(--bg); font-size:15px; line-height:1.55; }
-    header, .controls, .cards, footer { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
+    header, .controls, footer { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
     header { padding-top:2.5rem; padding-bottom:.75rem; }
     header h1 { font-size:1.7rem; font-weight:800; margin:0 0 .25rem; }
     header p { color:var(--ink-2); margin:.25rem 0; max-width:760px; }
@@ -49,55 +50,19 @@
            color:var(--ink-3); text-align:right; }
     .dlt.pos { color:#047857; font-weight:600; }
     .na { color:var(--ink-3); }
-    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-             gap:1rem; padding-bottom:1.5rem; }
-    .card { border:1px solid var(--line); border-radius:8px; padding:1rem 1.25rem;
-            font-size:.86rem; }
-    .card h3 { margin:0 0 .5rem; font-size:.95rem; }
-    .lane { display:inline-block; font-size:.68rem; letter-spacing:.04em;
-            text-transform:uppercase; border-radius:999px; padding:.12rem .55rem;
-            margin-left:.4rem; vertical-align:middle; }
-    .lane.pub { background:#eef2ff; color:#4338ca; }
-    .lane.held { background:#ecfdf5; color:#047857; }
-    footer { padding-bottom:3rem; font-size:.8rem; color:var(--ink-3); }
+    footer { padding-bottom:1.5rem; font-size:.85rem; color:var(--ink-2); }
+    footer p { max-width:860px; margin:.4rem 0; }
     footer a { color:var(--accent); text-decoration:none; }
   </style>
 </head>
 <body>
+  <!--NAV-->
   <header>
-    <h1>Selection &amp; Fusion</h1>
-    <p>Multi-layer fusion compared with selecting a single layer, per model and task: the best
-       single layer (the reference row, in bold), label-free proxy-guided fusion over a few chosen
-       layers, and trainable multi-layer fusion. The small numbers give the difference from the
-       best single layer.</p>
-    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
-      <a href="index.html">Paper</a>
-      <a href="atlas.html">Results</a>
-      <a href="layers.html">Cheat sheet</a>
-      <a href="explorer.html">Explorer</a>
-      <strong>Selection &amp; fusion</strong>
-      <a href="corr.html">Correlations</a>
-      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
-    </nav>
-    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
+    <h1>Layer selection</h1>
+    <p>For each model and task, the best single layer (in bold) is compared with the middle and last layers,
+       with the layers ranked highest by a label-free metric, averaged or concatenated, and with fusion of all
+       layers, without or with training. Small numbers give the difference from the best single layer.</p>
   </header>
-  <div class="cards">
-    <div class="card">
-      <h3>As published <span class="lane pub">retrospective protocol</span></h3>
-      Across the paper&rsquo;s models and tasks: probing only the top-3 proxy-ranked layers comes
-      within <strong>0.4&nbsp;pp</strong> of the best single layer (matching it on 58% of
-      model&ndash;task pairs); averaging those three layers lands at <strong>0.3&nbsp;pp</strong>
-      and beats every trainable fusion method (<em>p</em>&nbsp;&lt;&nbsp;0.001). The per-task
-      proxy metric was chosen retrospectively on the same models (see the paper).
-    </div>
-    <div class="card">
-      <h3>Held out <span class="lane held">non-circular</span></h3>
-      Fixing each task family&rsquo;s proxy on the other models of the same paradigm and applying it to a held-out
-      model still places the true best layer in the proxy&rsquo;s top-3 <strong>39.6%</strong>
-      of the time (chance 15.1%; top-1: 16.7% vs 5.0%), and <strong>41.7%</strong> for tonal
-      tasks via the pitch-transposition equivariance measure.
-    </div>
-  </div>
   <div class="controls">
     <div class="ctrl"><label for="view">View by</label>
       <select id="view" onchange="switchView()">
@@ -113,11 +78,12 @@
     <!--SECTIONS-->
   </div>
   <footer>
-    Tagging tasks are scored as the mean of AP and AUROC (the published fusion protocol), and their
-    single-layer reference uses the same averaged curve. Proxy-guided fusion uses the published
-    layer sets. Full protocol and raw records:
-    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
+    <p>Held-out evaluation: when each task family's metric is selected on the other models of the same paradigm,
+       the best layer of the held-out model is among the metric's top three in 39.6% of cases (chance: 15.1%;
+       top one: 16.7% against 5.0%), and in 41.7% of cases for tonal tasks, where the selected metric is PTE.</p>
+    <p>Tagging scores are the mean of macro-averaged AP and AUROC.</p>
   </footer>
+  <!--FOOT-->
   <script>
   function showTask(id) {
     document.querySelectorAll('.ftask').forEach(s => s.hidden = (s.id !== id));

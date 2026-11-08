@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Metric&ndash;Task Correlations | What Makes a Good Layer?</title>
-  <meta name="description" content="Mean within-model Spearman correlations between intrinsic metric profiles and per-layer downstream performance.">
+  <title>Metrics | What Makes a Good Layer?</title>
+  <meta name="description" content="How well each label-free metric tracks downstream performance across the layers of music foundation models, per task and per paradigm.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Metric–Task Correlations: what predicts a good layer">
-  <meta property="og:description" content="Mean within-model Spearman correlation between each intrinsic metric's layer profile and per-layer downstream performance, per task and per paradigm.">
+  <meta property="og:title" content="Label-free metrics against downstream performance, layer by layer">
+  <meta property="og:description" content="Within-model Spearman correlations between the layer profile of each label-free metric and per-layer downstream scores, per task and per paradigm.">
   <meta property="og:url" content="https://angeloskanatas.github.io/music-fms-layer-eval/corr.html">
   <meta property="og:image" content="https://angeloskanatas.github.io/music-fms-layer-eval/static/images/social_preview.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -15,6 +15,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/site.css">
   <style>
     :root { --ink:#1e293b; --ink-2:#64748b; --ink-3:#94a3b8; --accent:#2563eb;
             --line:#e2e8f0; --bg:#fff; --bg-2:#f8fafc; }
@@ -46,25 +47,16 @@
               font-size:.8rem; color:var(--ink-2); }
     .swatch { display:inline-block; width:11px; height:11px; border-radius:3px;
               vertical-align:-1px; margin:0 .25rem 0 .5rem; }
-    footer { padding-bottom:3rem; font-size:.8rem; color:var(--ink-3); }
+    footer { padding-bottom:1.5rem; font-size:.85rem; color:var(--ink-2); }
   </style>
 </head>
 <body>
+  <!--NAV-->
   <header>
-    <h1>Metric&ndash;Task Correlations</h1>
-    <p>Each cell is the mean, over models, of the within-model Spearman correlation between a
-       label-free metric&rsquo;s layer profile and a task&rsquo;s per-layer performance. Hover a cell for
-       the per-model values.</p>
-    <nav class="meta" style="display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;">
-      <a href="index.html">Paper</a>
-      <a href="atlas.html">Results</a>
-      <a href="layers.html">Cheat sheet</a>
-      <a href="explorer.html">Explorer</a>
-      <a href="fusion.html">Selection &amp; fusion</a>
-      <strong>Correlations</strong>
-      <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">Data</a>
-    </nav>
-    <p class="meta" style="margin-top:.25rem;">Results as of {{DATE}}</p>
+    <h1>Metrics</h1>
+    <p>Spearman correlation between the layer profile of each label-free metric and per-layer downstream
+       performance, computed within each model and averaged over models. Hover over a cell for the per-model
+       values; the profiles themselves can be overlaid on the <a href="explorer.html">Layer profiles</a> page.</p>
   </header>
   <div class="controls">
     <label for="view">Models</label>
@@ -74,22 +66,12 @@
   </div>
   <div class="legend">
     <span class="swatch" style="background:rgba(235,104,52,.75)"></span> positive
-    (higher metric &rarr; better layers)
     <span class="swatch" style="background:rgba(42,120,214,.75)"></span> negative
-    &emsp; colour intensity shows |&rho;| &emsp; &mdash; insufficient data
-    &emsp; same polarity as the paper&rsquo;s figure
+    &emsp; colour intensity shows the magnitude
   </div>
   <div class="twrap">
     <!--SECTIONS-->
   </div>
-  <footer>
-    Metrics use the paper&rsquo;s conventions: curvature in the signed convention (monotone to the
-    stored absolute values), and PTE defined as negated phase error with the published rule of
-    taking the strongest of its four probe&thinsp;&times;&thinsp;error configurations per model
-    and task, so positive always means the metric tracks better layers. Chord recognition
-    is shown per <code>mir_eval</code> metric because the story differs by metric. Correlations
-    here cover all models with data, more than the paper&rsquo;s figure. Raw profiles:
-    <a href="https://github.com/angeloskanatas/music-fms-layer-eval/tree/master/data">data/</a>.
-  </footer>
+  <!--FOOT-->
 </body>
 </html>

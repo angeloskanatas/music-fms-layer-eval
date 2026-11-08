@@ -168,9 +168,7 @@
     1.0050692034505584
    ],
    "n_layers": 12,
-   "tags": [
-    "cherry-pick-pool"
-   ],
+   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw.json"
   },
@@ -192,9 +190,7 @@
     1.4143485379194551
    ],
    "n_layers": 12,
-   "tags": [
-    "cherry-pick-pool"
-   ],
+   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw_mlp.json"
   },
@@ -216,9 +212,7 @@
     0.9973475787658249
    ],
    "n_layers": 12,
-   "tags": [
-    "cherry-pick-pool"
-   ],
+   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw_mlp.json"
   }

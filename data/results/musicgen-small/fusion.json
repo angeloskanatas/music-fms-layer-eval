@@ -2272,6 +2272,448 @@
    "source": "probe.MTT.musicgen-small.uniform_avg",
    "version": "version_1",
    "protocol": "published-map"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "oracle",
+   "value": 85.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "middle",
+   "value": 85.5,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "last",
+   "value": 82.6,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "oracle",
+   "value": 47.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "middle",
+   "value": 47.5,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "last",
+   "value": 40.6,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "oracle",
+   "value": 64.5,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "middle",
+   "value": 63.0,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "last",
+   "value": 45.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "oracle",
+   "value": 74.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "middle",
+   "value": 70.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "last",
+   "value": 52.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "oracle",
+   "value": 58.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "middle",
+   "value": 57.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "last",
+   "value": 49.9,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "oracle",
+   "value": 68.6,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "middle",
+   "value": 66.3,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "last",
+   "value": 63.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "oracle",
+   "value": 50.15,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "middle",
+   "value": 49.9,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "last",
+   "value": 45.05,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "oracle",
+   "value": 16.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "middle",
+   "value": 15.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_ap",
+   "variant": "last",
+   "value": 11.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "oracle",
+   "value": 84.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "middle",
+   "value": 84.0,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre_auroc",
+   "variant": "last",
+   "value": 78.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "oracle",
+   "value": 47.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "middle",
+   "value": 46.9,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "last",
+   "value": 42.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "oracle",
+   "value": 19.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "middle",
+   "value": 18.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_ap",
+   "variant": "last",
+   "value": 15.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "oracle",
+   "value": 75.3,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "middle",
+   "value": 75.0,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument_auroc",
+   "variant": "last",
+   "value": 70.0,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "oracle",
+   "value": 45.05,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "middle",
+   "value": 44.95,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "last",
+   "value": 39.5,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "oracle",
+   "value": 14.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "middle",
+   "value": 14.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_ap",
+   "variant": "last",
+   "value": 9.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "oracle",
+   "value": 76.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "middle",
+   "value": 75.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood_auroc",
+   "variant": "last",
+   "value": 69.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "oracle",
+   "value": 54.2,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "middle",
+   "value": 53.95,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "last",
+   "value": 49.3,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "oracle",
+   "value": 27.0,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "middle",
+   "value": 26.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_ap",
+   "variant": "last",
+   "value": 21.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "oracle",
+   "value": 81.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "middle",
+   "value": 81.1,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50_auroc",
+   "variant": "last",
+   "value": 76.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "oracle",
+   "value": 64.7,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "middle",
+   "value": 64.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "last",
+   "value": 60.85,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "oracle",
+   "value": 38.9,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "middle",
+   "value": 38.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_ap",
+   "variant": "last",
+   "value": 33.8,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "oracle",
+   "value": 90.6,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "middle",
+   "value": 90.4,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt_auroc",
+   "variant": "last",
+   "value": 87.9,
+   "source": "downstream/data/musicgen-small.json",
+   "protocol": "single-layer reference"
   }
- ]
+ ],
+ "updated": "2026-11-08"
 }

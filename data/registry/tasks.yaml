@@ -1,105 +1,76 @@
 # canonical task registry; aliases map source-file drift onto one vocabulary
 beat_f1:
-  description: "Beat tracking F1 (GTZAN)"
+  description: "Beat tracking, GTZAN (F-measure)"
   family: rhythm
-chords_ace_mirex:
-  description: "Chord MIREX score (ChordsACE)"
-  family: tonal
-chords_ace_root:
-  description: "Chord root score (ChordsACE)"
-  family: tonal
-chords_ace_thirds:
-  description: "Chord thirds score (ChordsACE)"
-  family: tonal
 chords_ace_triads:
   description: "Chord triads score (ChordsACE)"
   family: tonal
 dimsim_acc_centered:
-  description: "Perceptual similarity accuracy, centered cosine (DimSim)"
+  description: "Perceptual similarity, DimSim (triplet accuracy, centered cosine)"
   family: similarity
 dimsim_acc_cosine:
-  description: "Perceptual similarity accuracy, cosine (DimSim)"
+  description: "Perceptual similarity, DimSim (triplet accuracy, cosine)"
   family: similarity
 dimsim_acc_l2:
-  description: "Perceptual similarity accuracy, raw L2 (DimSim)"
+  description: "Perceptual similarity, DimSim (triplet accuracy, Euclidean distance)"
   family: similarity
 downbeat_f1:
-  description: "Downbeat tracking F1 (GTZAN)"
+  description: "Downbeat tracking, GTZAN (F-measure)"
   family: rhythm
 emo_r2:
-  description: "Emotion recognition R2 (EMO)"
+  description: "Emotion regression, Emomusic (R2 of arousal and valence)"
   family: semantic
 emo_r2a:
-  description: "Emotion recognition arousal R2 (EMO)"
+  description: "Emotion regression, Emomusic (R2 of arousal)"
   family: semantic
 emo_r2v:
-  description: "Emotion recognition valence R2 (EMO)"
+  description: "Emotion regression, Emomusic (R2 of valence)"
   family: semantic
 genre:
-  description: "Genre classification accuracy (GTZAN)"
+  description: "Genre classification, GTZAN (accuracy)"
   family: semantic
 hxmsa:
-  description: "Clip-level music structure analysis accuracy (Harmonix)"
+  description: "Structural function recognition, Harmonix (clip-level accuracy)"
   family: semantic
-instrument:
-  description: "Instrument classification (NSynth)"
 key:
-  description: "Key estimation weighted score (GiantSteps)"
+  description: "Key estimation, GiantSteps (mir_eval weighted score)"
   family: tonal
-mpc:
-  description: "Music piece classification"
 mtg_genre_ap:
-  description: "Genre tagging AP (MTG-Jamendo)"
+  description: "Genre tagging, MTG-Jamendo (macro-averaged AP)"
   family: semantic
 mtg_genre_auroc:
-  description: "Genre tagging AUROC (MTG-Jamendo)"
+  description: "Genre tagging, MTG-Jamendo (macro-averaged AUROC)"
   family: semantic
 mtg_instrument_ap:
-  description: "Instrument tagging AP (MTG-Jamendo)"
+  description: "Instrument tagging, MTG-Jamendo (macro-averaged AP)"
   family: semantic
 mtg_instrument_auroc:
-  description: "Instrument tagging AUROC (MTG-Jamendo)"
+  description: "Instrument tagging, MTG-Jamendo (macro-averaged AUROC)"
   family: semantic
 mtg_mood_ap:
-  description: "Mood/theme tagging AP (MTG-Jamendo)"
+  description: "Mood and theme tagging, MTG-Jamendo (macro-averaged AP)"
   family: semantic
 mtg_mood_auroc:
-  description: "Mood/theme tagging AUROC (MTG-Jamendo)"
+  description: "Mood and theme tagging, MTG-Jamendo (macro-averaged AUROC)"
   family: semantic
 mtg_top50_ap:
-  description: "Top-50 tagging AP (MTG-Jamendo)"
+  description: "Top-50 tagging, MTG-Jamendo (macro-averaged AP)"
   family: semantic
 mtg_top50_auroc:
-  description: "Top-50 tagging AUROC (MTG-Jamendo)"
+  description: "Top-50 tagging, MTG-Jamendo (macro-averaged AUROC)"
   family: semantic
 mtt_ap:
-  description: "Auto-tagging AP (MagnaTagATune)"
+  description: "Tagging, MagnaTagATune (macro-averaged AP)"
   family: semantic
 mtt_auroc:
-  description: "Auto-tagging AUROC (MagnaTagATune)"
+  description: "Tagging, MagnaTagATune (macro-averaged AUROC)"
   family: semantic
 nsynth_instrument:
-  description: "Instrument classification accuracy (NSynth)"
+  description: "Instrument family classification, NSynth (accuracy)"
   family: timbre
 nsynth_pitch:
-  description: "Pitch classification accuracy (NSynth)"
+  description: "Pitch classification, NSynth (accuracy)"
   family: tonal
-pitch:
-  description: "Pitch classification (NSynth)"
-rd:
-  description: "Rhythm detection"
-singer:
-  description: "Singer identification (VocalSet)"
-sqc:
-  description: "Sound quality classification"
-structure:
-  description: "Music structure segmentation (Harmonix)"
-tagging_ap:
-  description: "Music tagging Average Precision (MagnaTagATune)"
-tagging_roc:
-  description: "Music tagging ROC-AUC (MagnaTagATune)"
-technique:
-  description: "Vocal technique classification (VocalSet)"
 aliases:
   emotion_r2a: emo_r2a
   emotion_r2v: emo_r2v

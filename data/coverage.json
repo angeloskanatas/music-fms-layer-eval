@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-04",
- "policy": "fill-as-we-go, append-only; new cells run 3 seeds",
+ "generated": "2026-11-08",
+ "policy": "(model, primary task) pairs not evaluated yet",
  "missing_primary_cells": {
   "musicgen-small": [
    "chords_ace_mirex",
@@ -45,107 +45,36 @@
   "mt2": [
    "beat_f1",
    "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ],
   "mt2-cls-avg": [
    "beat_f1",
    "chords_ace_mirex",
    "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ],
   "mt2-cls-contrastive": [
    "beat_f1",
    "chords_ace_mirex",
    "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ],
   "mt2-cls-equiv": [
    "beat_f1",
    "chords_ace_mirex",
    "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ],
-  "muq-paper": [
+  "mert-v2-30s": [
    "beat_f1",
    "chords_ace_mirex",
-   "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "mtt_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ],
-  "musicfm-paper": [
+  "mert-v2-fullsong": [
    "beat_f1",
    "chords_ace_mirex",
-   "dimsim_acc_centered",
-   "downbeat_f1",
-   "emo_r2",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "mtt_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
-  ],
-  "qwen2audio-instruct": [
-   "beat_f1",
-   "chords_ace_mirex",
-   "downbeat_f1",
-   "hxmsa",
-   "mtg_genre_ap",
-   "mtg_instrument_ap",
-   "mtg_mood_ap",
-   "mtg_top50_ap",
-   "mtt_ap",
-   "nsynth_instrument",
-   "nsynth_pitch"
-  ],
-  "musicflamingo": [
-   "chords_ace_mirex",
-   "hxmsa",
-   "nsynth_instrument",
-   "nsynth_pitch"
+   "downbeat_f1"
   ]
  },
- "n_missing": 112
+ "n_missing": 45
 }
