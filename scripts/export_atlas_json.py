@@ -269,6 +269,7 @@ VARIANT_LABEL = {
     "oracle": "Best single layer", "middle": "Middle layer",
     "last": "Last layer",
     "topk_avg": "Top 3, averaged", "topk_stack": "Top 3, concatenated",
+    "metric_top1": "Top 1", "metric_top3": "Best of top 3",
     "top5_avg": "Top 5, averaged", "top5_stack": "Top 5, concatenated",
     "uniform_avg": "Average", "stack": "Concatenation",
     "learned_avg": "Weighted sum", "hconv": "Hierarchical convolution",
@@ -1005,6 +1006,7 @@ def main():
     written, skipped, problems, task_registry = export_downstream()
     apply_chord_scores()
     append_fusion_reference()
+    append_metric_picks()
     write_registries(task_registry)
     n = render_atlas_table(task_registry)
     print(f"index.html rendered: {n} models")
@@ -1517,7 +1519,8 @@ def export_fusion():
 
 FUSION_GROUPS = [
     ("Single layers", ["oracle", "middle", "last"]),
-    ("Layers ranked highest by a label-free metric", ["topk_avg", "topk_stack", "top5_avg", "top5_stack"]),
+    ("Layers ranked highest by a label-free metric",
+     ["metric_top1", "metric_top3", "topk_avg", "topk_stack", "top5_avg", "top5_stack"]),
     ("All layers, no training", ["uniform_avg", "stack"]),
     ("All layers, trained", ["learned_avg", "hconv", "attentive_ciernik"]),
 ]
@@ -1590,6 +1593,74 @@ def append_fusion_reference():
             f.write_text(json.dumps(doc, indent=1))
             done.append(model_id)
     print(f"fusion reference rows added: {', '.join(done) or 'none'}")
+
+
+# The paper's layer selection: for each model and task, the layer its label-free metric ranks first and the three it
+# ranks highest (the layers the top-3 fusion rows combine), listed in this output of the selection script.
+PICKS_FILE = PROBE_DIR / "multilayer_vs_proxy_full_results.txt"
+PICKS_MODEL = {"MERT-95M": "mert-v1-95M", "MERT-330M": "mert-v1-330M", "MuQ": "muq", "MusicFM": "musicfm",
+               "OMAR-RQ-m": "omar-rq-multifeature-25hz", "MG-S": "musicgen-small", "MG-M": "musicgen-medium",
+               "MG-L": "musicgen-large", "YuE-0.5B": "yue-0.5b", "Myna": "myna"}
+
+
+def _metric_picks():
+    """(model id, probe task) -> (top-1 layer, top-3 layers), read from PICKS_FILE."""
+    picks, model, inside = {}, None, False
+    for line in PICKS_FILE.read_text().splitlines():
+        if line.startswith("PROXY LAYER SELECTIONS"):
+            inside = True
+            continue
+        if not inside:
+            continue
+        if line.startswith("====") and picks:
+            break
+        m = re.match(r"^  (\S.*?) \((\d+)L\):", line)
+        if m:
+            model = PICKS_MODEL.get(m.group(1))
+            continue
+        m = re.match(r"^\s+(\w+)\s+\[\w+\s*\]\s+top1=L\s*(\d+)\s+top3=L\[([\d, ]+)\]", line)
+        if m and model:
+            picks[(model, m.group(1))] = (int(m.group(2)), [int(x) for x in m.group(3).split(",")])
+    return picks
+
+
+def append_metric_picks():
+    """Store the single-layer scores of the paper's layer selection (top 1, and the best of the top 3) beside the
+    reference rows, scored on the same per-layer curves as those rows. Append-only."""
+    if not PICKS_FILE.exists():
+        return
+    picks, done, notes = _metric_picks(), [], []
+    for model_id in MODELS:
+        f = OUT / "results" / model_id / "fusion.json"
+        if not f.exists() or model_id in UNPUBLISHED or model_id in FUSION_EXCLUDE:
+            continue
+        doc = json.loads(f.read_text())
+        have = {(r["task"], r["variant"]) for r in doc["records"]}
+        name = MODELS[model_id]["file"]
+        down = _paper_run_records(model_id)
+        new = []
+        for probe_task, (task, _col) in FUSION_TASKS.items():
+            if (model_id, probe_task) not in picks or task in FUSION_SKIP_TASKS:
+                continue
+            top1, top3 = picks[(model_id, probe_task)]
+            for t in [task] + [x for x, _ in FUSION_EXTRA_COLS.get(probe_task, []) if x not in FUSION_SKIP_TASKS]:
+                curve = _single_layer_curve(down, t)
+                if not curve or max(top3 + [top1]) >= len(curve):
+                    notes.append(f"{model_id}/{t}: no curve for the picked layers")
+                    continue
+                for variant, layers, value in (("metric_top1", [top1], curve[top1]),
+                                               ("metric_top3", top3, max(curve[l] for l in top3))):
+                    if (t, variant) not in have:
+                        new.append({"task": t, "variant": variant, "value": round(value, 2), "layers": layers,
+                                    "source": f"downstream/data/{name}.json", "protocol": "single-layer reference"})
+        if new:
+            doc["records"] += new
+            doc["updated"] = str(date.today())
+            f.write_text(json.dumps(doc, indent=1))
+            done.append(f"{model_id} (+{len(new)})")
+    print(f"metric-pick rows added: {', '.join(done) or 'none'}")
+    for n in notes:
+        print(f"  {n}")
 
 
 def render_fusion_panel():

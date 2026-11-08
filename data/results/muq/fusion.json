@@ -2377,6 +2377,292 @@
    "value": 87.6,
    "source": "downstream/data/muq.json",
    "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top1",
+   "value": 83.1,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top3",
+   "value": 84.1,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top1",
+   "value": 66.9,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top3",
+   "value": 67.1,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top1",
+   "value": 57.9,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top3",
+   "value": 59.3,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top1",
+   "value": 64.45,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top3",
+   "value": 64.95,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top1",
+   "value": 50.55,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top3",
+   "value": 50.85,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top1",
+   "value": 46.45,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top3",
+   "value": 47.8,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top1",
+   "value": 44.15,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top3",
+   "value": 44.6,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top1",
+   "value": 54.2,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top3",
+   "value": 54.8,
+   "layers": [
+    7,
+    10,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top1",
+   "value": 64.5,
+   "layers": [
+    2
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top3",
+   "value": 64.5,
+   "layers": [
+    2,
+    1,
+    0
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top1",
+   "value": 92.5,
+   "layers": [
+    2
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top3",
+   "value": 92.5,
+   "layers": [
+    2,
+    1,
+    0
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top1",
+   "value": 76.2,
+   "layers": [
+    10
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top3",
+   "value": 78.3,
+   "layers": [
+    10,
+    9,
+    3
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top1",
+   "value": 75.7,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top3",
+   "value": 75.8,
+   "layers": [
+    7,
+    12,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top1",
+   "value": 43.1,
+   "layers": [
+    7
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top3",
+   "value": 46.5,
+   "layers": [
+    7,
+    12,
+    6
+   ],
+   "source": "downstream/data/muq.json",
+   "protocol": "single-layer reference"
   }
  ],
  "updated": "2026-11-08"

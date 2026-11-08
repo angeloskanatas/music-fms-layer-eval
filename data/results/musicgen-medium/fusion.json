@@ -2370,6 +2370,292 @@
    "value": 86.0,
    "source": "downstream/data/musicgen-medium.json",
    "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top1",
+   "value": 60.7,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top3",
+   "value": 60.7,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top1",
+   "value": 51.1,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top3",
+   "value": 53.8,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top1",
+   "value": 54.6,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top3",
+   "value": 54.6,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top1",
+   "value": 62.85,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top3",
+   "value": 62.9,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top1",
+   "value": 46.85,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top3",
+   "value": 47.4,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top1",
+   "value": 42.65,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top3",
+   "value": 42.85,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top1",
+   "value": 41.3,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top3",
+   "value": 41.55,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top1",
+   "value": 50.6,
+   "layers": [
+    29
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top3",
+   "value": 51.05,
+   "layers": [
+    29,
+    30,
+    32
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top1",
+   "value": 64.8,
+   "layers": [
+    0
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top3",
+   "value": 65.5,
+   "layers": [
+    0,
+    1,
+    43
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top1",
+   "value": 89.8,
+   "layers": [
+    0
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top3",
+   "value": 89.8,
+   "layers": [
+    0,
+    1,
+    43
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top1",
+   "value": 68.0,
+   "layers": [
+    28
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top3",
+   "value": 68.4,
+   "layers": [
+    28,
+    25,
+    27
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top1",
+   "value": 84.7,
+   "layers": [
+    28
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top3",
+   "value": 84.7,
+   "layers": [
+    28,
+    25,
+    27
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top1",
+   "value": 45.3,
+   "layers": [
+    28
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top3",
+   "value": 45.7,
+   "layers": [
+    28,
+    25,
+    27
+   ],
+   "source": "downstream/data/musicgen-medium.json",
+   "protocol": "single-layer reference"
   }
  ],
  "updated": "2026-11-08"

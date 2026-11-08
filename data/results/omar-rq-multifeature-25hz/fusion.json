@@ -2377,6 +2377,292 @@
    "value": 92.9,
    "source": "downstream/data/omar-rq-multifeature-25hz.json",
    "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top1",
+   "value": 78.3,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "genre",
+   "variant": "metric_top3",
+   "value": 78.6,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top1",
+   "value": 66.5,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "emo_r2",
+   "variant": "metric_top3",
+   "value": 66.5,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top1",
+   "value": 58.8,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "hxmsa",
+   "variant": "metric_top3",
+   "value": 59.4,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top1",
+   "value": 64.3,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtt",
+   "variant": "metric_top3",
+   "value": 64.5,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top1",
+   "value": 50.1,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_genre",
+   "variant": "metric_top3",
+   "value": 50.4,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top1",
+   "value": 46.1,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_instrument",
+   "variant": "metric_top3",
+   "value": 46.15,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top1",
+   "value": 43.9,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_mood",
+   "variant": "metric_top3",
+   "value": 44.0,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top1",
+   "value": 53.75,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "mtg_top50",
+   "variant": "metric_top3",
+   "value": 53.85,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top1",
+   "value": 67.0,
+   "layers": [
+    5
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "key",
+   "variant": "metric_top3",
+   "value": 67.0,
+   "layers": [
+    5,
+    1,
+    4
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top1",
+   "value": 93.9,
+   "layers": [
+    5
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_pitch",
+   "variant": "metric_top3",
+   "value": 93.9,
+   "layers": [
+    5,
+    1,
+    4
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top1",
+   "value": 73.3,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "nsynth_instrument",
+   "variant": "metric_top3",
+   "value": 73.3,
+   "layers": [
+    15,
+    14,
+    22
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top1",
+   "value": 74.7,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "beat_f1",
+   "variant": "metric_top3",
+   "value": 74.7,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top1",
+   "value": 45.9,
+   "layers": [
+    15
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
+  },
+  {
+   "task": "downbeat_f1",
+   "variant": "metric_top3",
+   "value": 46.4,
+   "layers": [
+    15,
+    16,
+    14
+   ],
+   "source": "downstream/data/omar-rq-multifeature-25hz.json",
+   "protocol": "single-layer reference"
   }
  ],
  "updated": "2026-11-08"
