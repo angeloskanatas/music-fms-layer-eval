@@ -20,7 +20,7 @@ SRC = Path(os.environ.get("ATLAS_SRC", "/home/akanatas/projects/layerbylayer/lay
 OUT = Path(__file__).resolve().parent.parent / "data"
 BUILD_DATE = str(date.today())  # "results as of" on every page; --render sets it from the records
 
-# canonical model id -> downstream filename stem. Variants reference their base
+# model id -> downstream filename stem. Variants reference their base
 # via variant_of; paper-replication files use the source paper's task keys.
 # display = the paper's official model name (tex Table 1 / source papers).
 # readout_of groups architecture-specific readouts of ONE model (MT2's
@@ -103,7 +103,7 @@ for _mid, _display, _base in _VARIANTS:
     MODELS[_mid] = {"file": _mid, "display": _display, "family": MODELS[_base]["family"], "in_paper": False,
                     "pending": True}
 
-# alias -> canonical task key (drift found in the source files)
+# other spellings of a task in the source files -> its key
 TASK_ALIASES = {"emotion_r2a": "emo_r2a", "emotion_r2v": "emo_r2v"}
 
 # Metrics that exist in probe outputs but must NEVER be exported or rendered.
@@ -1025,7 +1025,7 @@ def main():
 
 
 # ------------- label-free metric profiles -------------
-# One record per (model, metric, variant); the variants used in the paper carry the tag paper-canonical.
+# One record per (model, metric, variant).
 
 METRIC_PREFIX = {
     "mert-v1-95M": "mert-95M", "mert-v1-330M": "mert-330M", "musicfm": "musicfm",
@@ -1167,7 +1167,9 @@ def export_metrics():
                     "source": f.name,
                 })
         # PTE / CPSD equivariance: {linear,mlp} x {phase,cpsd} RMSE configs
-        for fsuf, probe in [("", "linear"), ("_mlp", "mlp")]:
+        # PTE records only for models with the linear-probe run, the probe of the paper's definition (Section 2.2)
+        has_linear_pte = (SRC / "cpsd_equivariance" / "data" / f"{prefix}.json").exists()
+        for fsuf, probe in [("", "linear"), ("_mlp", "mlp")] if has_linear_pte else []:
             f = SRC / "cpsd_equivariance" / "data" / f"{prefix}{fsuf}.json"
             if not f.exists():
                 continue
@@ -1252,7 +1254,7 @@ METRIC_ROW_LABEL = {
     ("anisotropy", "spectral"): "Anisotropy",
     ("infonce", "default"): "InfoNCE", ("lidar", "default"): "LiDAR",
     ("curvature", "default"): "Curvature",
-    ("pte", "best"): "PTE",                     # the paper's PTE rule, over the stored PTE variants
+    ("pte", "profiles"): "PTE",
 }
 # chord recognition is shown per mir_eval metric, never aggregated (the metrics differ in what they credit)
 CORR_EXTRA_TASKS = {"chords_ace_root", "chords_ace_thirds", "chords_ace_triads"}
@@ -1281,9 +1283,8 @@ def _spearman(x, y):
 
 
 def render_correlations(task_registry):
-    """corr.html: mean within-model Spearman between each canonical metric
-    profile and each primary task's layer curve. Recomputed from data/;
-    conventions stated on the page."""
+    """corr.html: mean within-model Spearman between each metric profile and each primary task's layer curve,
+    recomputed from data/."""
     rows_data = {}                              # model -> {(metric,variant): layers}
     tasks_data = {}                             # model -> {task: layers}
     fam_of = {}
@@ -1300,7 +1301,7 @@ def render_correlations(task_registry):
         mrecs = json.loads(mf.read_text())["records"]
         rows_data[model_id] = {(r["metric"], r["variant"]): r for r in mrecs
                                if (r["metric"], r["variant"]) in METRIC_ROW_LABEL}
-        rows_data[model_id][("pte", "best")] = [r["layers"] for r in mrecs if r["metric"] == "pte"]
+        rows_data[model_id][("pte", "profiles")] = [r["layers"] for r in mrecs if r["metric"] == "pte"]
         tasks_data[model_id] = {
             r["task"]: r["layers"]
             for r in primary_records(json.loads(df.read_text())["records"])
@@ -1326,17 +1327,11 @@ def render_correlations(task_registry):
                     curve = tasks_data.get(m, {}).get(t)
                     if not curve:
                         continue
-                    if key == ("pte", "best"):  # the paper's PTE rule
-                        best = None
-                        for layers in rows_data.get(m, {}).get(key, []):
-                            if len(layers) != len(curve):
-                                continue
-                            r = _spearman(layers, curve)
-                            if best is None or abs(r) > abs(best):
-                                best = r
-                        if best is None:
-                            continue
-                        vals.append((m, -best))  # PTE convention: negate RMSE-rho
+                    if key == ("pte", "profiles"):
+                        rs = [_spearman(layers, curve) for layers in rows_data.get(m, {}).get(key, [])
+                              if len(layers) == len(curve)]
+                        if rs:
+                            vals.append((m, -max(rs, key=abs)))   # PTE profiles are errors
                         continue
                     rec = rows_data.get(m, {}).get(key)
                     if not rec or len(rec["layers"]) != len(curve):
@@ -1389,9 +1384,8 @@ import csv
 
 PROBE_DIR = Path("/home/akanatas/projects/layerbylayer/MARBLE/output")
 
-# canonical task -> test column map, verbatim from
-# MARBLE/scripts/analyze_multilayer_vs_proxy.py:534 (the published protocol;
-# tagging = avg(AP, AUROC) there). Tempo columns are never in this map.
+# task of the fusion runs -> its test column; tagging scores are the mean of AP and AUROC. Tempo columns are never
+# read.
 FUSION_TASKS = {
     "GS":               ("key", "test/weighted_score"),
     "NSynthP":          ("nsynth_pitch", "test/file_acc"),
