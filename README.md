@@ -21,7 +21,7 @@ The site is at **https://angeloskanatas.github.io/music-fms-layer-eval/** and ha
 - [Layer selection](https://angeloskanatas.github.io/music-fms-layer-eval/fusion.html): the best single layer
   against the layers ranked highest by a metric and against multi-layer fusion.
 
-We keep adding models and tasks. The pages mark the models evaluated after the paper with a +.
+We keep adding models, tasks and probes.
 
 ## Data
 
