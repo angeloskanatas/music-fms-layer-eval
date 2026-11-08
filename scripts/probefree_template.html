@@ -42,7 +42,7 @@
     thead th { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em;
                color: var(--ink-2); border-bottom: 2px solid var(--line);
                position: sticky; top: 0; background: var(--bg); cursor: pointer; }
-    thead th.detail { text-transform: none; letter-spacing: 0; }
+    .gstart { border-left: 1px solid #cbd5e1; }  /* first column of each group */
     th.famgrp { text-align: center; border-bottom: 1px solid var(--line); }
     th.famgrp.expandable:hover { color: var(--accent); }
     .num { text-align: right; font-variant-numeric: tabular-nums; }
@@ -115,9 +115,11 @@
       const cells = document.querySelectorAll('.detail.d-' + fam);
       const show = cells[0] && cells[0].hidden;
       cells.forEach(c => c.hidden = !show);
+      th.colSpan = Number(th.dataset.np) + (show ? Number(th.dataset.nc) : 0);
       th.querySelector('.chev').innerHTML = show ? '&#9662;' : '&#9656;';
       e.stopPropagation();
     });
+  });
   });
   // click-to-sort on any header with data-sort
   document.querySelectorAll('thead th[data-sort]').forEach((th) => {

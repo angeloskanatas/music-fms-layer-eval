@@ -669,38 +669,39 @@ def render_atlas_table(task_registry):
     # column groups of a table: (group id, shown tasks, tasks behind the group's expander)
     task_groups = [(tf, prim_tasks[tf], comp_tasks[tf]) for tf in TASK_FAMILY_ORDER]
 
-    def th_task(t, tf, hidden):
+    def th_task(t, tf, hidden, first=False):
         h = " hidden" if hidden else ""
-        cls = "detail d-" + tf if hidden else "ptask"
+        cls = ("detail d-" + tf if hidden else "ptask") + (" gstart" if first else "")
         label = TASK_LABEL.get(t, t)
         desc = escape(task_registry.get(t, t))
         return f"<th class='{cls}' data-sort='num'{h} title='{desc}'>{label}</th>"
 
     def th_group(g, label, n_p, n_c, title=""):
+        # the header widens over the extra columns when they are expanded (data-np, data-nc)
         exp = (f" <span class='chev' title='{n_c} more'>&#9656;</span>"
                if n_c else "")
-        return (f"<th colspan='{n_p}' class='famgrp{' expandable' if n_c else ''}' "
-                f"data-fam='{g}'{title}>{label}{exp}</th>")
+        return (f"<th colspan='{n_p}' class='famgrp gstart{' expandable' if n_c else ''}' "
+                f"data-fam='{g}' data-np='{n_p}' data-nc='{n_c}'{title}>{label}{exp}</th>")
 
     head_lead = ("<tr><th rowspan='2' data-sort='str'>Model</th>"
                  "<th rowspan='2' data-sort='str'>Paradigm</th>"
                  "<th rowspan='2' data-sort='num' title='Parameters of the evaluated "
-                 "encoder, as reported in each paper (audio tower for two-tower models, "
-                 "decoder for autoregressive)'>Params</th>")
+                 "encoder (audio tower of two-tower models, decoder of autoregressive "
+                 "models)'>Params</th>")
     head_top = [head_lead]
     head_sub = ["<tr>"]
     for tf, shown, companions in task_groups:
         head_top.append(th_group(tf, tf.capitalize(), len(shown), len(companions)))
-        for t in shown:
-            head_sub.append(th_task(t, tf, hidden=False))
+        for i, t in enumerate(shown):
+            head_sub.append(th_task(t, tf, hidden=False, first=i == 0))
         for t in companions:
             head_sub.append(th_task(t, tf, hidden=True))
     head_top.append("</tr>")
     head_sub.append("</tr>")
 
-    def cell(pt, tf, hidden, digits=1):
+    def cell(pt, tf, hidden, digits=1, first=False):
         h = " hidden" if hidden else ""
-        cls = ("detail d-" + tf) if hidden else "ptask"
+        cls = (("detail d-" + tf) if hidden else "ptask") + (" gstart" if first else "")
         if pt is None:
             return f"<td class='num {cls} na'{h} title='not evaluated'>&mdash;</td>"
         cv = (f"<sup class='cav' title='{pt['caveat']}'>&dagger;</sup>"
@@ -729,8 +730,8 @@ def render_atlas_table(task_registry):
                       "<td class='num na' data-val='-1' title='not verified'>&mdash;</td>")(PARAMS.get(m['id']))]
             for g, shown, companions in groups:
                 digits = SCORE_DIGITS.get(g, 1)
-                for t in shown:
-                    cells.append(cell(m["per_task"].get(t), g, hidden=False, digits=digits))
+                for i, t in enumerate(shown):
+                    cells.append(cell(m["per_task"].get(t), g, hidden=False, digits=digits, first=i == 0))
                 for t in companions:
                     cells.append(cell(m["per_task"].get(t), g, hidden=True, digits=digits))
             cells.append("</tr>")
@@ -773,8 +774,8 @@ def render_atlas_table(task_registry):
         free_top, free_sub = [head_lead], ["<tr>"]
         for g, shown, companions in free_groups:
             free_top.append(th_group(g, readout_label(g), len(shown), len(companions), f" title='{about[g]}'"))
-            for t in shown:
-                free_sub.append(th_task(t, g, hidden=False))
+            for i, t in enumerate(shown):
+                free_sub.append(th_task(t, g, hidden=False, first=i == 0))
             for t in companions:
                 free_sub.append(th_task(t, g, hidden=True))
         ftpl = page_template("probefree", COMPANIONS=any(companions for _, _, companions in free_groups))
@@ -898,13 +899,13 @@ def cheatsheet_parts():
                       if TASK_FAMILY[t] == tf and t in PRIMARY_METRICS]
                  for tf in TASK_FAMILY_ORDER}
     famhead = "".join(
-        f"<th class='num' title='{', '.join(TASK_LABEL.get(t, t) for t in fam_tasks[tf])}'>"
+        f"<th class='num gstart' title='{', '.join(TASK_LABEL.get(t, t) for t in fam_tasks[tf])}'>"
         f"{tf.capitalize()}</th>" for tf in TASK_FAMILY_ORDER)
 
     def cell(m, tf):
         tasks = [t for t in fam_tasks[tf] if t in m["per_task"]]
         if not tasks:
-            return "<td class='num na' title='not evaluated'>&mdash;</td>"
+            return "<td class='num na gstart' title='not evaluated'>&mdash;</td>"
         curves = [norm(m["per_task"][t]["scores"]) for t in tasks]
         n = len(curves[0])
         mean = [sum(c[i] for c in curves) / len(curves) for i in range(n)]
@@ -915,7 +916,7 @@ def cheatsheet_parts():
         dp = round(100 * best / max(n - 1, 1))
         det = "; ".join(f"{TASK_LABEL.get(t, t)} best L{m['per_task'][t]['best']}"
                         for t in tasks)
-        return (f"<td class='num band' title='top-3 layers of the family-mean curve "
+        return (f"<td class='num band gstart' title='top-3 layers of the family-mean curve "
                 f"({len(tasks)} task{'s' if len(tasks) > 1 else ''}): {det}'>"
                 f"<span class='sc'>{band}"
                 f"<span class='lyr'>best L{best}, {dp}% depth</span></span>"
