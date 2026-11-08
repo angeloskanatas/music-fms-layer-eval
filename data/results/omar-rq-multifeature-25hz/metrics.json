@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "omar-rq-multifeature-25hz",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -35,10 +35,6 @@
     24.330709035714833
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube_gride_k8.json"
   },
@@ -72,9 +68,6 @@
     27.594235352672214
    ],
    "n_layers": 24,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube_twonn.json"
   },
@@ -108,9 +101,6 @@
     1.3878105145702493
    ],
    "n_layers": 24,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube.json"
   },
@@ -144,9 +134,6 @@
     363.7279357910156
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube.json"
   },
@@ -180,9 +167,6 @@
     0.17294110357761383
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube_spectral.json"
   },
@@ -216,9 +200,6 @@
     0.45454761385917664
    ],
    "n_layers": 24,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube_cosine_nol2_nocenter.json"
   },
@@ -252,9 +233,6 @@
     7.661145210266113
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "omar-rq-multifeature-25hz_discotube.json"
   },
@@ -262,37 +240,34 @@
    "metric": "curvature",
    "variant": "default",
    "layers": [
-    1.1203075446486472,
-    1.1396697535514833,
-    1.1610527614355086,
-    1.1868435627818108,
-    1.205170301437378,
-    1.2182607241868972,
-    1.2271137912869454,
-    1.2356800842285156,
-    1.2391614226698875,
-    1.2505208453536034,
-    1.2520066376924515,
-    1.252244621515274,
-    1.253612974047661,
-    1.2513547449707985,
-    1.256051290690899,
-    1.2655335137248038,
-    1.2644066202640534,
-    1.2550516439676285,
-    1.2489712702035904,
-    1.2333145838975907,
-    1.211888570010662,
-    1.207600688457489,
-    1.2300740612745285,
-    1.252916650354862
+    2.0164587080478666,
+    1.996827808737755,
+    1.9746103467941285,
+    1.9471508463025093,
+    1.9278035235404969,
+    1.912366381585598,
+    1.9017762365341186,
+    1.8916663737893105,
+    1.8876564396619797,
+    1.875343127310276,
+    1.872855034172535,
+    1.8725685896873474,
+    1.8705487803816796,
+    1.8723862394690514,
+    1.8682344441413878,
+    1.8582150275111198,
+    1.859947704911232,
+    1.869934296131134,
+    1.8753849992156029,
+    1.8855254201889038,
+    1.8880587260723114,
+    1.8846966275572776,
+    1.871920299589634,
+    1.8238348081707954
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
-   "source": "omar-rq-multifeature-25hz_discotube_n1000_s42.json"
+   "source": "omar-rq-multifeature-25hz_discotube_signed_n1000_s42.json"
   },
   {
    "metric": "pte",
@@ -324,10 +299,6 @@
     0.4444227394888863
    ],
    "n_layers": 24,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "omar-rq-multifeature-25hz.json"
   },
@@ -361,7 +332,6 @@
     0.45450555872853704
    ],
    "n_layers": 24,
-   "tags": [],
    "lower_is_better": true,
    "source": "omar-rq-multifeature-25hz.json"
   },
@@ -395,7 +365,6 @@
     0.403473860313166
    ],
    "n_layers": 24,
-   "tags": [],
    "lower_is_better": true,
    "source": "omar-rq-multifeature-25hz_mlp.json"
   },
@@ -429,7 +398,6 @@
     0.3864467301683655
    ],
    "n_layers": 24,
-   "tags": [],
    "lower_is_better": true,
    "source": "omar-rq-multifeature-25hz_mlp.json"
   },
@@ -463,10 +431,6 @@
     1.3808013895710427
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -499,10 +463,6 @@
     0.4547061982056201
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -535,10 +495,6 @@
     0.17379643157646402
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -571,10 +527,6 @@
     2.0309445538744484
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -607,10 +559,6 @@
     364.2796157048548
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -643,10 +591,6 @@
     0.9471822075946992
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -679,10 +623,6 @@
     20.743902205747634
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -715,10 +655,6 @@
     0.172506924716722
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -751,10 +687,6 @@
     24.457588280072464
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -787,10 +719,6 @@
     27.060329066964368
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -823,10 +751,6 @@
     21.58677645476392
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -859,10 +783,6 @@
     23.340571565975043
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -895,10 +815,6 @@
     27.46706546123313
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -931,10 +847,6 @@
     0.41334833565108614
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -967,10 +879,6 @@
     0.020769883142483726
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -1003,10 +911,6 @@
     0.017046855812851924
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -1039,10 +943,6 @@
     0.23276173210298365
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -1075,10 +975,6 @@
     0.47906132152840464
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
   },
   {
@@ -1111,11 +1007,40 @@
     -1.9797276680769722
    ],
    "n_layers": 24,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/omar-rq-multifeature-25hz.json"
+  },
+  {
+   "metric": "lidar",
+   "variant": "default",
+   "layers": [
+    121.8657916893685,
+    118.8880049853302,
+    121.6805835444766,
+    123.41836805767902,
+    132.24951738761624,
+    147.002295398776,
+    177.33669575702413,
+    211.26751358378357,
+    227.53075731186095,
+    233.84646543640528,
+    233.47111476688,
+    227.27065588924623,
+    221.9541370657434,
+    231.3198147970705,
+    239.47366780249064,
+    242.34518390829905,
+    246.5403375098458,
+    247.13817381845365,
+    245.70030719924878,
+    237.04538138215946,
+    229.39429170697505,
+    193.24582376524998,
+    169.05995409337783,
+    163.373612204918
+   ],
+   "n_layers": 24,
+   "corpus": "discotube",
+   "source": "omar-rq-multifeature-25hz_discotube.json"
   }
  ],
  "updated": "2026-11-08"

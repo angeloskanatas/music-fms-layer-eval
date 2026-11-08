@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "yue-7b",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -44,9 +44,6 @@
     23.24258764189222
    ],
    "n_layers": 33,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube_twonn.json"
   },
@@ -89,9 +86,6 @@
     1.8582970997149693
    ],
    "n_layers": 33,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube.json"
   },
@@ -134,9 +128,6 @@
     568.4981079101562
    ],
    "n_layers": 33,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube.json"
   },
@@ -179,9 +170,6 @@
     0.17357048392295837
    ],
    "n_layers": 33,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube_spectral.json"
   },
@@ -224,9 +212,6 @@
     0.9567627906799316
    ],
    "n_layers": 33,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube_cosine_nol2_nocenter.json"
   },
@@ -269,9 +254,6 @@
     7.945472240447998
    ],
    "n_layers": 33,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "yue-7b_discotube.json"
   },
@@ -279,46 +261,43 @@
    "metric": "curvature",
    "variant": "default",
    "layers": [
-    1.0374493851661681,
-    1.0514173994660378,
-    1.0541595205664636,
-    1.1391482929587364,
-    1.116914517700672,
-    1.097223547399044,
-    1.0800971443653107,
-    1.0794439005851746,
-    1.0871498582959176,
-    1.0892284890413284,
-    1.0928022000193596,
-    1.0897281317710876,
-    1.091403740465641,
-    1.0866938368678094,
-    1.0832352405190468,
-    1.075543057203293,
-    1.0678776943087578,
-    1.0606564681828021,
-    1.0646736477315426,
-    1.0654852285683154,
-    1.0665858908593655,
-    1.0655727470517158,
-    1.0582815333008766,
-    1.055022197186947,
-    1.049528834760189,
-    1.0458382285237313,
-    1.0422127937674524,
-    1.037064799696207,
-    1.032877220094204,
-    1.0289239962100982,
-    1.0276391260921955,
-    1.0235551049411298,
-    0.9594944936335087
+    2.090229503631592,
+    2.072433957695961,
+    2.083007517337799,
+    1.9896662051677705,
+    2.0099838992357255,
+    2.0260539737939833,
+    2.041860907793045,
+    2.0409364805221557,
+    2.032914383172989,
+    2.029446790099144,
+    2.024419253587723,
+    2.028650997519493,
+    2.027091402411461,
+    2.031902830958366,
+    2.034973469018936,
+    2.0427699407339097,
+    2.0500490485429763,
+    2.0572387638092042,
+    2.0535687170028685,
+    2.051008089542389,
+    2.0493115459680555,
+    2.0492156101465224,
+    2.0558415188789367,
+    2.0582123069763183,
+    2.0633321059942245,
+    2.066323452591896,
+    2.0695146803855895,
+    2.0734345388412474,
+    2.076750471830368,
+    2.079529844760895,
+    2.080338117003441,
+    2.083224359154701,
+    2.1140889896154405
    ],
    "n_layers": 33,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
-   "source": "yue-7b_discotube.json"
+   "source": "yue-7b_discotube_signed_n1000_s42.json"
   },
   {
    "metric": "pte",
@@ -359,10 +338,6 @@
     0.5566549928991985
    ],
    "n_layers": 33,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "yue-7b.json"
   },
@@ -405,7 +380,6 @@
     0.5167113097588736
    ],
    "n_layers": 33,
-   "tags": [],
    "lower_is_better": true,
    "source": "yue-7b.json"
   },
@@ -448,7 +422,6 @@
     0.5608714882326656
    ],
    "n_layers": 33,
-   "tags": [],
    "lower_is_better": true,
    "source": "yue-7b_mlp.json"
   },
@@ -491,7 +464,6 @@
     0.5021145968750638
    ],
    "n_layers": 33,
-   "tags": [],
    "lower_is_better": true,
    "source": "yue-7b_mlp.json"
   },
@@ -534,10 +506,6 @@
     1.872936831527367
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -579,10 +547,6 @@
     0.9573549812085255
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -624,10 +588,6 @@
     0.17479910800709095
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -669,10 +629,6 @@
     2.0242302803102814
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -714,10 +670,6 @@
     569.2227639240214
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -759,10 +711,6 @@
     0.9884194100630403
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -804,10 +752,6 @@
     64.66842711139763
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -849,10 +793,6 @@
     0.34675492716024875
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -894,10 +834,6 @@
     20.407367427257732
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -939,10 +875,6 @@
     22.551967577494498
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -984,10 +916,6 @@
     18.03592484849886
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1029,10 +957,6 @@
     21.554234440154946
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1074,10 +998,6 @@
     23.440195456602247
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1119,10 +1039,6 @@
     0.038685285546820006
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1164,10 +1080,6 @@
     0.0020122684722953454
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1209,10 +1121,6 @@
     0.0030396613356191452
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1254,10 +1162,6 @@
     0.917062781912005
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1299,10 +1203,6 @@
     0.029406367285955578
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
   },
   {
@@ -1344,11 +1244,91 @@
     -0.16643399420786606
    ],
    "n_layers": 33,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/yue-7b.json"
+  },
+  {
+   "metric": "id",
+   "variant": "gride_k8",
+   "layers": [
+    25.360445125074968,
+    25.0810121941278,
+    22.45654081841608,
+    21.32220770425969,
+    23.520328529981924,
+    23.968660599057237,
+    24.495157795162896,
+    25.345431114240633,
+    22.23863600107868,
+    23.61668219408297,
+    25.459499039865534,
+    27.409295405830697,
+    28.751039903539088,
+    29.651608083810807,
+    29.736248923057367,
+    29.371582017392072,
+    29.325221233442164,
+    29.04493445517091,
+    28.866230188159356,
+    28.514850564794116,
+    28.927712725216203,
+    28.862200650446844,
+    28.50770232193623,
+    27.777513266299067,
+    27.234287845459384,
+    27.00237600881446,
+    26.830182844241577,
+    26.317849129479526,
+    25.907979189082127,
+    25.704894784092467,
+    25.463877881401892,
+    24.97705783947304,
+    20.346771624820512
+   ],
+   "n_layers": 33,
+   "corpus": "discotube",
+   "source": "yue-7b_discotube_gride.json"
+  },
+  {
+   "metric": "lidar",
+   "variant": "default",
+   "layers": [
+    128.8059493521934,
+    498.9941592516381,
+    487.1746048747656,
+    517.2307733010041,
+    582.0385631471405,
+    592.3433978076431,
+    617.2258273297269,
+    639.6985708285802,
+    659.1571300740834,
+    668.9421870193743,
+    674.7137499566452,
+    678.293545592809,
+    681.0631235084848,
+    684.9178388073783,
+    678.240751431062,
+    673.6636628217228,
+    665.4905523487618,
+    659.6718962911494,
+    652.2844080969846,
+    649.6249866824604,
+    646.5360156410654,
+    640.8546912505445,
+    633.6937699715663,
+    631.7712869549333,
+    628.7074283327714,
+    626.9083585080447,
+    626.1523617365508,
+    624.6139508650817,
+    623.6871576959471,
+    623.9152900479407,
+    624.3531055193824,
+    623.2326385116634,
+    608.3749782553956
+   ],
+   "n_layers": 33,
+   "corpus": "discotube",
+   "source": "yue-7b_discotube.json"
   }
  ],
  "updated": "2026-11-08"

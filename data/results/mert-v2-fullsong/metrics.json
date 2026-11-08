@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "mert-v2-fullsong",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-11-08",
  "records": [
   {
@@ -36,10 +36,6 @@
     24.71266383221416
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube_gride_k8.json"
   },
@@ -74,9 +70,6 @@
     28.631935609306563
    ],
    "n_layers": 25,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube_twonn.json"
   },
@@ -111,9 +104,6 @@
     1.0860503852398178
    ],
    "n_layers": 25,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube.json"
   },
@@ -148,9 +138,6 @@
     513.1660766601562
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube.json"
   },
@@ -185,9 +172,6 @@
     0.16863805055618286
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube_spectral.json"
   },
@@ -222,9 +206,6 @@
     0.7109586000442505
    ],
    "n_layers": 25,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube_cosine_nol2_nocenter.json"
   },
@@ -259,9 +240,6 @@
     7.032702922821045
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube.json"
   },
@@ -296,9 +274,6 @@
     271.4394306880435
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-fullsong_discotube_effective_rank.json"
   },
@@ -333,10 +308,6 @@
     1.0860503391173684
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -370,10 +341,6 @@
     0.7109585942933327
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -407,10 +374,6 @@
     0.1686380509222126
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -444,10 +407,6 @@
     2.4341033871406257
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -481,10 +440,6 @@
     513.1650202383033
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -518,10 +473,6 @@
     0.9063856079738106
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -555,10 +506,6 @@
     16.830290028951417
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -592,10 +539,6 @@
     0.298832543331392
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -629,10 +572,6 @@
     24.71266383221416
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -666,10 +605,6 @@
     27.593730282150844
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -703,10 +638,6 @@
     21.747724697868442
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -740,10 +671,6 @@
     26.690226156627
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -777,10 +704,6 @@
     28.63193560933508
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -814,10 +737,6 @@
     0.2661559203975255
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -851,10 +770,6 @@
     0.01634750431275489
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -888,10 +803,6 @@
     0.020654227759974695
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -925,10 +836,6 @@
     0.5132636734832795
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -962,10 +869,6 @@
     0.5927197106325508
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   },
   {
@@ -999,10 +902,6 @@
     -1.095683785366872
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-fullsong.json"
   }
  ]

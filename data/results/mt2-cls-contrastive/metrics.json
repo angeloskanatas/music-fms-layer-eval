@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "mt2-cls-contrastive",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -24,9 +24,6 @@
     19.93714280561075
    ],
    "n_layers": 13,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-contrastive_discotube_twonn.json"
   },
@@ -49,9 +46,6 @@
     1.2275870483243498
    ],
    "n_layers": 13,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-contrastive_discotube.json"
   },
@@ -74,9 +68,6 @@
     133.10928344726562
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-contrastive_discotube.json"
   },
@@ -99,9 +90,6 @@
     0.050960611552000046
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-contrastive_discotube_spectral.json"
   },
@@ -124,9 +112,6 @@
     8.32644271850586
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-contrastive_discotube.json"
   },
@@ -149,10 +134,6 @@
     0.42060986990062943
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "mt2-cls-contrastive.json"
   },
@@ -175,7 +156,6 @@
     0.3828233069768162
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-contrastive.json"
   },
@@ -198,7 +178,6 @@
     0.38983613814867807
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-contrastive_mlp.json"
   },
@@ -221,9 +200,31 @@
     0.3620364161756014
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-contrastive_mlp.json"
+  },
+  {
+   "metric": "lidar",
+   "variant": "default",
+   "layers": [
+    47.09652570530652,
+    51.5249134564406,
+    53.744190017020095,
+    54.88567533797878,
+    54.41220913108775,
+    55.02592539499383,
+    55.992304881193576,
+    56.21570594146589,
+    58.03072364917392,
+    62.562500410543194,
+    69.90188449376885,
+    76.8071001727798,
+    88.88225919468037
+   ],
+   "n_layers": 13,
+   "corpus": "discotube",
+   "source": "mt2-cls-contrastive_discotube.json"
   }
- ]
+ ],
+ "updated": "2026-11-08"
 }

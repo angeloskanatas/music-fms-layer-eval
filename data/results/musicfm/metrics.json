@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "musicfm",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -24,10 +24,6 @@
     27.68994569058085
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube_gride_k8.json"
   },
@@ -50,9 +46,6 @@
     31.560573837115474
    ],
    "n_layers": 13,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube_twonn.json"
   },
@@ -75,9 +68,6 @@
     1.250662159449877
    ],
    "n_layers": 13,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube.json"
   },
@@ -100,9 +90,6 @@
     433.9173278808594
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube.json"
   },
@@ -125,9 +112,6 @@
     0.10066689550876617
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube_spectral.json"
   },
@@ -150,9 +134,6 @@
     0.0013818079605698586
    ],
    "n_layers": 13,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube_cosine.json"
   },
@@ -175,9 +156,6 @@
     7.805047512054443
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube.json"
   },
@@ -200,9 +178,6 @@
     294.9771526372924
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicfm_discotube_effective_rank.json"
   },
@@ -210,26 +185,23 @@
    "metric": "curvature",
    "variant": "default",
    "layers": [
-    1.3140421101927757,
-    1.321844511628151,
-    1.3395300615191459,
-    1.349425030732155,
-    1.3460502141594888,
-    1.342592012321949,
-    1.3431998510122298,
-    1.355983558487892,
-    1.3472592484116555,
-    1.3538769594073297,
-    1.3576575722694397,
-    1.3435136717438698,
-    1.3411119011282921
+    1.807764621257782,
+    1.7978816244602203,
+    1.778600685954094,
+    1.7646934025287628,
+    1.7691758989095687,
+    1.772626411318779,
+    1.7683618419766427,
+    1.761372587800026,
+    1.7697196616530417,
+    1.7611097603440284,
+    1.7568839282393456,
+    1.739601391851902,
+    1.7039055919647217
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
-   "source": "musicfm_discotube.json"
+   "source": "musicfm_discotube_signed_n1000_s42.json"
   },
   {
    "metric": "alpha_req",
@@ -250,10 +222,6 @@
     1.25215374563431
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -275,10 +243,6 @@
     0.7281268952331871
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -300,10 +264,6 @@
     0.10170145320857077
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -325,10 +285,6 @@
     2.1762196744475473
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -350,10 +306,6 @@
     433.8471531341355
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -375,10 +327,6 @@
     0.9298502109826411
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -400,10 +348,6 @@
     15.82536624557603
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -425,10 +369,6 @@
     0.3116119112264374
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -450,10 +390,6 @@
     27.610751627757473
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -475,10 +411,6 @@
     30.54429081150838
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -500,10 +432,6 @@
     24.64934310540532
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -525,10 +453,6 @@
     34.31607938423832
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -550,10 +474,6 @@
     31.734432840169223
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -575,10 +495,6 @@
     0.25737130260992513
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -600,10 +516,6 @@
     0.015802915414481103
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -625,10 +537,6 @@
     0.02647769739229657
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -650,10 +558,6 @@
     0.5370431466924048
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -675,10 +579,6 @@
     0.5307888437822427
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
   },
   {
@@ -700,11 +600,51 @@
     -1.0348879220145037
    ],
    "n_layers": 13,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicfm.json"
+  },
+  {
+   "metric": "pte",
+   "variant": "mlp_phase",
+   "layers": [
+    0.3079089015977697,
+    0.3343668476057301,
+    0.41106286686407106,
+    0.4440243233306602,
+    0.43696605003964084,
+    0.4982302105579064,
+    0.47928605065661684,
+    0.5392744404099207,
+    0.5708880839430659,
+    0.5982477566852673,
+    0.6139954702663769,
+    0.603694926172684,
+    0.6132296467040037
+   ],
+   "n_layers": 13,
+   "lower_is_better": true,
+   "source": "musicfm_mlp.json"
+  },
+  {
+   "metric": "pte",
+   "variant": "mlp_cpsd",
+   "layers": [
+    0.32347589439983676,
+    0.3632166675501575,
+    0.43472723149104564,
+    0.48545988307005083,
+    0.4547762395990807,
+    0.5429567269590226,
+    0.46212106993465063,
+    0.5176292053980228,
+    0.5496928235046176,
+    0.5683221754194768,
+    0.5843331677601895,
+    0.5416339687112833,
+    0.5340492174156803
+   ],
+   "n_layers": 13,
+   "lower_is_better": true,
+   "source": "musicfm_mlp.json"
   }
  ],
  "updated": "2026-11-08"

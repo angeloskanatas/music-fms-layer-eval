@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "maest",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -23,9 +23,6 @@
     31.24786176845203
    ],
    "n_layers": 12,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "maest-30s-discogs-pw_discotube_twonn.json"
   },
@@ -47,9 +44,6 @@
     0.9118080487506941
    ],
    "n_layers": 12,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "maest-30s-discogs-pw_discotube.json"
   },
@@ -71,9 +65,6 @@
     1505.3016357421875
    ],
    "n_layers": 12,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "maest-30s-discogs-pw_discotube.json"
   },
@@ -95,9 +86,6 @@
     0.06943058967590332
    ],
    "n_layers": 12,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "maest-30s-discogs-pw_discotube_spectral.json"
   },
@@ -119,9 +107,6 @@
     6.963039398193359
    ],
    "n_layers": 12,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "maest-30s-discogs-pw_discotube.json"
   },
@@ -143,10 +128,6 @@
     1.426823441538465
    ],
    "n_layers": 12,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw.json"
   },
@@ -168,7 +149,6 @@
     1.0050692034505584
    ],
    "n_layers": 12,
-   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw.json"
   },
@@ -190,7 +170,6 @@
     1.4143485379194551
    ],
    "n_layers": 12,
-   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw_mlp.json"
   },
@@ -212,9 +191,51 @@
     0.9973475787658249
    ],
    "n_layers": 12,
-   "tags": [],
    "lower_is_better": true,
    "source": "maest-30s-discogs-pw_mlp.json"
+  },
+  {
+   "metric": "id",
+   "variant": "gride_k8",
+   "layers": [
+    11.936637242108844,
+    12.935359273010484,
+    15.773635671770638,
+    18.975845735024805,
+    22.557350972995486,
+    25.720525213439444,
+    27.06093192581487,
+    27.65744396221239,
+    27.498134875875635,
+    26.273187425452605,
+    26.251433789131376,
+    26.12940405298557
+   ],
+   "n_layers": 12,
+   "corpus": "discotube",
+   "source": "maest-30s-discogs-pw_discotube_gride.json"
+  },
+  {
+   "metric": "lidar",
+   "variant": "default",
+   "layers": [
+    134.38934673899186,
+    262.1498902019001,
+    371.18861057335755,
+    466.8964634539694,
+    586.1863516892928,
+    700.2379821867754,
+    810.8241909359948,
+    885.9535394465767,
+    940.3709658486401,
+    996.4154798311736,
+    1076.0429046025704,
+    1101.989061640455
+   ],
+   "n_layers": 12,
+   "corpus": "discotube",
+   "source": "maest-30s-discogs-pw_discotube.json"
   }
- ]
+ ],
+ "updated": "2026-11-08"
 }

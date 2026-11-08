@@ -107,10 +107,8 @@ for _mid, _display, _base in _VARIANTS:
 TASK_ALIASES = {"emotion_r2a": "emo_r2a", "emotion_r2v": "emo_r2v"}
 
 # Metrics that exist in probe outputs but must NEVER be exported or rendered.
-# Evidence: GTZANBeatTracking probes train with loss_weights [1.0, 1.0, 0.0] --
-# the tempo head is untrained (train/loss_tempo == 0.0) yet tempo metrics are
-# still logged to metrics.csv. Parsing probe dirs without this guard would
-# publish garbage numbers.
+# The GTZAN beat probes train with loss weights [1.0, 1.0, 0.0]: the tempo head is not trained, although its
+# metrics are logged, so they are never exported.
 EXCLUDED_METRICS = {
     "tempo_acc1": "untrained head (beat-probe tempo loss weight = 0.0)",
     "tempo_acc2": "untrained head (beat-probe tempo loss weight = 0.0)",
@@ -362,7 +360,7 @@ TASK_FAMILY_ORDER = ["tonal", "rhythm", "timbre", "semantic", "similarity"]
 # file's scores for its (task, readout) differ from it.
 REPLACE_DOWNSTREAM = {"myna", "clap"}
 # Chord scores: mir_eval scores against the annotated segments (keys *_annotated) of the MLP and linear probes.
-CHORD_REFIT = {
+CHORD_FILES = {
     "mert-v1-95M": ("mert-95M_layerwise-onthefly", "mert-95M_linear"),
     "mert-v1-330M": ("mert-330M_layerwise-onthefly-full", "mert-330M_linear-full"),
     "muq": ("muq_layerwise-onthefly", "muq_linear"),
@@ -376,9 +374,9 @@ CHORD_TASKS = ("chords_ace_root", "chords_ace_thirds", "chords_ace_triads", "cho
 
 
 def apply_chord_scores():
-    """Write each model's chord records from the files of CHORD_REFIT."""
+    """Write each model's chord records from the files of CHORD_FILES."""
     done = []
-    for model_id, (mlp_file, lin_file) in CHORD_REFIT.items():
+    for model_id, (mlp_file, lin_file) in CHORD_FILES.items():
         out = OUT / "results" / model_id / "downstream.json"
         if not out.exists():
             continue
@@ -444,8 +442,8 @@ def export_downstream():
             sources.append(str(f.relative_to(SRC.parent.parent)))
             for key, scores in tasks.items():
                 task_id = TASK_ALIASES.get(key, key)
-                if task_id not in EXPORT_TASKS or (task_id in CHORD_TASKS and model_id in CHORD_REFIT):
-                    continue                    # only the tasks the pages show; chords come from CHORD_REFIT
+                if task_id not in EXPORT_TASKS or (task_id in CHORD_TASKS and model_id in CHORD_FILES):
+                    continue                    # only the tasks the pages show; chords come from CHORD_FILES
                 # registry collection must not depend on the append-only skips below,
                 # else a re-run rebuilds tasks.yaml empty
                 desc = meta.get("tasks", {}).get(key)
@@ -517,7 +515,7 @@ def export_downstream():
 def write_registries(task_registry):
     reg = OUT / "registry"
     reg.mkdir(parents=True, exist_ok=True)
-    models_yaml = ["# canonical model registry (open vocabulary; edit by hand, append-only)"]
+    models_yaml = ["# model registry"]
     for mid, spec in MODELS.items():
         if mid in UNPUBLISHED or (spec.get("pending") and not (OUT / "results" / mid / "downstream.json").exists()):
             continue
@@ -531,7 +529,7 @@ def write_registries(task_registry):
     (reg / "models.yaml").write_text("\n".join(models_yaml) + "\n")
 
     task_registry.setdefault("chords_ace_triads", "Chord triads score (ChordsACE)")
-    tasks_yaml = ["# canonical task registry; aliases map source-file drift onto one vocabulary"]
+    tasks_yaml = ["# task registry; aliases map other spellings of a task to its key"]
     for tid in sorted(task_registry):
         tasks_yaml.append(f"{tid}:")
         tasks_yaml.append(f"  description: \"{task_registry[tid]}\"")
@@ -541,7 +539,7 @@ def write_registries(task_registry):
     tasks_yaml.append("aliases:")
     for a, t in TASK_ALIASES.items():
         tasks_yaml.append(f"  {a}: {t}")
-    tasks_yaml.append("excluded_metrics:   # never export/render; reasons are evidence-based")
+    tasks_yaml.append("excluded_metrics:   # not reported")
     for m, why in EXCLUDED_METRICS.items():
         tasks_yaml.append(f"  {m}: \"{why}\"")
     (reg / "tasks.yaml").write_text("\n".join(tasks_yaml) + "\n")
@@ -1043,29 +1041,30 @@ METRIC_PREFIX = {
     **{m: m for m, _ in _NEW},
     **{m: m for m, _, _ in _VARIANTS},
 }
-# (metric, dir, json key, value key, [(variant, filename token, tags)])
+# (metric, dir, json key, value key, [(variant, filename token)])
 METRIC_SPECS = [
     ("id", "sequence_level_intrinsic_dimension", "intrinsic_dimension", "id",
-     [("gride_k8", "gride_k8", ["paper-canonical", "heldout-canonical"]),
-      ("twonn", "twonn", ["methods-stated"])]),
+     [("gride_k8", "gride_k8"),
+      ("twonn", "twonn")]),
     ("alpha", "alpha_req", "alpha_req", "alpha",
-     [("default", None, ["computed-not-in-paper"])]),
+     [("default", None)]),
     ("effective_rank", "sequence_level_effective_rank", "effective_rank",
-     "effective_rank", [("default", None, ["paper-canonical"])]),
+     "effective_rank", [("default", None)]),
     ("anisotropy", "sequence_level_anisotropy", "anisotropy", "anisotropy",
-     [("spectral", "spectral", ["paper-canonical"]),
-      ("cosine", "cosine", ["unpublished-variant"])]),  # note (2026-10-10): the shortest-name rule picks
-     # centered + L2 files for some models and raw ones for others; kept as published (correction not applied)
+     [("spectral", "spectral"),
+      ("cosine", "cosine")]),
     ("infonce", "infonce", "infonce", "raw",
-     [("default", None, ["paper-canonical"])]),
+     [("default", None)]),
     ("lidar", "lidar", "lidar", "effective_rank",
-     [("default", "effective_rank", ["paper-canonical"])]),
+     [("default", ("effective_rank", None))]),
+    # the signed angle where a model has it; otherwise the angle folded to [0, pi/2], negated in the views
     ("curvature", "curvature", "curvature", "raw",
-     [("default", None, ["paper-canonical"])]),
+     [("default", ("signed", None))]),
 ]
+# A token is a filename token or a tuple of them, tried in order (None: no token).
 # Records replaced when the file the exporter picks differs from the stored source, dropped when no file
 # qualifies any more (append-only otherwise).
-REPLACE_RECORDS: set = set()  # e.g. {("anisotropy", "cosine")} to apply the raw-file correction
+REPLACE_RECORDS = {("curvature", "default")}
 # models whose metrics.json is rebuilt from its source files on every export
 REPLACE_METRICS = {"clap"}
 # the metrics of the released library; points files may hold records of metrics it no longer has
@@ -1078,10 +1077,17 @@ LIBRARY_METRICS = {
     "participation_ratio", "procrustes", "pte", "ridge_predictivity", "rsa", "self_clustering", "sparsity", "svcca",
     "token_cosine", "token_gram_drift", "token_norm_outliers", "trajectory_curvature", "uniformity",
 }
-# view conventions (stated on every page that uses them): these two are
-# correlated negated in the paper — lower raw value = better representation.
-NEGATED_IN_VIEWS = {"curvature", "pte"}
-PTE_EXCLUDED = {"musicfm"}                      # models whose PTE profiles are not exported
+
+
+METRICS_NOTE = ("pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; "
+                "curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named "
+                "signed and folded to [0, pi/2] otherwise")
+
+
+def negated_in_views(rec):
+    """PTE is an error, and a folded curvature angle runs opposite to the signed one, so both are negated in
+    the views; a signed curvature angle is shown as it is (lower is straighter)."""
+    return rec["metric"] == "pte" or (rec["metric"] == "curvature" and "signed" not in rec.get("source", ""))
 
 
 def _pick_metric_file(data_dir, prefix, token):
@@ -1100,6 +1106,23 @@ def _pick_metric_file(data_dir, prefix, token):
     return min(cands, key=lambda f: len(f.name)) if cands else None
 
 
+def _gride_k8_from_scales(data_dir, prefix):
+    """GRIDE at k = 8 from a multi-scale file (one list of IDs per layer, scales k = 2, 4, 8, ...), for models
+    without a separate gride_k8 file. Returns (file, per-layer values) or (None, None)."""
+    f = _pick_metric_file(data_dir, prefix, "gride")
+    if f is None:
+        return None, None
+    try:
+        per_layer = json.loads(f.read_text())["intrinsic_dimension"]
+        layers = sorted((k for k in per_layer if k.isdigit()), key=int)
+        if [int(k) for k in layers] != list(range(len(layers))) or per_layer[layers[0]]["k_ranks"][2] != 8:
+            return None, None
+        vals = [per_layer[k]["id"][2] for k in layers]
+    except (KeyError, TypeError, ValueError, IndexError):
+        return None, None
+    return f, vals
+
+
 def export_metrics():
     written, problems, n_rec = [], [], 0
     for model_id, spec in MODELS.items():
@@ -1115,14 +1138,22 @@ def export_metrics():
             n_layers = max((r["n_layers"] for r in recs), default=None)
         records = []
         for metric, mdir, mkey, vkey, variants in METRIC_SPECS:
-            for variant, token, tags in variants:
-                f = _pick_metric_file(SRC / mdir / "data", prefix, token)
-                if f is None:
+            for variant, token in variants:
+                for tok in (token if isinstance(token, tuple) else (token,)):
+                    f = _pick_metric_file(SRC / mdir / "data", prefix, tok)
+                    if f is not None:
+                        break
+                if f is None and variant == "gride_k8":
+                    f, vals = _gride_k8_from_scales(SRC / mdir / "data", prefix)
+                    if f is None:
+                        continue
+                elif f is None:
                     continue
-                try:
-                    vals = json.loads(f.read_text())[mkey][vkey]
-                except (KeyError, TypeError):
-                    continue
+                else:
+                    try:
+                        vals = json.loads(f.read_text())[mkey][vkey]
+                    except (KeyError, TypeError):
+                        continue
                 if not isinstance(vals, list) or not vals:
                     continue
                 if n_layers and len(vals) != n_layers:
@@ -1130,13 +1161,13 @@ def export_metrics():
                                     f"{len(vals)} layers vs downstream {n_layers}")
                 records.append({
                     "metric": metric, "variant": variant, "layers": vals,
-                    "n_layers": len(vals), "tags": tags,
+                    "n_layers": len(vals),
                     "corpus": ("discotube" if "discotube" in f.name else
                                "mtg-jamendo" if "mtg-jamendo" in f.name else None),
                     "source": f.name,
                 })
         # PTE / CPSD equivariance: {linear,mlp} x {phase,cpsd} RMSE configs
-        for fsuf, probe in [("", "linear"), ("_mlp", "mlp")] if model_id not in PTE_EXCLUDED else []:
+        for fsuf, probe in [("", "linear"), ("_mlp", "mlp")]:
             f = SRC / "cpsd_equivariance" / "data" / f"{prefix}{fsuf}.json"
             if not f.exists():
                 continue
@@ -1146,9 +1177,8 @@ def export_metrics():
                 if not vals:
                     continue
                 variant = f"{'lin' if probe == 'linear' else 'mlp'}_{rname}"
-                tags = ["paper-canonical", "heldout-canonical"] if variant == "lin_phase" else []
                 rec = {"metric": "pte", "variant": variant, "layers": vals,
-                       "n_layers": len(vals), "tags": list(tags),
+                       "n_layers": len(vals),
                        "lower_is_better": True, "source": f.name}
                 records.append(rec)
         # Jacobian effective rank (scripts/run_frozen_jer.py): natural inputs, noise and random-init
@@ -1158,7 +1188,7 @@ def export_metrics():
             d = json.loads(f.read_text())
             for cond, c in d["conditions"].items():
                 rec = {"metric": "jer", "variant": cond, "layers": c["jer"], "n_layers": len(c["jer"]),
-                       "tags": ["computed-not-in-paper"], "source": f"jer/data/{f.name}",
+                       "source": f"jer/data/{f.name}",
                        "settings": d.get("settings", {}), "input_space": d.get("input_space")}
                 if d["layers"] != list(range(len(c["jer"]))):
                     rec["layer_index"] = d["layers"]
@@ -1173,7 +1203,6 @@ def export_metrics():
             for m, v in sorted(prof.items()):
                 vals = [v[k] for k in sorted(v)]
                 records.append({"metric": m, "variant": "req-metrics", "layers": vals, "n_layers": len(vals),
-                                "tags": ["req-metrics", "computed-not-in-paper"],
                                 "source": f"req_metrics/points/{f.name}"})
         if not records:
             continue
@@ -1181,32 +1210,31 @@ def export_metrics():
         if out.exists() and model_id not in REPLACE_METRICS:   # append-only at the record level
             doc = json.loads(out.read_text())
             fresh = {(r["metric"], r["variant"]): r for r in records}
-            kept, fixed = [], 0
+            kept, replaced = [], 0
             for r in doc["records"]:
                 k = (r["metric"], r["variant"])
                 if k in REPLACE_RECORDS and k not in fresh:
-                    fixed += 1                  # no qualifying file any more: dropped
+                    replaced += 1               # no qualifying file any more: dropped
                 elif k in REPLACE_RECORDS and fresh[k]["source"] != r.get("source"):
                     kept.append(fresh[k])
-                    fixed += 1
+                    replaced += 1
                 else:
                     kept.append(r)
             doc["records"] = kept
             have = {(r["metric"], r["variant"]) for r in doc["records"]}
             new = [r for r in records if (r["metric"], r["variant"]) not in have]
-            if new or fixed:
+            if new or replaced:
                 doc["records"] += new
                 doc["updated"] = str(date.today())
                 out.write_text(json.dumps(doc, indent=1))
-                written.append(f"{model_id} (+{len(new)} records" + (f", {fixed} corrected)" if fixed else ")"))
+                written.append(f"{model_id} (+{len(new)} records" + (f", {replaced} replaced)" if replaced else ")"))
                 n_rec += len(new)
             continue
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps({
             "schema_version": SCHEMA_VERSION, "model": model_id,
             "space": "sequence-level embeddings, same extraction as downstream",
-            "note": "variants tagged per the paper-canonical table; curvature and "
-                    "PTE are lower-is-better and correlated negated in the paper",
+            "note": METRICS_NOTE,
             "exported": str(date.today()), "records": records}, indent=1))
         written.append(model_id)
         n_rec += len(records)
@@ -1218,7 +1246,7 @@ def export_metrics():
 # ------------- metrics page: metric x task correlations -------------
 
 METRIC_ROW_LABEL = {
-    ("id", "gride_k8"): "ID (GRIDE k=8)", ("id", "twonn"): "ID (TwoNN)",
+    ("id", "twonn"): "ID (TwoNN)", ("id", "gride_k8"): "ID (GRIDE k=8)",
     ("alpha", "default"): "Alpha-ReQ",
     ("effective_rank", "default"): "Effective rank",
     ("anisotropy", "spectral"): "Anisotropy",
@@ -1226,7 +1254,6 @@ METRIC_ROW_LABEL = {
     ("curvature", "default"): "Curvature",
     ("pte", "best"): "PTE",                     # the paper's PTE rule, over the stored PTE variants
 }
-DIMSIM_EXCLUDE = {"muq", "musicfm"}             # left out of the DimSim correlations
 # chord recognition is shown per mir_eval metric, never aggregated (the metrics differ in what they credit)
 CORR_EXTRA_TASKS = {"chords_ace_root", "chords_ace_thirds", "chords_ace_triads"}
 CORR_LABEL = {"chords_ace_mirex": "Chords MIREX"}
@@ -1296,8 +1323,6 @@ def render_correlations(task_registry):
             for t in tcols:
                 vals = []
                 for m in models_subset:
-                    if t.startswith("dimsim") and m in DIMSIM_EXCLUDE:
-                        continue
                     curve = tasks_data.get(m, {}).get(t)
                     if not curve:
                         continue
@@ -1316,8 +1341,7 @@ def render_correlations(task_registry):
                     rec = rows_data.get(m, {}).get(key)
                     if not rec or len(rec["layers"]) != len(curve):
                         continue
-                    mvals = ([-v for v in rec["layers"]]
-                             if key[0] in NEGATED_IN_VIEWS else rec["layers"])
+                    mvals = [-v for v in rec["layers"]] if negated_in_views(rec) else rec["layers"]
                     vals.append((m, _spearman(mvals, curve)))
                 if not vals:
                     tds.append("<td class='num na'>&mdash;</td>")
@@ -1337,8 +1361,11 @@ def render_correlations(task_registry):
         return f"<table>{head}{''.join(body)}</table>"
 
     all_models = list(rows_data)
-    sections = [f"<section class='cview' id='cv-all'>{table_for(all_models)}</section>"]
-    opts = ["<option value='cv-all'>All models</option>"]
+    paper = [m for m in all_models if MODELS[m].get("in_paper", True)]
+    sections = [f"<section class='cview' id='cv-paper'>{table_for(paper)}</section>",
+                f"<section class='cview' id='cv-all' hidden>{table_for(all_models)}</section>"]
+    opts = [f"<option value='cv-paper'>The paper's models ({len(paper)})</option>",
+            f"<option value='cv-all'>All models ({len(all_models)})</option>"]
     for fam in FAMILY_ORDER:
         sub = [m for m in all_models if fam_of[m] == fam]
         if len(sub) < 2:
@@ -1448,7 +1475,7 @@ def export_fusion():
                 or not (OUT / "results" / model / "downstream.json").exists()):
             skipped_models.add(token)
             continue
-        vals, vdir = _last_test_row(d)
+        vals, _ = _last_test_row(d)
         if not vals:
             continue
         base_task, col = FUSION_TASKS[task_probe]
@@ -1473,8 +1500,7 @@ def export_fusion():
                 recs.append({"task": xt[0], "metric_spec": xt[1] + " x100",
                              "value": round(100 * vals[xt[1]], 2)})
         for rec in recs:
-            rec.update({"variant": variant, "source": d.name, "version": vdir,
-                        "protocol": "published-map"})
+            rec.update({"variant": variant, "protocol": "multi-layer fusion"})
             per_model.setdefault(model, []).append(rec)
             parsed += 1
     for model, recs in per_model.items():

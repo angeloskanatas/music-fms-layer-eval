@@ -1,4 +1,4 @@
-# canonical model registry (open vocabulary; edit by hand, append-only)
+# model registry
 mert-v1-95M:
   family: masked
   in_paper: true

@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "musicgen-medium",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -60,9 +60,6 @@
     35.256016244433916
    ],
    "n_layers": 49,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube_n5000_twonn.json"
   },
@@ -121,9 +118,6 @@
     1.0427018220506326
    ],
    "n_layers": 49,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube.json"
   },
@@ -182,9 +176,6 @@
     605.8551635742188
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube.json"
   },
@@ -243,9 +234,6 @@
     0.13222958147525787
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube_spectral.json"
   },
@@ -304,9 +292,6 @@
     0.0007613877533003688
    ],
    "n_layers": 49,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube_cosine.json"
   },
@@ -365,9 +350,6 @@
     8.657710075378418
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube.json"
   },
@@ -426,9 +408,6 @@
     525.9647736940294
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube_effective_rank.json"
   },
@@ -487,9 +466,6 @@
     2.0150037928819655
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "musicgen-medium_discotube_signed_n1000_s42.json"
   },
@@ -548,10 +524,6 @@
     0.5485389784538177
    ],
    "n_layers": 49,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "musicgen-medium.json"
   },
@@ -610,7 +582,6 @@
     0.4951794130192114
    ],
    "n_layers": 49,
-   "tags": [],
    "lower_is_better": true,
    "source": "musicgen-medium.json"
   },
@@ -669,7 +640,6 @@
     0.5455896059533395
    ],
    "n_layers": 49,
-   "tags": [],
    "lower_is_better": true,
    "source": "musicgen-medium_mlp.json"
   },
@@ -728,7 +698,6 @@
     0.4823828826410668
    ],
    "n_layers": 49,
-   "tags": [],
    "lower_is_better": true,
    "source": "musicgen-medium_mlp.json"
   },
@@ -787,10 +756,6 @@
     1.0420971990775254
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -848,10 +813,6 @@
     0.2798012110155452
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -909,10 +870,6 @@
     0.13256464044979813
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -970,10 +927,6 @@
     2.0580830675508377
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1031,10 +984,6 @@
     604.6233176952854
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1092,10 +1041,6 @@
     0.9378788278347413
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1153,10 +1098,6 @@
     30.664096431388895
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1214,10 +1155,6 @@
     0.07067122869824614
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1275,10 +1212,6 @@
     32.36079707459706
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1336,10 +1269,6 @@
     36.71785192098982
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1397,10 +1326,6 @@
     28.577996940190868
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1458,10 +1383,6 @@
     26.321339767270054
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1519,10 +1440,6 @@
     38.349325115366604
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1580,10 +1497,6 @@
     0.5229122416706892
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1641,10 +1554,6 @@
     0.020456957470058452
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1702,10 +1611,6 @@
     0.01648305151719488
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1763,10 +1668,6 @@
     0.10439758520488915
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1824,10 +1725,6 @@
     0.5546719328914517
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
   },
   {
@@ -1885,11 +1782,65 @@
     -2.691638250155984
    ],
    "n_layers": 49,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/musicgen-medium.json"
+  },
+  {
+   "metric": "id",
+   "variant": "gride_k8",
+   "layers": [
+    19.600152192752383,
+    16.43026754703807,
+    26.66100250518476,
+    29.55855077445858,
+    32.403996312606,
+    30.342223944049593,
+    29.329097161291138,
+    31.123389297285613,
+    31.508274555543174,
+    31.251124018780217,
+    31.22471808160512,
+    31.659779341131937,
+    31.89814925308948,
+    31.951903333904653,
+    32.154095358137226,
+    32.15309052029173,
+    32.31032462200723,
+    32.45557767823499,
+    32.56027796331843,
+    33.23219364165874,
+    32.557190224617685,
+    32.617105289141264,
+    32.69657787534359,
+    31.601307184871835,
+    35.922597059993336,
+    36.45976126495566,
+    37.072847275940035,
+    38.2079135730601,
+    38.358010374947014,
+    39.669669225460055,
+    39.47737878010855,
+    38.823982607267936,
+    39.037216613733804,
+    38.423299223559994,
+    38.13328339374209,
+    37.35404482857082,
+    36.663982697256586,
+    35.605074820063564,
+    35.725093483535886,
+    36.0831049901154,
+    35.89652459417414,
+    35.5216665850119,
+    34.95698048671542,
+    34.18050975126043,
+    33.451002364858525,
+    33.36443363160275,
+    33.19465014536671,
+    32.79844682621622,
+    29.890927652806475
+   ],
+   "n_layers": 49,
+   "corpus": "discotube",
+   "source": "musicgen-medium_discotube_n5000_gride.json"
   }
  ],
  "updated": "2026-11-08"

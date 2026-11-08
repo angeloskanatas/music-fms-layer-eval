@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "mert-v2-30s",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-11-08",
  "records": [
   {
@@ -36,10 +36,6 @@
     23.81133033838207
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube_gride_k8.json"
   },
@@ -74,9 +70,6 @@
     27.156357915727185
    ],
    "n_layers": 25,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube_twonn.json"
   },
@@ -111,9 +104,6 @@
     1.0604339706422354
    ],
    "n_layers": 25,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube.json"
   },
@@ -148,9 +138,6 @@
     535.7369384765625
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube.json"
   },
@@ -185,9 +172,6 @@
     0.1326550990343094
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube_spectral.json"
   },
@@ -222,9 +206,6 @@
     0.3369092345237732
    ],
    "n_layers": 25,
-   "tags": [
-    "unpublished-variant"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube_cosine_nol2_nocenter.json"
   },
@@ -259,9 +240,6 @@
     7.026065826416016
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube.json"
   },
@@ -296,9 +274,6 @@
     275.0034663964001
    ],
    "n_layers": 25,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mert-v2-30s_discotube_effective_rank.json"
   },
@@ -333,10 +308,6 @@
     1.0604337664685473
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -370,10 +341,6 @@
     0.3369092645171758
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -407,10 +374,6 @@
     0.13265511957083498
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -444,10 +407,6 @@
     2.461801216684864
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -481,10 +440,6 @@
     535.7361619678742
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -518,10 +473,6 @@
     0.890192281585738
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -555,10 +506,6 @@
     12.137391950081705
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -592,10 +539,6 @@
     0.28115852971695654
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -629,10 +572,6 @@
     23.81133033838207
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -666,10 +605,6 @@
     26.727396457288634
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -703,10 +638,6 @@
     21.197334565193692
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -740,10 +671,6 @@
     24.509383152180625
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -777,10 +704,6 @@
     27.15635791573806
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -814,10 +737,6 @@
     0.5390636198917197
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -851,10 +770,6 @@
     0.024718243447122916
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -888,10 +803,6 @@
     0.03181039161561595
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -925,10 +836,6 @@
     0.12981093295388388
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -962,10 +869,6 @@
     0.5601659477694398
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   },
   {
@@ -999,10 +902,6 @@
     -2.5069536063373086
    ],
    "n_layers": 25,
-   "tags": [
-    "req-metrics",
-    "computed-not-in-paper"
-   ],
    "source": "req_metrics/points/mert-v2-30s.json"
   }
  ]

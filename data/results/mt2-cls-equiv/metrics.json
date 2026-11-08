@@ -2,7 +2,7 @@
  "schema_version": "1.0.0",
  "model": "mt2-cls-equiv",
  "space": "sequence-level embeddings, same extraction as downstream",
- "note": "variants tagged per the paper-canonical table; curvature and PTE are lower-is-better and correlated negated in the paper",
+ "note": "pte: RMS phase (phase) or cross-power (cpsd) error of a linear (lin) or MLP probe, lower is better; curvature: mean angle in radians between successive frame displacements, in [0, pi] for files named signed and folded to [0, pi/2] otherwise",
  "exported": "2026-08-04",
  "records": [
   {
@@ -24,9 +24,6 @@
     21.396161412678282
    ],
    "n_layers": 13,
-   "tags": [
-    "methods-stated"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-equiv_discotube_twonn.json"
   },
@@ -49,9 +46,6 @@
     1.5258084135636052
    ],
    "n_layers": 13,
-   "tags": [
-    "computed-not-in-paper"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-equiv_discotube.json"
   },
@@ -74,9 +68,6 @@
     88.66605377197266
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-equiv_discotube.json"
   },
@@ -99,9 +90,6 @@
     0.34854453802108765
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-equiv_discotube_spectral.json"
   },
@@ -124,9 +112,6 @@
     9.726140975952148
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical"
-   ],
    "corpus": "discotube",
    "source": "mt2-cls-equiv_discotube.json"
   },
@@ -149,10 +134,6 @@
     0.49033746599105466
    ],
    "n_layers": 13,
-   "tags": [
-    "paper-canonical",
-    "heldout-canonical"
-   ],
    "lower_is_better": true,
    "source": "mt2-cls-equiv.json"
   },
@@ -175,7 +156,6 @@
     0.4388470240382399
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-equiv.json"
   },
@@ -198,7 +178,6 @@
     0.38480376040082026
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-equiv_mlp.json"
   },
@@ -221,9 +200,31 @@
     0.37818612522487394
    ],
    "n_layers": 13,
-   "tags": [],
    "lower_is_better": true,
    "source": "mt2-cls-equiv_mlp.json"
+  },
+  {
+   "metric": "lidar",
+   "variant": "default",
+   "layers": [
+    57.94726528203148,
+    57.81803336215997,
+    56.51130923673219,
+    55.267176528078,
+    53.112745316788015,
+    52.29203746646575,
+    52.165400047209985,
+    54.1069206541705,
+    55.843502484480766,
+    57.51746811015885,
+    61.46378588813457,
+    64.1305834161564,
+    76.09138689312718
+   ],
+   "n_layers": 13,
+   "corpus": "discotube",
+   "source": "mt2-cls-equiv_discotube.json"
   }
- ]
+ ],
+ "updated": "2026-11-08"
 }

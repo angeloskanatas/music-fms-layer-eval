@@ -67,8 +67,8 @@
   const TASKS  = /*TASKS_JSON*/;
   const OVERLAYS = [
     ['', 'None'],
-    ['id|gride_k8', 'Intrinsic dimension (GRIDE k=8)'],
     ['id|twonn', 'Intrinsic dimension (TwoNN)'],
+    ['id|gride_k8', 'Intrinsic dimension (GRIDE k=8)'],
     ['effective_rank|default', 'Effective rank'],
     ['anisotropy|spectral', 'Anisotropy'],
     ['infonce|default', 'InfoNCE'],
@@ -77,7 +77,8 @@
     ['alpha|default', 'Alpha-ReQ'],
     ['pte|lin_phase', 'PTE (−phase RMSE)'],
   ];
-  const NEG = new Set(['curvature', 'pte']);
+  // PTE is an error and a folded curvature angle runs opposite to the signed one: both are negated
+  const negated = r => r.metric === 'pte' || (r.metric === 'curvature' && !(r.source || '').includes('signed'));
   const cache = {}, mcache = {};
   const $m = document.getElementById('model'), $t = document.getElementById('task'),
         $g = document.getElementById('mates'), $n = document.getElementById('norm'),
@@ -203,7 +204,7 @@
         const md = await mrec(mid);
         const mr = md && md.records.find(z => z.metric === mk && z.variant === mv);
         if (mr && mr.layers.length === r.layers.length) {
-          mvals = NEG.has(mk) ? mr.layers.map(v => -v) : mr.layers.slice();
+          mvals = negated(mr) ? mr.layers.map(v => -v) : mr.layers.slice();
           mlabel = OVERLAYS.find(([v]) => v === ov)[1];
         } else {
           notes.push('This model has no ' + OVERLAYS.find(([v]) => v === ov)[1] +

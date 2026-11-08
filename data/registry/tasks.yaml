@@ -1,4 +1,4 @@
-# canonical task registry; aliases map source-file drift onto one vocabulary
+# task registry; aliases map other spellings of a task to its key
 beat_f1:
   description: "Beat tracking, GTZAN (F-measure)"
   family: rhythm
@@ -74,7 +74,7 @@ nsynth_pitch:
 aliases:
   emotion_r2a: emo_r2a
   emotion_r2v: emo_r2v
-excluded_metrics:   # never export/render; reasons are evidence-based
+excluded_metrics:   # not reported
   tempo_acc1: "untrained head (beat-probe tempo loss weight = 0.0)"
   tempo_acc2: "untrained head (beat-probe tempo loss weight = 0.0)"
   tempo_mae: "untrained head (beat-probe tempo loss weight = 0.0)"
