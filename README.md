@@ -39,6 +39,9 @@ python scripts/export_atlas_json.py --render
 This rebuilds every page from `data/` alone and needs only the Python standard library. Without `--render`,
 the script first exports new records from our analysis outputs, which are not in this repository.
 
+The link-preview image (`static/images/social_card.png`) is drawn from `data/` by
+`python scripts/make_social_card.py --fonts <folder with the Inter TTF files>`, which needs matplotlib and SciPy.
+
 ## Citation
 
 ```bibtex
